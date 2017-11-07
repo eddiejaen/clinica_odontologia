@@ -1,76 +1,157 @@
-<h1 class="page-header">Blog Feed</h1>
-
-<!-- Custom Success/Error Message -->
-<div class="row show-hide-message" *ngIf="message && newPost">
+<h1 *ngIf="!newPost" >Pacientes</h1>
+<h1 *ngIf="newPost" >Registro de Pacientes</h1>
+<div class="row show-hide-message" *ngIf="newPost" >
   <div [ngClass]="messageClass">
     {{ message }}
   </div>
 </div>
+<br *ngIf="!newPost" />
 
-<!-- New Post Button -->
-<button type="button" name="button" class="btn btn-warning" *ngIf="!newPost" (click)="newBlogForm()">New Post</button>
+<!-- New Post Button-->
+<button type="button" name="button" class="btn btn-group" *ngIf="!newPost" (click)="newBlogForm()">Nuevo Paciente</button>
 
-<!-- Reload Button -->
-<button [disabled]="loadingBlogs" type="button" name="button" class="btn btn-default" *ngIf="!newPost" (click)="reloadBlogs()"><span class="glyphicon glyphicon-repeat"></span>&nbsp;&nbsp;Reload</button>
+<br *ngIf="!newPost" />
+<br *ngIf="!newPost" />
 
-<br />
-<br />
+<form class="form-horizontal" *ngIf="!newPost">
+  <input class="form-control mr-sm-2" placeholder="Buscar Paciente" type="text">
+  <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
+</form>
+<br *ngIf="!newPost" />
+<br *ngIf="!newPost" />
+<table class="table table-striped table-hover table-bordered" *ngIf="!newPost">
+  <thead class="thead-dark">
+    <tr>
+      <th>Cédula</th>
+      <th>Nombre</th>
+      <th>Apellidos</th>
+      <th>Telefono</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let blog of blogPosts">
+      <td>{{ blog.cedula }}</td>
+      <td>{{ blog.nombre }}</td>
+      <td>{{ blog.apellido }}</td>
+      <td>{{ blog.telefono_celular }}</td>
+    </tr>
+</tbody>
+</table>
 
-<!-- New Blog Form -->
+<!-- New Pacient Form -->
 <form [formGroup]="form" name="blogForm" (submit)="onBlogSubmit()" *ngIf="newPost">
-  <!-- Title Input -->
-  <div class="form-group">
-    <label for="title">Title</label>
-    <div [ngClass]="{'has-success': form.controls.title.valid, 'has-error': form.controls.title.dirty && form.controls.title.errors}">
-      <!-- Title Input -->
-      <input type="text" name="title" class="form-control" placeholder="*Blog Title" autocomplete="off" formControlName="title" />
-      <!-- Validation -->
-      <ul class="help-block">
-        <li *ngIf="form.controls.title.dirty && form.controls.title.errors?.required">This field is required.</li>
-        <li *ngIf="(form.controls.title.dirty && form.controls.title.errors?.minlength) || (form.controls.title.dirty && form.controls.title.errors?.maxlength)">Max length: 50, Min length: 5</li>
-        <li *ngIf="form.controls.title.dirty && form.controls.title.errors?.alphaNumericValidation">Must be a letter or number</li>
-      </ul>
+  <div class="row">
+    <div class="col-lg-6">
+      <label>Nombre</label>
+      <input class="form-control" name="inputNombre" formControlName="inputNombre" placeholder="Nombre" type="text">
+      <br>
+      <label>Apellidos</label>
+      <input class="form-control" name="inputApellido" formControlName="inputApellido" placeholder="Apellidos" type="text">
+      <br>
+      <label>Recomendado por</label>
+      <input class="form-control" name="inputRecomendado" formControlName="inputRecomendado" placeholder="Recomendado por" type="text">
+      <br>
+      <label>Dirección</label>
+      <input class="form-control" name="inputDireccion" formControlName="inputDireccion" placeholder="Dirección" type="text">
+      <br>
+      <label>Cantón</label>
+      <input class="form-control" name="inputCanton" formControlName="inputCanton" placeholder="Cantón" type="text">
+      <br>
+      <label>Provincia</label>
+      <input class="form-control" name="inputProvincia" formControlName="inputProvincia" placeholder="Provincia" type="text">
+      <br>
+      <label>No. Cédula</label>
+      <input class="form-control" name="inputCedula" formControlName="inputCedula" placeholder="Cédula" type="text" (blur)="checkCedula()">
+      <br>
+      <label>Ocupación</label>
+      <input class="form-control" name="inputOcupacion"  formControlName="inputOcupacion" placeholder="Ocupación" type="text">
+      <br>
     </div>
-  </div>
 
-  <!-- Body Input -->
-  <div class="form-group">
-    <label for="body">Body</label>
-    <div [ngClass]="{'has-success': form.controls.body.valid, 'has-error': form.controls.body.dirty && form.controls.body.errors}">
-      <!-- Body Input -->
-      <textarea name="body" rows="8" cols="80" placeholder="*Body" class="form-control" formControlName="body"></textarea>
-      <!-- Validation -->
-      <ul class="help-block">
-        <li *ngIf="form.controls.body.dirty && form.controls.body.errors?.required">This field is required.</li>
-        <li *ngIf="(form.controls.body.dirty && form.controls.body.errors?.minlength) || (form.controls.body.dirty && form.controls.body.errors?.maxlength)">Max length: 500, Min length: 5</li>
-      </ul>
+    <div class="col-lg-6">
+      <label>Télefono Célular</label>
+      <input class="form-control" name="inputCelular" formControlName="inputCelular" placeholder="Célular" type="text">
+      <br>
+      <div class="row">
+        <div class="col-lg-9">
+          <label>Télefono Oficina</label>
+          <input class="form-control" name="inputOficina" formControlName="inputOficina" placeholder="Télefono Oficina" type="text">
+        </div>
+        <div class="col-lg-3">
+          <label>Ext.</label>
+          <input class="form-control" name="inputExt" formControlName="inputExt" placeholder="Ext" type="text">
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-lg-9">
+          <label>Télefono Habitación</label>
+          <input class="form-control" name="inputHabitacion" formControlName="inputHabitacion" placeholder="Télefono Habitación" type="text">
+        </div>
+        <div class="col-lg-3">
+          <label>Apdo</label>
+          <input class="form-control" name="inputApdo" formControlName="inputApdo" placeholder="Apdo" type="text">
+        </div>
+      </div>
+      <br>
+      <label>Médico</label>
+      <input class="form-control" name="inputMedico" formControlName="inputMedico" placeholder="Medico" type="text">
+      <br>
+      <label>En caso de emergencia avisar a</label>
+      <input class="form-control" name="inputAvisar" formControlName="inputAvisar" placeholder="En caso de emergencia avisar a" type="text">
+      <br>
+      <div class="row">
+        <div class="col-lg-6">
+          <label>Parentesco</label>
+          <input class="form-control" name="inputParentesco" formControlName="inputParentesco" placeholder="Parentesco" type="text">
+        </div>
+        <div class="col-lg-6">
+          <label>Télefono</label>
+          <input class="form-control" name="inputTelParentesco" formControlName="inputTelParentesco" placeholder="Télefono" type="text">
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- Go Back Button -->
-  <button [disabled]="processing" type="button" name="button" (click)="goBack()" class="btn btn-warning">Go Back</button>
+  <button [disabled]="processing" type="button" name="button" (click)="goBack()" class="btn btn-warning">Volver</button>
   <!-- Submit Button -->
-  <button [disabled]="processing || !form.valid" type="submit" name="button" class="btn btn-success">Submit</button>
+  <button [disabled]="!cedulaValid || processing || !form.valid" type="submit" name="button" class="btn btn-success">Registrar</button>
 
 </form>
-<!-- New Blog Form -->
+<!-- New Pacient Form -->
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-------------------------------------------------------------------------------------------------------------------------------------->
 <!-- Panel Start -->
-<div *ngIf="!newPost">
-  <!-- Panel Outer Layer -->
+<!-- <div *ngIf="newPost">
+  <!-- Panel Outer Layer
   <div class="panel panel-primary" *ngFor="let blog of blogPosts">
 
-    <!-- Panel Title -->
+    <!-- Panel Title
     <div class="panel-heading">
       <h3 class="panel-title">{{ blog.title }}</h3>
     </div>
 
-    <!-- Panel Body -->
+    <!-- Panel Body
     <div class="panel-body">
       {{ blog.body }}
     </div>
 
-    <!-- Panel Footer Start -->
+    <!-- Panel Footer Start
     <div class="panel-footer">
       <strong>Posted by: </strong>{{ blog.createdBy }}
       <br />
@@ -82,26 +163,26 @@
         <strong>Dislikes: </strong>{{ blog.dislikes }}
       </div>
 
-      <!-- Edit Button -->
+      <!-- Edit Button
       <a [routerLink]="['/edit-blog/', blog._id]" *ngIf="username === blog.createdBy"><button type="button" name="button" class="btn btn-sm btn-info">Edit</button></a>
-      <!-- Delete Button -->
+      <!-- Delete Button
       <a [routerLink]="['/delete-blog/', blog._id]" *ngIf="username === blog.createdBy"><button type="button" name="button" class="btn btn-sm btn-danger">Delete</button></a>
 
-      <!-- Likes Dropdown  -->
+      <!-- Likes Dropdown
       <div class="dropdown">
-        <!-- Like Button -->
+        <!-- Like Button
         <button [disabled]="blog.likedBy.indexOf(username) > -1" type="button" name="button" class="btn btn-sm btn-success" *ngIf="username !== blog.createdBy" (click)="likeBlog(blog._id)"><span class="glyphicon glyphicon-thumbs-up">&nbsp;</span>Likes: {{ blog.likes }}</button>
-        <!-- Dropdown Menu Items -->
+        <!-- Dropdown Menu Items
         <div class="dropdown-content">
           <a [routerLink]="['/user/', liker]" *ngFor="let liker of blog.likedBy">{{ liker }}</a>
         </div>
       </div>
 
-      <!-- Dislikes Dropdown  -->
+      <!-- Dislikes Dropdown
       <div class="dropdown">
-        <!-- Dislike Button -->
+        <!-- Dislike Button
         <button [disabled]="blog.dislikedBy.indexOf(username) > -1" type="button" name="button" class="btn btn-sm btn-warning" *ngIf="username !== blog.createdBy" (click)="dislikeBlog(blog._id)"><span class="glyphicon glyphicon-thumbs-down">&nbsp;</span>Dislikes: {{ blog.dislikes }}</button>
-        <!-- Dropdown Menu Items -->
+        <!-- Dropdown Menu Items
         <div class="dropdown-content">
           <a [routerLink]="['/user/', disliker]" *ngFor="let disliker of blog.dislikedBy">{{ disliker }}</a>
         </div>
@@ -110,36 +191,36 @@
     </div>
     <!-- Panel Footer End -->
 
-    <!-- Post Comment Box: Start -->
+    <!-- Post Comment Box: Start
     <ul class="list-group">
       <li class="list-group-item">
-        <!-- Post Comment Button -->
+        <!-- Post Comment Button
         <button type="button" name="button" class="btn btn-sm btn-danger" (click)="draftComment(blog._id)" [disabled]="newComment.indexOf(blog._id) > -1">Post Comment</button>
         <br />
         <br />
         <div *ngIf="newComment.indexOf(blog._id) > -1">
 
-          <!-- Form: Comment Form Start -->
+          <!-- Form: Comment Form Start
           <form [formGroup]="commentForm">
-            <!-- Textarea Input -->
+            <!-- Textarea Input
             <textarea name="comment" rows="10" cols="30" class="form-control" formControlName="comment"></textarea>
-            <!-- Validation -->
+            <!-- Validation
             <div [ngClass]="{'has-success': !commentForm.controls.comment.errors && commentForm.controls.comment.dirty, 'has-error': commentForm.controls.comment.dirty && commentForm.controls.comment.errors}">
               <ul class="help-block">
                 <li *ngIf="commentForm.controls.comment.errors?.required && commentForm.controls.comment.dirty">This field is required.</li>
                 <li *ngIf="(commentForm.controls.comment.errors?.maxlength && commentForm.controls.comment.dirty) ||(commentForm.controls.comment.errors?.minlength && commentForm.controls.comment.dirty)">Comment must be at least 1 character but no more than 200.</li>
               </ul>
             </div>
-            <!-- Post Button -->
+            <!-- Post Button
             <button [disabled]="!commentForm.valid || processing" type="submit" name="button" class="btn btn-sm btn-info" (click)="postComment(blog._id)">Post</button>
-            <!-- Cancel Button -->
+            <!-- Cancel Button
             <button [disabled]="processing" type="button" name="button" class="btn btn-sm btn-danger" (click)="cancelSubmission(blog._id)">Cancel</button>
           </form>
-          <!-- Form: Comment Form End -->
+          <!-- Form: Comment Form End
 
         </div>
 
-        <!-- Show Comments -->
+        <!-- Show Comments
         <li *ngIf="enabledComments.indexOf(blog._id) === -1 && blog.comments.length > 0" class="list-group-item">
           <span (click)="expand(blog._id)">
             Show comments&nbsp;&nbsp;
@@ -147,7 +228,7 @@
           </span>
         </li>
 
-        <!-- Hide Comments -->
+        <!-- Hide Comments
         <li *ngIf="enabledComments.indexOf(blog._id) > -1" class="list-group-item">
           <span (click)="collapse(blog._id)">
             Hide Comments&nbsp;&nbsp;
@@ -155,16 +236,16 @@
           </span>
         </li>
 
-        <!-- Comment -->
+        <!-- Comment
         <div *ngIf="enabledComments.indexOf(blog._id) > -1">
           <li *ngFor="let comment of blog.comments" class="list-group-item">
             <strong>{{ comment.commentator }}:</strong> {{ comment.comment }}
           </li>
         </div>
-    </ul>
-    <!-- Post Comment Box: End -->
+      </ul>
+      <!-- Post Comment Box: End
 
+    </div>
+    <!-- Panel Outer Layer
   </div>
-  <!-- Panel Outer Layer -->
-</div>
-<!-- Panel End -->
+  <!-- Panel End -->

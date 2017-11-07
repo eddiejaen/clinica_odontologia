@@ -12,6 +12,7 @@ export class BlogComponent implements OnInit {
 
   messageClass;
   message;
+  cedulaValid;
   newPost = false;
   loadingBlogs = false;
   form;
@@ -28,59 +29,157 @@ export class BlogComponent implements OnInit {
     private blogService: BlogService
   ) {
     this.createNewBlogForm(); // Create new blog form on start up
-    this.createCommentForm(); // Create form for posting comments on a user's blog post
   }
 
   // Function to create new blog form
   createNewBlogForm() {
     this.form = this.formBuilder.group({
-      // Title field
-      title: ['', Validators.compose([
+
+      inputNombre: ['', Validators.compose([
         Validators.required,
+        Validators.minLength(3),
         Validators.maxLength(50),
-        Validators.minLength(5),
         this.alphaNumericValidation
       ])],
-      // Body field
-      body: ['', Validators.compose([
+      inputApellido: ['', Validators.compose([
         Validators.required,
-        Validators.maxLength(500),
-        Validators.minLength(5)
-      ])]
-    })
-  }
-
-  // Create form for posting comments
-  createCommentForm() {
-    this.commentForm = this.formBuilder.group({
-      comment: ['', Validators.compose([
+        Validators.minLength(4),
+        Validators.maxLength(50),
+        this.alphaNumericValidation
+      ])],
+      inputRecomendado: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(50),
+        this.alphaNumericValidation
+      ])],
+      inputDireccion: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(50),
+        this.alphaNumericValidation
+      ])],
+      inputCanton: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(50),
+        this.alphaNumericValidation
+      ])],
+      inputProvincia: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(50),
+        this.alphaNumericValidation
+      ])],
+      inputCedula: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(9),
+        Validators.maxLength(15),
+        this.alphaNumericValidation
+      ])],
+      inputOcupacion: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(50),
+        this.alphaNumericValidation
+      ])],
+      inputCelular: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(15),
+        this.alphaNumericValidation
+      ])],
+      inputOficina: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(15),
+        this.alphaNumericValidation
+      ])],
+      inputExt: ['', Validators.compose([
         Validators.required,
         Validators.minLength(1),
-        Validators.maxLength(200)
-      ])]
+        Validators.maxLength(10),
+        this.alphaNumericValidation
+      ])],
+      inputHabitacion: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(50),
+        this.alphaNumericValidation
+      ])],
+      inputApdo: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(50),
+        this.alphaNumericValidation
+      ])],
+      inputMedico: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(50),
+        this.alphaNumericValidation
+      ])],
+      inputAvisar: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(50),
+        this.alphaNumericValidation
+      ])],
+      inputParentesco: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(50),
+        this.alphaNumericValidation
+      ])],
+      inputTelParentesco: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(50),
+        this.alphaNumericValidation
+      ])],
     })
-  }
-
-  // Enable the comment form
-  enableCommentForm() {
-    this.commentForm.get('comment').enable(); // Enable comment field
-  }
-
-  // Disable the comment form
-  disableCommentForm() {
-    this.commentForm.get('comment').disable(); // Disable comment field
   }
 
   // Enable new blog form
   enableFormNewBlogForm() {
-    this.form.get('title').enable(); // Enable title field
-    this.form.get('body').enable(); // Enable body field
+    this.form.controls['inputNombre'].enable();
+    this.form.controls['inputApellido'].enable();
+    this.form.controls['inputRecomendado'].enable();
+    this.form.controls['inputDireccion'].enable();
+    this.form.controls['inputCanton'].enable();
+    this.form.controls['inputProvincia'].enable();
+    this.form.controls['inputCedula'].enable();
+    this.form.controls['inputOcupacion'].enable();
+    this.form.controls['inputCelular'].enable();
+    this.form.controls['inputOficina'].enable();
+    this.form.controls['inputExt'].enable();
+    this.form.controls['inputHabitacion'].enable();
+    this.form.controls['inputApdo'].enable();
+    this.form.controls['inputMedico'].enable();
+    this.form.controls['inputAvisar'].enable();
+    this.form.controls['inputParentesco'].enable();
+    this.form.controls['inputTelParentesco'].enable();
   }
 
   // Disable new blog form
   disableFormNewBlogForm() {
-    this.form.get('title').disable(); // Disable title field
-    this.form.get('body').disable(); // Disable body field
+    this.form.controls['inputNombre'].disable();
+    this.form.controls['inputApellido'].disable();
+    this.form.controls['inputRecomendado'].disable();
+    this.form.controls['inputDireccion'].disable();
+    this.form.controls['inputCanton'].disable();
+    this.form.controls['inputProvincia'].disable();
+    this.form.controls['inputCedula'].disable();
+    this.form.controls['inputOcupacion'].disable();
+    this.form.controls['inputCelular'].disable();
+    this.form.controls['inputOficina'].disable();
+    this.form.controls['inputExt'].disable();
+    this.form.controls['inputHabitacion'].disable();
+    this.form.controls['inputApdo'].disable();
+    this.form.controls['inputMedico'].disable();
+    this.form.controls['inputAvisar'].disable();
+    this.form.controls['inputParentesco'].disable();
+    this.form.controls['inputTelParentesco'].disable();
   }
 
   // Validation for title
@@ -102,26 +201,10 @@ export class BlogComponent implements OnInit {
   // Reload blogs on current page
   reloadBlogs() {
     this.loadingBlogs = true; // Used to lock button
-    this.getAllBlogs(); // Add any new blogs to the page
+  //  this.getAllBlogs(); // Add any new blogs to the page
     setTimeout(() => {
       this.loadingBlogs = false; // Release button lock after four seconds
     }, 4000);
-  }
-
-  // Function to post a new comment on blog post
-  draftComment(id) {
-    this.commentForm.reset(); // Reset the comment form each time users starts a new comment
-    this.newComment = []; // Clear array so only one post can be commented on at a time
-    this.newComment.push(id); // Add the post that is being commented on to the array
-  }
-
-  // Function to cancel new post transaction
-  cancelSubmission(id) {
-    const index = this.newComment.indexOf(id); // Check the index of the blog post in the array
-    this.newComment.splice(index, 1); // Remove the id from the array to cancel post submission
-    this.commentForm.reset(); // Reset  the form after cancellation
-    this.enableCommentForm(); // Enable the form after cancellation
-    this.processing = false; // Enable any buttons that were locked
   }
 
   // Function to submit a new blog post
@@ -131,9 +214,23 @@ export class BlogComponent implements OnInit {
 
     // Create blog object from form fields
     const blog = {
-      title: this.form.get('title').value, // Title field
-      body: this.form.get('body').value, // Body field
-      createdBy: this.username // CreatedBy field
+      inputNombre: this.form.get('inputNombre').value,
+      inputApellido: this.form.get('inputApellido').value,
+      inputRecomendado: this.form.get('inputRecomendado').value,
+      inputDireccion: this.form.get('inputDireccion').value,
+      inputCanton: this.form.get('inputCanton').value,
+      inputProvincia: this.form.get('inputProvincia').value,
+      inputCedula: this.form.get('inputCedula').value,
+      inputOcupacion: this.form.get('inputOcupacion').value,
+      inputCelular: this.form.get('inputCelular').value,
+      inputOficina: this.form.get('inputOficina').value,
+      inputExt: this.form.get('inputExt').value,
+      inputHabitacion: this.form.get('inputHabitacion').value,
+      inputApdo: this.form.get('inputApdo').value,
+      inputMedico: this.form.get('inputMedico').value,
+      inputAvisar: this.form.get('inputAvisar').value,
+      inputParentesco: this.form.get('inputParentesco').value,
+      inputTelParentesco: this.form.get('inputTelParentesco').value
     }
 
     // Function to save blog into database
@@ -147,15 +244,10 @@ export class BlogComponent implements OnInit {
       } else {
         this.messageClass = 'alert alert-success'; // Return success class
         this.message = data.message; // Return success message
-        this.getAllBlogs();
         // Clear form data after two seconds
         setTimeout(() => {
-          this.newPost = false; // Hide form
-          this.processing = false; // Enable submit button
-          this.message = false; // Erase error/success message
-          this.form.reset(); // Reset all form fields
-          this.enableFormNewBlogForm(); // Enable the form fields
-        }, 2000);
+          window.location.reload();
+        }, 1000);
       }
     });
   }
@@ -165,50 +257,12 @@ export class BlogComponent implements OnInit {
     window.location.reload(); // Clear all variable states
   }
 
-  // Function to get all blogs from the database
+  // // Function to get all blogs from the database
   getAllBlogs() {
     // Function to GET all blogs from database
     this.blogService.getAllBlogs().subscribe(data => {
       this.blogPosts = data.blogs; // Assign array to use in HTML
     });
-  }
-
-  // Function to like a blog post
-  likeBlog(id) {
-    // Service to like a blog post
-    this.blogService.likeBlog(id).subscribe(data => {
-      this.getAllBlogs(); // Refresh blogs after like
-    });
-  }
-
-  // Function to disliked a blog post
-  dislikeBlog(id) {
-    // Service to dislike a blog post
-    this.blogService.dislikeBlog(id).subscribe(data => {
-      this.getAllBlogs(); // Refresh blogs after dislike
-    });
-  }
-
-  // Function to post a new comment
-  postComment(id) {
-    this.disableCommentForm(); // Disable form while saving comment to database
-    this.processing = true; // Lock buttons while saving comment to database
-    const comment = this.commentForm.get('comment').value; // Get the comment value to pass to service function
-    // Function to save the comment to the database
-    this.blogService.postComment(id, comment).subscribe(data => {
-      this.getAllBlogs(); // Refresh all blogs to reflect the new comment
-      const index = this.newComment.indexOf(id); // Get the index of the blog id to remove from array
-      this.newComment.splice(index, 1); // Remove id from the array
-      this.enableCommentForm(); // Re-enable the form
-      this.commentForm.reset(); // Reset the comment form
-      this.processing = false; // Unlock buttons on comment form
-      if (this.enabledComments.indexOf(id) < 0) this.expand(id); // Expand comments for user on comment submission
-    });
-  }
-
-  // Expand the list of comments
-  expand(id) {
-    this.enabledComments.push(id); // Add the current blog post id to array
   }
 
   // Collapse the list of comments
@@ -217,13 +271,28 @@ export class BlogComponent implements OnInit {
     this.enabledComments.splice(index, 1); // Remove id from array
   }
 
+  // Function to check if username is available
+  checkCedula() {
+    // Function from authentication file to check if username is taken
+    this.blogService.checkCedula(this.form.get('inputCedula').value).subscribe(data => {
+      // Check if success true or success false was returned from API
+      if (!data.success) {
+        this.cedulaValid = false; // Return username as invalid
+        this.messageClass = 'alert alert-danger'; // Return error class
+        this.message = data.message; // Return error message
+      } else {
+        this.cedulaValid = true; // Return username as valid
+        this.messageClass = 'alert alert-success'; // Return success class
+        this.message = data.message;
+      }
+    });
+  }
+
   ngOnInit() {
     // Get profile username on page load
     this.authService.getProfile().subscribe(profile => {
       this.username = profile.user.username; // Used when creating new blog posts and comments
     });
-
     this.getAllBlogs(); // Get all blogs on component load
   }
-
 }
