@@ -5,9 +5,9 @@ const mongoose = require('mongoose'); // Node Tool for MongoDB
 mongoose.Promise = global.Promise; // Configure Mongoose Promises
 const Schema = mongoose.Schema; // Import Schema from Mongoose
 
-// // Validate Function to check blog title length
+// // Validate Function to check patient title length
 // let titleLengthChecker = (title) => {
-//   // Check if blog title exists
+//   // Check if patient title exists
 //   if (!title) {
 //     return false; // Return error
 //   } else {
@@ -94,8 +94,8 @@ const Schema = mongoose.Schema; // Import Schema from Mongoose
 //   }
 // ];
 
-// Blog Model Definition
-const blogSchema = new Schema({
+// Patient Model Definition
+const patientSchema = new Schema({
   nombre: { type: String, required: true },
   apellido: { type: String, required: true },
   recomendado: { type: String, required: true },
@@ -116,4 +116,4 @@ const blogSchema = new Schema({
 });
 
 // Export Module/Schema
-module.exports = mongoose.model('Blogs', blogSchema);
+module.exports = mongoose.model('Patients', patientSchema);

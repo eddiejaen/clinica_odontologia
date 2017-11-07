@@ -1,0 +1,251 @@
+<h1 *ngIf="!newPost" >Pacientes</h1>
+<h1 *ngIf="newPost" >Registro de Pacientes</h1>
+<div class="row show-hide-message" *ngIf="newPost" >
+  <div [ngClass]="messageClass">
+    {{ message }}
+  </div>
+</div>
+<br *ngIf="!newPost" />
+
+<!-- New Post Button-->
+<button type="button" name="button" class="btn btn-group" *ngIf="!newPost" (click)="newPatientForm()">Nuevo Paciente</button>
+
+<br *ngIf="!newPost" />
+<br *ngIf="!newPost" />
+
+<form class="form-horizontal" *ngIf="!newPost">
+  <input class="form-control mr-sm-2" placeholder="Buscar Paciente" type="text">
+  <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
+</form>
+<br *ngIf="!newPost" />
+<br *ngIf="!newPost" />
+<table class="table table-striped table-hover table-bordered" *ngIf="!newPost">
+  <thead class="thead-dark">
+    <tr>
+      <th>Cédula</th>
+      <th>Nombre</th>
+      <th>Apellidos</th>
+      <th>Telefono</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let patient of patientPosts" (click)="verPaciente(patient)">
+      <td>{{ patient.cedula }}</td>
+      <td>{{ patient.nombre }}</td>
+      <td>{{ patient.apellido }}</td>
+      <td>{{ patient.telefono_celular }}</td>
+    </tr>
+</tbody>
+</table>
+
+<!-- New Pacient Form -->
+<form [formGroup]="form" name="patientForm" (submit)="onPatientSubmit()" *ngIf="newPost">
+  <div class="row">
+    <div class="col-lg-6">
+      <label>Nombre</label>
+      <input class="form-control" name="inputNombre" formControlName="inputNombre" placeholder="Nombre" type="text">
+      <br>
+      <label>Apellidos</label>
+      <input class="form-control" name="inputApellido" formControlName="inputApellido" placeholder="Apellidos" type="text">
+      <br>
+      <label>Recomendado por</label>
+      <input class="form-control" name="inputRecomendado" formControlName="inputRecomendado" placeholder="Recomendado por" type="text">
+      <br>
+      <label>Dirección</label>
+      <input class="form-control" name="inputDireccion" formControlName="inputDireccion" placeholder="Dirección" type="text">
+      <br>
+      <label>Cantón</label>
+      <input class="form-control" name="inputCanton" formControlName="inputCanton" placeholder="Cantón" type="text">
+      <br>
+      <label>Provincia</label>
+      <input class="form-control" name="inputProvincia" formControlName="inputProvincia" placeholder="Provincia" type="text">
+      <br>
+      <label>No. Cédula</label>
+      <input class="form-control" name="inputCedula" formControlName="inputCedula" placeholder="Cédula" type="text" (blur)="checkCedula()">
+      <br>
+      <label>Ocupación</label>
+      <input class="form-control" name="inputOcupacion"  formControlName="inputOcupacion" placeholder="Ocupación" type="text">
+      <br>
+    </div>
+
+    <div class="col-lg-6">
+      <label>Télefono Célular</label>
+      <input class="form-control" name="inputCelular" formControlName="inputCelular" placeholder="Célular" type="text">
+      <br>
+      <div class="row">
+        <div class="col-lg-9">
+          <label>Télefono Oficina</label>
+          <input class="form-control" name="inputOficina" formControlName="inputOficina" placeholder="Télefono Oficina" type="text">
+        </div>
+        <div class="col-lg-3">
+          <label>Ext.</label>
+          <input class="form-control" name="inputExt" formControlName="inputExt" placeholder="Ext" type="text">
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-lg-9">
+          <label>Télefono Habitación</label>
+          <input class="form-control" name="inputHabitacion" formControlName="inputHabitacion" placeholder="Télefono Habitación" type="text">
+        </div>
+        <div class="col-lg-3">
+          <label>Apdo</label>
+          <input class="form-control" name="inputApdo" formControlName="inputApdo" placeholder="Apdo" type="text">
+        </div>
+      </div>
+      <br>
+      <label>Médico</label>
+      <input class="form-control" name="inputMedico" formControlName="inputMedico" placeholder="Medico" type="text">
+      <br>
+      <label>En caso de emergencia avisar a</label>
+      <input class="form-control" name="inputAvisar" formControlName="inputAvisar" placeholder="En caso de emergencia avisar a" type="text">
+      <br>
+      <div class="row">
+        <div class="col-lg-6">
+          <label>Parentesco</label>
+          <input class="form-control" name="inputParentesco" formControlName="inputParentesco" placeholder="Parentesco" type="text">
+        </div>
+        <div class="col-lg-6">
+          <label>Télefono</label>
+          <input class="form-control" name="inputTelParentesco" formControlName="inputTelParentesco" placeholder="Télefono" type="text">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Go Back Button -->
+  <button [disabled]="processing" type="button" name="button" (click)="goBack()" class="btn btn-warning">Volver</button>
+  <!-- Submit Button -->
+  <button [disabled]="!cedulaValid || processing || !form.valid" type="submit" name="button" class="btn btn-success">Registrar</button>
+
+</form>
+<!-- New Pacient Form -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-------------------------------------------------------------------------------------------------------------------------------------->
+<!-- Panel Start -->
+<!-- <div *ngIf="newPost">
+  <!-- Panel Outer Layer
+  <div class="panel panel-primary" *ngFor="let patient of patientPosts">
+
+    <!-- Panel Title
+    <div class="panel-heading">
+      <h3 class="panel-title">{{ patient.title }}</h3>
+    </div>
+
+    <!-- Panel Body
+    <div class="panel-body">
+      {{ patient.body }}
+    </div>
+
+    <!-- Panel Footer Start
+    <div class="panel-footer">
+      <strong>Posted by: </strong>{{ patient.createdBy }}
+      <br />
+      <strong>Date: </strong>{{ patient.createdAt | date:'MMM dd, yyyy' }}
+      <br />
+      <div *ngIf="username === patient.createdBy">
+        <strong>Likes: </strong>{{ patient.likes }}
+        <br />
+        <strong>Dislikes: </strong>{{ patient.dislikes }}
+      </div>
+
+      <!-- Edit Button
+      <a [routerLink]="['/edit-patient/', patient._id]" *ngIf="username === patient.createdBy"><button type="button" name="button" class="btn btn-sm btn-info">Edit</button></a>
+      <!-- Delete Button
+      <a [routerLink]="['/delete-patient/', patient._id]" *ngIf="username === patient.createdBy"><button type="button" name="button" class="btn btn-sm btn-danger">Delete</button></a>
+
+      <!-- Likes Dropdown
+      <div class="dropdown">
+        <!-- Like Button
+        <button [disabled]="patient.likedBy.indexOf(username) > -1" type="button" name="button" class="btn btn-sm btn-success" *ngIf="username !== patient.createdBy" (click)="likePatient(patient._id)"><span class="glyphicon glyphicon-thumbs-up">&nbsp;</span>Likes: {{ patient.likes }}</button>
+        <!-- Dropdown Menu Items
+        <div class="dropdown-content">
+          <a [routerLink]="['/user/', liker]" *ngFor="let liker of patient.likedBy">{{ liker }}</a>
+        </div>
+      </div>
+
+      <!-- Dislikes Dropdown
+      <div class="dropdown">
+        <!-- Dislike Button
+        <button [disabled]="patient.dislikedBy.indexOf(username) > -1" type="button" name="button" class="btn btn-sm btn-warning" *ngIf="username !== patient.createdBy" (click)="dislikePatient(patient._id)"><span class="glyphicon glyphicon-thumbs-down">&nbsp;</span>Dislikes: {{ patient.dislikes }}</button>
+        <!-- Dropdown Menu Items
+        <div class="dropdown-content">
+          <a [routerLink]="['/user/', disliker]" *ngFor="let disliker of patient.dislikedBy">{{ disliker }}</a>
+        </div>
+      </div>
+
+    </div>
+    <!-- Panel Footer End -->
+
+    <!-- Post Comment Box: Start
+    <ul class="list-group">
+      <li class="list-group-item">
+        <!-- Post Comment Button
+        <button type="button" name="button" class="btn btn-sm btn-danger" (click)="draftComment(patient._id)" [disabled]="newComment.indexOf(patient._id) > -1">Post Comment</button>
+        <br />
+        <br />
+        <div *ngIf="newComment.indexOf(patient._id) > -1">
+
+          <!-- Form: Comment Form Start
+          <form [formGroup]="commentForm">
+            <!-- Textarea Input
+            <textarea name="comment" rows="10" cols="30" class="form-control" formControlName="comment"></textarea>
+            <!-- Validation
+            <div [ngClass]="{'has-success': !commentForm.controls.comment.errors && commentForm.controls.comment.dirty, 'has-error': commentForm.controls.comment.dirty && commentForm.controls.comment.errors}">
+              <ul class="help-block">
+                <li *ngIf="commentForm.controls.comment.errors?.required && commentForm.controls.comment.dirty">This field is required.</li>
+                <li *ngIf="(commentForm.controls.comment.errors?.maxlength && commentForm.controls.comment.dirty) ||(commentForm.controls.comment.errors?.minlength && commentForm.controls.comment.dirty)">Comment must be at least 1 character but no more than 200.</li>
+              </ul>
+            </div>
+            <!-- Post Button
+            <button [disabled]="!commentForm.valid || processing" type="submit" name="button" class="btn btn-sm btn-info" (click)="postComment(patient._id)">Post</button>
+            <!-- Cancel Button
+            <button [disabled]="processing" type="button" name="button" class="btn btn-sm btn-danger" (click)="cancelSubmission(patient._id)">Cancel</button>
+          </form>
+          <!-- Form: Comment Form End
+
+        </div>
+
+        <!-- Show Comments
+        <li *ngIf="enabledComments.indexOf(patient._id) === -1 && patient.comments.length > 0" class="list-group-item">
+          <span (click)="expand(patient._id)">
+            Show comments&nbsp;&nbsp;
+            <div class="glyphicon glyphicon-comment"></div>
+          </span>
+        </li>
+
+        <!-- Hide Comments
+        <li *ngIf="enabledComments.indexOf(patient._id) > -1" class="list-group-item">
+          <span (click)="collapse(patient._id)">
+            Hide Comments&nbsp;&nbsp;
+            <div class="glyphicon glyphicon-comment"></div>
+          </span>
+        </li>
+
+        <!-- Comment
+        <div *ngIf="enabledComments.indexOf(patient._id) > -1">
+          <li *ngFor="let comment of patient.comments" class="list-group-item">
+            <strong>{{ comment.commentator }}:</strong> {{ comment.comment }}
+          </li>
+        </div>
+      </ul>
+      <!-- Post Comment Box: End
+
+    </div>
+    <!-- Panel Outer Layer
+  </div>
+  <!-- Panel End -->
