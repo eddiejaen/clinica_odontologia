@@ -116,4 +116,4 @@ const blogSchema = new Schema({
 });
 
 // Export Module/Schema
-module.exports = mongoose.model('Blogs', blogSchema);
+module.exports = mongoose.model('Patients', blogSchema);
