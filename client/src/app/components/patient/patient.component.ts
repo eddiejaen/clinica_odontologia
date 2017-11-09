@@ -13,15 +13,15 @@ export class PatientComponent implements OnInit {
   messageClass;
   message;
   cedulaValid;
-  newPost = false;
+  newPatient = false;
+  editPatient = false;
+  profilePatient = false;
   loadingPatients = false;
   form;
-  commentForm;
   processing = false;
   username;
   patientPosts;
-  newComment = [];
-  enabledComments = [];
+  patientSelect;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -195,7 +195,12 @@ export class PatientComponent implements OnInit {
 
   // Function to display new patient form
   newPatientForm() {
-    this.newPost = true; // Show new patient form
+    this.newPatient = true; // Show new patient form
+  }
+
+  // Function to display new patient form
+  editPatientForm() {
+    this.editPatient = true; // Show new patient form
   }
 
   // Reload patients on current page
@@ -252,6 +257,54 @@ export class PatientComponent implements OnInit {
     });
   }
 
+  onPatientUpdateSubmit() {
+    this.processing = true; // Disable submit button
+    this.disableFormNewPatientForm(); // Lock form
+
+    // Create patient object from form fields
+    const patient = {
+      _id: this.patientSelect._id,
+      nombre: this.form.get('inputNombre').value,
+      apellido: this.form.get('inputApellido').value,
+      recomendado: this.form.get('inputRecomendado').value,
+      direccion: this.form.get('inputDireccion').value,
+      canton: this.form.get('inputCanton').value,
+      provincia: this.form.get('inputProvincia').value,
+      cedula: this.form.get('inputCedula').value,
+      ocupacion: this.form.get('inputOcupacion').value,
+      telefono_celular: this.form.get('inputCelular').value,
+      telefono_oficina: this.form.get('inputOficina').value,
+      ext_oficina: this.form.get('inputExt').value,
+      telefono_habitacion: this.form.get('inputHabitacion').value,
+      apdo_habitacion: this.form.get('inputApdo').value,
+      medico: this.form.get('inputMedico').value,
+      emergencia: this.form.get('inputAvisar').value,
+      parentesco: this.form.get('inputParentesco').value,
+      telefono_parentesco: this.form.get('inputTelParentesco').value
+    }
+
+    // Function to save patient into database
+    this.patientService.editPatient(patient).subscribe(data => {
+      // Check if patient was saved to database or not
+      if (!data.success) {
+        this.messageClass = 'alert alert-danger'; // Return error class
+        this.message = data.message; // Return error message
+        this.processing = false; // Enable submit button
+        this.enableFormNewPatientForm(); // Enable form
+      } else {
+        this.messageClass = 'alert alert-success'; // Return success class
+        this.message = data.message; // Return success message
+        // Clear form data after two seconds
+        setTimeout(() => {
+          this.messageClass = ""; // Return success class
+          this.message = ""; // Return success message
+          this.processing = false;
+          this.enableFormNewPatientForm();
+        }, 2000);
+      }
+    });
+  }
+
   // Function to go back to previous page
   goBack() {
     window.location.reload(); // Clear all variable states
@@ -263,12 +316,6 @@ export class PatientComponent implements OnInit {
     this.patientService.getAllPatients().subscribe(data => {
       this.patientPosts = data.patients; // Assign array to use in HTML
     });
-  }
-
-  // Collapse the list of comments
-  collapse(id) {
-    const index = this.enabledComments.indexOf(id); // Get position of id in array
-    this.enabledComments.splice(index, 1); // Remove id from array
   }
 
   // Function to check if username is available
@@ -289,14 +336,15 @@ export class PatientComponent implements OnInit {
   }
 
   verPaciente(patient : any){
-    console.log(patient);
+    this.profilePatient = true;
+    this.patientSelect = patient;
   }
 
   ngOnInit() {
-    // Get profile username on page load
-    this.authService.getProfile().subscribe(profile => {
-      this.username = profile.user.username; // Used when creating new patient posts and comments
-    });
+    // // Get profile username on page load
+    // this.authService.getProfile().subscribe(profile => {
+    //   this.username = profile.user.username; // Used when creating new patient posts and comments
+    // });
     this.getAllPatients(); // Get all patients on component load
   }
 }

@@ -9,186 +9,183 @@ module.exports = (router) => {
   CREATE NEW BLOG
   =============================================================== */
   router.post('/newPatient', (req, res) => {
-          const patient = new Patient({
-            nombre: req.body.inputNombre,
-            apellido: req.body.inputApellido,
-            recomendado: req.body.inputRecomendado,
-            direccion: req.body.inputDireccion,
-            canton: req.body.inputCanton,
-            provincia: req.body.inputProvincia,
-            cedula: req.body.inputCedula,
-            ocupacion: req.body.inputOcupacion,
-            telefono_celular: req.body.inputCelular,
-            telefono_oficina: req.body.inputOficina,
-            ext_oficina: req.body.inputExt,
-            telefono_habitacion: req.body.inputHabitacion,
-            apdo_habitacion: req.body.inputApdo,
-            medico: req.body.inputMedico,
-            emergencia: req.body.inputAvisar,
-            parentesco: req.body.inputParentesco,
-            telefono_parentesco: req.body.inputTelParentesco
-          });
-          // Save patient into database
-          patient.save((err) => {
-            // Check if error
-            if (err) {
-              if (err.code === 11000) {
-                res.json({ success: false, message: 'Cédula ya existe.' }); // Return error
-              } else {
-                res.json({ success: false, message: err}); // Return general error message
-              }
-              } else {
-                res.json({ success: true, message: 'Paciente Registrado!' }); // Return success message
-            }
-          });
-        //}
-      //}
+    const patient = new Patient({
+      nombre: req.body.inputNombre,
+      apellido: req.body.inputApellido,
+      recomendado: req.body.inputRecomendado,
+      direccion: req.body.inputDireccion,
+      canton: req.body.inputCanton,
+      provincia: req.body.inputProvincia,
+      cedula: req.body.inputCedula,
+      ocupacion: req.body.inputOcupacion,
+      telefono_celular: req.body.inputCelular,
+      telefono_oficina: req.body.inputOficina,
+      ext_oficina: req.body.inputExt,
+      telefono_habitacion: req.body.inputHabitacion,
+      apdo_habitacion: req.body.inputApdo,
+      medico: req.body.inputMedico,
+      emergencia: req.body.inputAvisar,
+      parentesco: req.body.inputParentesco,
+      telefono_parentesco: req.body.inputTelParentesco
+    });
+    // Save patient into database
+    patient.save((err) => {
+      // Check if error
+      if (err) {
+        if (err.code === 11000) {
+          res.json({ success: false, message: 'Cédula ya existe.' }); // Return error
+        } else {
+          res.json({ success: false, message: err}); // Return general error message
+        }
+      } else {
+        res.json({ success: true, message: 'Paciente Registrado!' }); // Return success message
+      }
+    });
+    //}
+    //}
     //}
   });
 
 
-    /* ===============================================================
-       Route to check if user's username is available for registration
-    =============================================================== */
-    router.get('/checkCedula/:cedula', (req, res) => {
-      // Check if username was provided in paramaters
-      if (!req.params.cedula) {
-        res.json({ success: false, message: 'Cedula was not provided' }); // Return error
-      } else {
-        // Look for username in database
-        Patient.findOne({ cedula: req.params.cedula }, (err, patient) => { // Check if connection error was found
-          if (err) {
-            res.json({ success: false, message: "C mamut" }); // Return connection error
-          } else {
-            // Check if user's username was found
-            if (patient) {
-              res.json({ success: false, message: 'Cedula is already taken' }); // Return as taken username
-            } else {
-              res.json({ success: true, message: 'Cedula is available' }); // Return as vailable username
-            }
-          }
-        });
-      }
-    });
-
-
-    /* ===============================================================
-    GET ALL BLOGS
-    =============================================================== */
-    router.get('/allPatients', (req, res) => {
-      // Search database for all patient posts
-      Patient.find({}, (err, patients) => {
-        // Check if error was found or not
+  /* ===============================================================
+  Route to check if user's username is available for registration
+  =============================================================== */
+  router.get('/checkCedula/:cedula', (req, res) => {
+    // Check if username was provided in paramaters
+    if (!req.params.cedula) {
+      res.json({ success: false, message: 'Cedula was not provided' }); // Return error
+    } else {
+      // Look for username in database
+      Patient.findOne({ cedula: req.params.cedula }, (err, patient) => { // Check if connection error was found
         if (err) {
-          res.json({ success: false, message: err }); // Return error message
+          res.json({ success: false, message: "C mamut" }); // Return connection error
         } else {
-          // Check if patients were found in database
-          if (!patients) {
-            res.json({ success: false, message: 'No patients found.' }); // Return error of no patients found
+          // Check if user's username was found
+          if (patient) {
+            res.json({ success: false, message: 'Cedula is already taken' }); // Return as taken username
           } else {
-            res.json({ success: true, patients: patients }); // Return success and patients array
+            res.json({ success: true, message: 'Cedula is available' }); // Return as vailable username
           }
         }
-      }).sort({ '_id': -1 }); // Sort patients from newest to oldest
-    });
+      });
+    }
+  });
 
-    /* ===============================================================
-    GET SINGLE BLOG
-    =============================================================== */
-    router.get('/singlePatient/:id', (req, res) => {
-      // Check if id is present in parameters
-      if (!req.params.id) {
-        res.json({ success: false, message: 'No patient ID was provided.' }); // Return error message
+
+  /* ===============================================================
+  GET ALL BLOGS
+  =============================================================== */
+  router.get('/allPatients', (req, res) => {
+    // Search database for all patient posts
+    Patient.find({}, (err, patients) => {
+      // Check if error was found or not
+      if (err) {
+        res.json({ success: false, message: err }); // Return error message
       } else {
-        // Check if the patient id is found in database
-        Patient.findOne({ _id: req.params.id }, (err, patient) => {
-          // Check if the id is a valid ID
-          if (err) {
-            res.json({ success: false, message: 'Not a valid patient id' }); // Return error message
+        // Check if patients were found in database
+        if (!patients) {
+          res.json({ success: false, message: 'No patients found.' }); // Return error of no patients found
+        } else {
+          res.json({ success: true, patients: patients }); // Return success and patients array
+        }
+      }
+    }).sort({ '_id': -1 }); // Sort patients from newest to oldest
+  });
+
+  /* ===============================================================
+  GET SINGLE BLOG
+  =============================================================== */
+  router.get('/singlePatient/:id', (req, res) => {
+    // Check if id is present in parameters
+    if (!req.params.id) {
+      res.json({ success: false, message: 'No patient ID was provided.' }); // Return error message
+    } else {
+      // Check if the patient id is found in database
+      Patient.findOne({ _id: req.params.id }, (err, patient) => {
+        // Check if the id is a valid ID
+        if (err) {
+          res.json({ success: false, message: 'Not a valid patient id' }); // Return error message
+        } else {
+          // Check if patient was found by id
+          if (!patient) {
+            res.json({ success: false, message: 'Patient not found.' }); // Return error message
           } else {
-            // Check if patient was found by id
-            if (!patient) {
-              res.json({ success: false, message: 'Patient not found.' }); // Return error message
-            } else {
-              // Find the current user that is logged in
-              User.findOne({ _id: req.decoded.userId }, (err, user) => {
-                // Check if error was found
-                if (err) {
-                  res.json({ success: false, message: err }); // Return error
+            // Find the current user that is logged in
+            User.findOne({ _id: req.decoded.userId }, (err, user) => {
+              // Check if error was found
+              if (err) {
+                res.json({ success: false, message: err }); // Return error
+              } else {
+                // Check if username was found in database
+                if (!user) {
+                  res.json({ success: false, message: 'Unable to authenticate user' }); // Return error message
                 } else {
-                  // Check if username was found in database
-                  if (!user) {
-                    res.json({ success: false, message: 'Unable to authenticate user' }); // Return error message
+                  // Check if the user who requested single patient is the one who created it
+                  if (user.username !== patient.createdBy) {
+                    res.json({ success: false, message: 'You are not authorized to edit this patient.' }); // Return authentication reror
                   } else {
-                    // Check if the user who requested single patient is the one who created it
-                    if (user.username !== patient.createdBy) {
-                      res.json({ success: false, message: 'You are not authorized to edit this patient.' }); // Return authentication reror
-                    } else {
-                      res.json({ success: true, patient: patient }); // Return success
-                    }
+                    res.json({ success: true, patient: patient }); // Return success
                   }
                 }
-              });
-            }
+              }
+            });
           }
-        });
-      }
-    });
+        }
+      });
+    }
+  });
 
-    /* ===============================================================
-    UPDATE BLOG POST
-    =============================================================== */
-    router.put('/updatePatient', (req, res) => {
-      // Check if id was provided
-      if (!req.body._id) {
-        res.json({ success: false, message: 'No patient id provided' }); // Return error message
-      } else {
-        // Check if id exists in database
-        Patient.findOne({ _id: req.body._id }, (err, patient) => {
-          // Check if id is a valid ID
-          if (err) {
-            res.json({ success: false, message: 'Not a valid patient id' }); // Return error message
+  /* ===============================================================
+  UPDATE BLOG POST
+  =============================================================== */
+  router.put('/updatePatient', (req, res) => {
+    // Check if id was provided
+    if (!req.body._id) {
+      res.json({ success: false, message: 'No patient id provided' }); // Return error message
+    } else {
+      // Check if id exists in database
+      Patient.findOne({ _id: req.body._id }, (err, patient) => {
+        // Check if id is a valid ID
+        if (err) {
+          res.json({ success: false, message: 'Not a valid patient id' }); // Return error message
+        } else {
+          // Check if id was found in the database
+          if (!patient) {
+            res.json({ success: false, message: 'Patient id was not found.' }); // Return error message
           } else {
-            // Check if id was found in the database
-            if (!patient) {
-              res.json({ success: false, message: 'Patient id was not found.' }); // Return error message
-            } else {
-              // Check who user is that is requesting patient update
-              User.findOne({ _id: req.decoded.userId }, (err, user) => {
-                // Check if error was found
-                if (err) {
+            patient.nombre = req.body.nombre;
+            patient.apellido = req.body.apellido;
+            patient.recomendado = req.body.recomendado;
+            patient.direccion = req.body.direccion;
+            patient.canton = req.body.canton;
+            patient.provincia = req.body.provincia;
+            patient.cedula = req.body.cedula;
+            patient.ocupacion = req.body.ocupacion;
+            patient.telefono_celular = req.body.telefono_celular;
+            patient.telefono_oficina = req.body.telefono_oficina;
+            patient.ext_oficina = req.body.ext_oficina;
+            patient.telefono_habitacion = req.body.telefono_habitacion;
+            patient.apdo_habitacion = req.body.apdo_habitacion;
+            patient.medico = req.body.medico;
+            patient.emergencia = req.body.emergencia;
+            patient.parentesco = req.body.parentesco;
+            patient.telefono_parentesco = req.body.telefono_parentesco; 
+            patient.save((err) => {
+              if (err) {
+                if (err.errors) {
+                  res.json({ success: false, message: 'Please ensure form is filled out properly' });
+                } else {
                   res.json({ success: false, message: err }); // Return error message
-                } else {
-                  // Check if user was found in the database
-                  if (!user) {
-                    res.json({ success: false, message: 'Unable to authenticate user.' }); // Return error message
-                  } else {
-                    // Check if user logged in the the one requesting to update patient post
-                    if (user.username !== patient.createdBy) {
-                      res.json({ success: false, message: 'You are not authorized to edit this patient post.' }); // Return error message
-                    } else {
-                      patient.title = req.body.title; // Save latest patient title
-                      patient.body = req.body.body; // Save latest body
-                      patient.save((err) => {
-                        if (err) {
-                          if (err.errors) {
-                            res.json({ success: false, message: 'Please ensure form is filled out properly' });
-                          } else {
-                            res.json({ success: false, message: err }); // Return error message
-                          }
-                        } else {
-                          res.json({ success: true, message: 'Patient Updated!' }); // Return success message
-                        }
-                      });
-                    }
-                  }
                 }
-              });
-            }
+              } else {
+                res.json({ success: true, message: 'Patient Updated!' }); // Return success message
+              }
+            });
           }
-        });
-      }
-    });
+        }
+      });
+    }
+  });
 
     /* ===============================================================
     DELETE BLOG POST
