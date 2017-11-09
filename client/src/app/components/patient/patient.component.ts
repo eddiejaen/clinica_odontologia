@@ -31,9 +31,6 @@ export class PatientComponent implements OnInit {
     private authService: AuthService,
     private patientService: PatientService
   ) {
-    this.historyPosts.diabetes = false;
-    this.historyPosts.cardiacas = false;
-    this.historyPosts.artritis = false;
     this.createNewPatientForm(); // Create new patient form on start up
   }
 
@@ -207,7 +204,6 @@ export class PatientComponent implements OnInit {
   // Function to display new patient form
   editPatientForm() {
     this.editPatient = true; // Show new patient form
-    this.getHistory();
   }
 
   // Reload patients on current page
@@ -380,9 +376,7 @@ export class PatientComponent implements OnInit {
   getHistory() {
     // Function to GET all patients from database
     this.patientService.getHistory(this.patientSelect.cedula).subscribe(data => {
-
     this.historyPosts = data.history; // Assign array to use in HTML
-    console.log(data.history.diabetes);
     });
   }
 
@@ -406,6 +400,7 @@ export class PatientComponent implements OnInit {
   verPaciente(patient : any){
     this.profilePatient = true;
     this.patientSelect = patient;
+    this.getHistory();
   }
 
   ngOnInit() {

@@ -132,7 +132,7 @@
       <a class="nav-link" data-toggle="tab" href="#editar" role="tab" (click)="editPatientForm()">Editar Datos Paciente</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#historial" role="tab" (click)="editPatientForm()">Historial Clinico del Paciente</a>
+      <a *ngIf="historyPosts" class="nav-link" data-toggle="tab" href="#historial" role="tab" (click)="editPatientForm()">Historial Clinico del Paciente</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" data-toggle="tab" href="#odontograma" role="tab">Odontograma del Paciente</a>
@@ -233,74 +233,74 @@
           <div class="col-lg-4">
             <label>¿Está usted bajo tratamiento médico?</label>
             <br>
-            <label><input #text1 type="checkbox" name="tratamiento" value="true"> Si</label>
+            <label><input #text1 type="checkbox" name="tratamiento" value="true" [checked]="historyPosts.tratamiento"> Si</label>
             <br>
             <label>¿Está tomando algún medicamento?</label>
             <br>
-            <label><input #text2 type="checkbox" name="medicamento" value="true"> Si</label>
+            <label><input #text2 type="checkbox" name="medicamento" value="true" [checked]="historyPosts.medicamento"> Si</label>
             <br>
             <label>Ha padecido usted de:</label>
             <br>
             <label><input #text3 type="checkbox" name="diabetes" value="true" [checked]="historyPosts.diabetes"> Diabetes</label><br>
             <label><input #text4 type="checkbox" name="artritis" value="true" [checked]="historyPosts.artritis"> Artritis</label><br>
             <label><input #text5 type="checkbox" name="cardiacas" value="true" [checked]="historyPosts.cardiacas"> Enfermedades cardíacas</label><br>
-            <label><input #text6 type="checkbox" name="fiebre" value="true"> Fiebre reumática</label><br>
-            <label><input #text7 type="checkbox" name="hepatitis" value="true"> Hepatitis</label><br>
-            <label><input #text8 type="checkbox" name="ulceras" value="true"> Ulceras</label><br>
-            <label><input #text9 type="checkbox" name="trastornos" value="true"> Trastornos Renales</label><br>
-            <label><input #text10 type="checkbox" name="nerviosas" value="true"> Enfermedades Nerviosas</label><br>
+            <label><input #text6 type="checkbox" name="fiebre" value="true" [checked]="historyPosts.fiebre"> Fiebre reumática</label><br>
+            <label><input #text7 type="checkbox" name="hepatitis" value="true" [checked]="historyPosts.hepatitis"> Hepatitis</label><br>
+            <label><input #text8 type="checkbox" name="ulceras" value="true" [checked]="historyPosts.ulceras"> Ulceras</label><br>
+            <label><input #text9 type="checkbox" name="trastornos" value="true" [checked]="historyPosts.transtornos"> Trastornos Renales</label><br>
+            <label><input #text10 type="checkbox" name="nerviosas" value="true" [checked]="historyPosts.nerviosas"> Enfermedades Nerviosas</label><br>
             <label>Otras enfermedades:</label><br>
-            <textarea #textarea1 name="otras_enfermedades" rows=5 cols=40 placeholder="Comentario"></textarea><br>
+            <textarea #textarea1 name="otras_enfermedades" rows=5 cols=40 placeholder="Comentario">{{historyPosts.otras_enfermedades}}</textarea><br>
             <br>
             <label>Le han operado alguna vez o ha estado internado(a).</label>
             <br>
-            <label><input #text11 type="checkbox" name="internado" value="true"> Si</label>
+            <label><input #text11 type="checkbox" name="internado" value="true" [checked]="historyPosts.internado"> Si</label>
           </div>
           <div class="col-lg-4">
             <label>Ha observado alguna alteración en su salud general en los últimos meses.</label>
             <br>
-            <label><input #text12 type="checkbox" name="alteraciones" value="true"> Si</label>
+            <label><input #text12 type="checkbox" name="alteraciones" value="true" [checked]="historyPosts.alteraciones"> Si</label>
             <br>
             <label>Padece o ha padecido alguna enfermedad o trastorno que no haya sido mencionado.</label>
             <br>
-            <label><input #text13 type="checkbox" name="padecimiento" value="true"> Si</label>
+            <label><input #text13 type="checkbox" name="padecimiento" value="true" [checked]="historyPosts.padecimiento"> Si</label>
             <br>
             <label>Es usted alérgico a:</label>
             <br>
-            <label><input #text14 type="checkbox" name="aspirina" value="true"> Aspirina</label><br>
-            <label><input #text15 type="checkbox" name="penicilina" value="true"> Penicilina</label><br>
-            <label><input #text16 type="checkbox" name="sulfas" value="true"> Sulfas</label><br>
+            <label><input #text14 type="checkbox" name="aspirina" value="true" [checked]="historyPosts.aspirina"> Aspirina</label><br>
+            <label><input #text15 type="checkbox" name="penicilina" value="true" [checked]="historyPosts.penicilina"> Penicilina</label><br>
+            <label><input #text16 type="checkbox" name="sulfas" value="true" [checked]="historyPosts.sulfas"> Sulfas</label><br>
             <label>Otros medicamentos:</label><br>
-            <textarea #textarea2  name="otros_medicamentos" rows=5 cols=40 placeholder="Comentario"></textarea><br>
+            <textarea #textarea2  name="otros_medicamentos" rows=5 cols=40 placeholder="Comentario">{{historyPosts.otros_medicamentos}}</textarea><br>
             <br>
             <label>Ha tenido alguna vez reacciones anormales a la anestesia dental.</label>
             <br>
-            <label><input #text17 type="checkbox" name="anestesia" value="true"> Si</label>
+            <label><input #text17 type="checkbox" name="anestesia" value="true" [checked]="historyPosts.anestesia"> Si</label>
             <br>
             <label>Presenta sangrado prolongado.</label>
             <br>
-            <label><input #text18 type="checkbox" name="sangrado" value="true"> Si</label>
+            <label><input #text18 type="checkbox" name="sangrado" value="true" [checked]="historyPosts.sangrado"> Si</label>
             <br>
             <label>Padece de desmayos.</label>
             <br>
-            <label><input #text19 type="checkbox" name="desmayos" value="true"> Si</label>
+            <label><input #text19 type="checkbox" name="desmayos" value="true" [checked]="historyPosts.desmayos"> Si</label>
           </div>
           <div class="col-lg-4">
             <h1>Damas</h1>
             <label>¿Está usted embarazada?</label>
             <br>
-            <label><input #text20 type="checkbox" name="embarazada" value="true"> Si</label>
+            <label><input #text20 type="checkbox" name="embarazada" value="true" [checked]="historyPosts.embarazada"> Si</label>
             <br>
             <label>¿En período de lactancia?</label>
             <br>
-            <label><input #text21 type="checkbox" name="lactancia" value="true"> Si</label>
+            <label><input #text21 type="checkbox" name="lactancia" value="true" [checked]="historyPosts.lactancia"> Si</label>
             <br>
             <label>¿Sufre transtornos durante el ciclo menstrual?</label>
             <br>
-            <label><input #text22 type="checkbox" name="transtornos" value="true"> Si</label>
+            <label><input #text22 type="checkbox" name="transtornos" value="true" [checked]="historyPosts.transtornos"> Si</label>
             <br>
             <label>Observaciones:</label><br>
-            <textarea #textarea3  name="observaciones" rows=5 cols=40 placeholder="Comentario"></textarea><br>
+            <textarea #textarea3  name="observaciones" rows=5 cols=40 placeholder="Comentario">{{historyPosts.observaciones}}</textarea><br>
             <!-- <br>
             <label>Fecha:</label>
             <input class="form-control" name="inputFecha"  placeholder="Fecha" type="date"> -->
