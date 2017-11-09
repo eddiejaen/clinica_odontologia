@@ -1,5 +1,6 @@
 const User = require('../models/user'); // Import User Model Schema
 const Patient = require('../models/patient'); // Import Patient Model Schema
+const History = require('../models/history'); // Import Patient Model Schema
 const jwt = require('jsonwebtoken'); // Compact, URL-safe means of representing claims to be transferred between two parties.
 const config = require('../config/database'); // Import database configuration
 
@@ -41,9 +42,51 @@ module.exports = (router) => {
         res.json({ success: true, message: 'Paciente Registrado!' }); // Return success message
       }
     });
-    //}
-    //}
-    //}
+  });
+
+
+  /* ===============================================================
+  CREATE NEW HISTORY
+  =============================================================== */
+  router.post('/newHistory', (req, res) => {
+    const history = new History({
+      cedula: req.body.cedula,
+      tratamiento: req.body.tratamiento,
+      medicamento: req.body.medicamento,
+      diabetes: req.body.diabetes,
+      artritis: req.body.artritis,
+      cardiacas: req.body.cardiacas,
+      fiebre: req.body.fiebre,
+      hepatitis: req.body.hepatitis,
+      ulceras: req.body.ulceras,
+      trastornos: req.body.trastornos,
+      nerviosas: req.body.nerviosas,
+      otras_enfermedades: req.body.otras_enfermedades,
+      internado: req.body.internado,
+      alteraciones: req.body.alteraciones,
+      padecimiento: req.body.padecimiento,
+      aspirina: req.body.aspirina,
+      penicilina: req.body.penicilina,
+      sulfas: req.body.sulfas,
+      otros_medicamentos: req.body.otros_medicamentos,
+      anestesia: req.body.anestesia,
+      sangrado: req.body.sangrado,
+      desmayos: req.body.desmayos,
+      embarazada: req.body.embarazada,
+      lactancia: req.body.lactancia,
+      transtornos: req.body.transtornos,
+      observaciones: req.body.observaciones
+      //inputFecha: req.body.inputFecha
+    });
+    // Save history into database
+    history.save((err) => {
+      // Check if error
+      if (err) {
+          res.json({ success: false, message: err}); // Return general error message
+      } else {
+        res.json({ success: true, message: 'Historial Medico Registrado' }); // Return success message
+    }
+  });
   });
 
 
@@ -90,6 +133,25 @@ module.exports = (router) => {
         }
       }
     }).sort({ '_id': -1 }); // Sort patients from newest to oldest
+  });
+  /* ===============================================================
+  GET ALL BLOGS
+  =============================================================== */
+  router.get('/history/:cedula', (req, res) => {
+    // Search database for all history posts
+    History.findOne({ cedula: req.params.cedula }, (err, history) => {
+      // Check if error was found or not
+      if (err) {
+        res.json({ success: false, message: err }); // Return error message
+      } else {
+        // Check if history were found in database
+        if (!history) {
+          res.json({ success: false, message: 'No historys found.' }); // Return error of no history found
+        } else {
+          res.json({ success: true, history: history }); // Return success and history array
+        }
+      }
+    });
   });
 
   /* ===============================================================
@@ -169,7 +231,7 @@ module.exports = (router) => {
             patient.medico = req.body.medico;
             patient.emergencia = req.body.emergencia;
             patient.parentesco = req.body.parentesco;
-            patient.telefono_parentesco = req.body.telefono_parentesco; 
+            patient.telefono_parentesco = req.body.telefono_parentesco;
             patient.save((err) => {
               if (err) {
                 if (err.errors) {

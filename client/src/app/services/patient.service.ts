@@ -31,6 +31,11 @@ export class PatientService {
     return this.http.post(this.domain + 'patients/newPatient', patient, this.options).map(res => res.json());
   }
 
+  newHistory(history) {
+    this.createAuthenticationHeaders(); // Create headers
+    return this.http.post(this.domain + 'patients/newHistory', history, this.options).map(res => res.json());
+  }
+
   checkCedula(cedula) {
     this.createAuthenticationHeaders(); // Create headers
     return this.http.get(this.domain + 'patients/checkCedula/' + cedula, this.options).map(res => res.json());
@@ -40,6 +45,10 @@ export class PatientService {
   getAllPatients() {
     this.createAuthenticationHeaders(); // Create headers
     return this.http.get(this.domain + 'patients/allPatients', this.options).map(res => res.json());
+  }
+  getHistory(cedula) {
+    this.createAuthenticationHeaders(); // Create headers
+    return this.http.get(this.domain + 'patients/history/' + cedula, this.options).map(res => res.json());
   }
 
   // Function to get the patient using the id

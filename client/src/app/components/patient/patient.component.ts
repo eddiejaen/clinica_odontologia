@@ -21,6 +21,7 @@ export class PatientComponent implements OnInit {
   processing = false;
   username;
   patientPosts;
+  historyPosts;
   patientSelect;
   diabetes:boolean=true;
 
@@ -203,6 +204,7 @@ export class PatientComponent implements OnInit {
   // Function to display new patient form
   editPatientForm() {
     this.editPatient = true; // Show new patient form
+    this.getHistory();
   }
 
   // Reload patients on current page
@@ -254,6 +256,59 @@ export class PatientComponent implements OnInit {
         // Clear form data after two seconds
         setTimeout(() => {
           window.location.reload();
+        }, 1000);
+      }
+    });
+  }
+
+  // Function to submit a new history post
+  onHistorialSubmit(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y) {
+    this.processing = true; // Disable submit button
+
+    // Create history object from form fields
+    const history = {
+      cedula: this.patientSelect.cedula,
+      tratamiento: a.checked,
+      medicamento: b.checked,
+      diabetes: c.checked,
+      artritis: d.checked,
+      cardiacas: e.checked,
+      fiebre: f.checked,
+      hepatitis: g.checked,
+      ulceras: h.checked,
+      trastornos: i.checked,
+      nerviosas: j.checked,
+      otras_enfermedades: w.value,
+      internado: k.checked,
+      alteraciones: l.checked,
+      padecimiento: m.checked,
+      aspirina: n.checked,
+      penicilina: o.checked,
+      sulfas: p.checked,
+      otros_medicamentos: x.value,
+      anestesia: q.checked,
+      sangrado: r.checked,
+      desmayos: s.checked,
+      embarazada: t.checked,
+      lactancia: u.checked,
+      transtornos: v.checked,
+      observaciones: y.value
+    //  inputFecha: this.form.get('inputFecha').value
+    }
+
+    // Function to save history into database
+    this.patientService.newHistory(history).subscribe(data => {
+      // Check if history was saved to database or not
+      if (!data.success) {
+        this.messageClass = 'alert alert-danger'; // Return error class
+        this.message = data.message; // Return error message
+        this.processing = false; // Enable submit button
+      } else {
+        this.messageClass = 'alert alert-success'; // Return success class
+        this.message = data.message; // Return success message
+        // Clear form data after two seconds
+        setTimeout(() => {
+          //window.location.reload();
         }, 1000);
       }
     });
@@ -317,6 +372,12 @@ export class PatientComponent implements OnInit {
     // Function to GET all patients from database
     this.patientService.getAllPatients().subscribe(data => {
       this.patientPosts = data.patients; // Assign array to use in HTML
+    });
+  }
+  getHistory() {
+    // Function to GET all patients from database
+    this.patientService.getHistory(this.patientSelect.cedula).subscribe(data => {
+    this.historyPosts = data.patients; // Assign array to use in HTML
     });
   }
 
