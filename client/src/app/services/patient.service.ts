@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Http, Headers, RequestOptions } from '@angular/http';
 
+
 @Injectable()
 export class PatientService {
 

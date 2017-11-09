@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { PatientService } from '../../services/patient.service';
+import { history } from "../../interfaces/patient.interface";
 
 @Component({
   selector: 'app-patient',
@@ -21,9 +22,8 @@ export class PatientComponent implements OnInit {
   processing = false;
   username;
   patientPosts;
-  historyPosts;
+  historyPosts:history;
   patientSelect;
-  diabetes:boolean=true;
 
 
   constructor(
@@ -31,6 +31,9 @@ export class PatientComponent implements OnInit {
     private authService: AuthService,
     private patientService: PatientService
   ) {
+    this.historyPosts.diabetes = false;
+    this.historyPosts.cardiacas = false;
+    this.historyPosts.artritis = false;
     this.createNewPatientForm(); // Create new patient form on start up
   }
 
@@ -377,7 +380,9 @@ export class PatientComponent implements OnInit {
   getHistory() {
     // Function to GET all patients from database
     this.patientService.getHistory(this.patientSelect.cedula).subscribe(data => {
-    this.historyPosts = data.patients; // Assign array to use in HTML
+
+    this.historyPosts = data.history; // Assign array to use in HTML
+    console.log(data.history.diabetes);
     });
   }
 
@@ -408,6 +413,7 @@ export class PatientComponent implements OnInit {
     // this.authService.getProfile().subscribe(profile => {
     //   this.username = profile.user.username; // Used when creating new patient posts and comments
     // });
+
     this.getAllPatients(); // Get all patients on component load
   }
 }
