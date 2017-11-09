@@ -241,7 +241,7 @@
             <br>
             <label>Ha padecido usted de:</label>
             <br>
-            <label><input [(ngModel)]="editPatient"  type="checkbox" name="diabetes" value="Si"> Diabetes</label><br>
+            <label><input  type="checkbox" name="diabetes" value="Si" [checked]="diabetes"> Diabetes</label><br>
             <h1> <small>{{editPatient}}</small></h1>
             <label><input type="checkbox" name="artritis" value="Si"> Artritis</label><br>
             <label><input type="checkbox" name="cardiacas" value="Si"> Enfermedades cardíacas</label><br>
@@ -304,7 +304,7 @@
             <textarea  name="comment" rows=5 cols=40 placeholder="Comentario"></textarea><br>
             <br>
             <label>Fecha:</label>
-            <input class="form-control" name="inputFecha"  formControlName="inputFecha" placeholder="Fecha" type="date">
+            <input class="form-control" name="inputFecha"   placeholder="Fecha" type="date">
           </div>
         </div>
       </form>

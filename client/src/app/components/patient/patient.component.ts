@@ -22,6 +22,8 @@ export class PatientComponent implements OnInit {
   username;
   patientPosts;
   patientSelect;
+  diabetes:boolean=true;
+
 
   constructor(
     private formBuilder: FormBuilder,
