@@ -116,7 +116,6 @@
   </div>
 
   <!-- Go Back Button -->
-  <!-- <button [disabled]="processing" type="button" name="button" (click)="goBack()" class="btn btn-warning">Volver</button> -->
   <button [disabled]="processing" type="button" name="button" (click)="goBack()" class="btn btn-warning">Volver</button>
   <!-- Submit Button -->
   <button [disabled]="!cedulaValid || processing || !form.valid" type="submit" name="button" class="btn btn-success">Registrar</button>
@@ -127,14 +126,15 @@
 <!-- Profile Pacient Button-->
 
 <div *ngIf="profilePatient">
+  <!-- Go Back Button -->
+  <button [disabled]="processing" type="button" name="button"  (click)="goBack()" class="btn btn-warning">Volver</button>
   <h1>Expediente del Paciente</h1>
-  <button [disabled]="processing" type="button" name="button" (click)="goBack()" class="btn btn-warning">Volver</button>
   <ul class="nav nav-tabs" role="tablist">
     <li class="nav-item">
       <a class="nav-link" data-toggle="tab" href="#editar" role="tab" (click)="editPatientForm()">Editar Datos Paciente</a>
     </li>
     <li class="nav-item">
-      <a  class="nav-link" data-toggle="tab" href="#historial" role="tab" (click)="editPatientForm()">Historial Clinico del Paciente</a>
+      <a *ngIf="historyPosts" class="nav-link" data-toggle="tab" href="#historial" role="tab" (click)="editPatientForm()">Historial Clinico del Paciente</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" data-toggle="tab" href="#odontograma" role="tab">Odontograma del Paciente</a>
@@ -222,8 +222,7 @@
         </div>
 
         <!-- Go Back Button -->
-        <!-- <button [disabled]="processing" type="button" name="button" (click)="goBack()" class="btn btn-warning">Volver</button> -->
-        <!-- <button [disabled]="processing" type="button" name="button" (click)="goBack()" class="btn btn-warning">Volver</button> -->
+        <button [disabled]="processing" type="button" name="button" (click)="goBack()" class="btn btn-warning">Volver</button>
         <!-- Submit Button -->
         <button [disabled]="processing || !form.valid" type="submit" name="button" class="btn btn-success">Modificar</button>
 
@@ -315,8 +314,45 @@
         <button [disabled]="processing" type="button" name="button" (click)="onHistorialSubmit(text1, text2, text3, text4, text5, text6, text7, text8, text9, text10, text11, text12, text13, text14, text15, text16, text17, text18, text19, text20, text21, text22, textarea1, textarea2, textarea3)" class="btn btn-success">Ingresar Nuevo Historial Clínico</button>
       </form>
     </div>
-    <div class="tab-pane" id="odontograma" role="tabpanel">..dqwq.</div>
-    <div class="tab-pane" id="tratamientos" role="tabpanel">..dadasa.</div>
+    <div class="tab-pane" id="odontograma" role="tabpanel">hola</div>
+    <div class="tab-pane" id="tratamientos" role="tabpanel">
+      <div class="row">
+        <div class="col-lg-6">
+          <label>Fecha</label>
+          <input class="form-control" name="inputFecha" formControlName="inputFecha" placeholder="Fecha" type="date" [(ngModel)]="patientSelect.nombre" >
+          <br>
+          <label>Pieza</label>
+          <input class="form-control" name="inputPieza" formControlName="inputPieza" placeholder="Pieza" type="text" [(ngModel)]="patientSelect.apellido" >
+          <br>
+          <label>Descripción</label>
+          <br>
+          <textarea #textarea2  name="Descripción" rows=5 cols=40 placeholder="Comentario"></textarea><br>
+          <br>
+          <label>Debe</label>
+          <input class="form-control" name="inputDebe" formControlName="inputDebe" placeholder="Debe" type="text" [(ngModel)]="patientSelect.direccion">
+          <br>
+          <label>Abono</label>
+          <input class="form-control" name="inputAbono" formControlName="inputAbono" placeholder="Abono" type="text" [(ngModel)]="patientSelect.canton">
+          <br>
+          <label>Saldo</label>
+          <input class="form-control" name="inputSaldo" formControlName="inputSaldo" placeholder="Saldo" type="text" [(ngModel)]="patientSelect.provincia">
+          <br>
+        </div>
+      </div>
+
+      <table class="table table-striped table-hover table-bordered" >
+        <thead class="thead-dark">
+          <tr>
+            <th>Fecha</th>
+            <th>Pieza</th>
+            <th>Descripción</th>
+            <th>Debe</th>
+            <th>Abono</th>
+            <th>Saldo</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
   </div>
 </div>
 <!-------------------------------------------------------------------------------------------------------------------------------------->
