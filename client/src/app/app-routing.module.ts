@@ -24,7 +24,7 @@ const appRoutes: Routes = [
   {
     path: 'register',
     component: RegisterComponent, // Register Route
-    canActivate: [NotAuthGuard] // User must NOT be logged in to view this route
+    canActivate: [AuthGuard] // User must NOT be logged in to view this route
   },
   {
     path: 'login',

@@ -25,6 +25,35 @@ export class PatientComponent implements OnInit {
   historyPosts:history;
   patientSelect;
 
+  historyBlanco: history = {
+      cedula: "",
+      tratamiento: false,
+      medicamento: false,
+      diabetes: false,
+      artritis: false,
+      cardiacas: false,
+      fiebre: false,
+      hepatitis: false,
+      ulceras: false,
+      trastornos: false,
+      nerviosas: false,
+      otras_enfermedades: "",
+      internado: false,
+      alteraciones: false,
+      padecimiento: false,
+      aspirina: false,
+      penicilina: false,
+      sulfas: false,
+      otros_medicamentos: "",
+      anestesia: false,
+      sangrado: false,
+      desmayos: false,
+      embarazada: false,
+      lactancia: false,
+      transtornos: false,
+      observaciones: ""
+    };
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -377,6 +406,10 @@ export class PatientComponent implements OnInit {
     // Function to GET all patients from database
     this.patientService.getHistory(this.patientSelect.cedula).subscribe(data => {
     this.historyPosts = data.history; // Assign array to use in HTML
+    if (!this.historyPosts)
+   {
+     this.historyPosts = this.historyBlanco;
+   } 
     });
   }
 

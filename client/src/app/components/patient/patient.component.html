@@ -13,10 +13,10 @@
 <br *ngIf="!newPatient && !profilePatient" />
 <br *ngIf="!newPatient && !profilePatient" />
 
-<form class="form-horizontal" *ngIf="!newPatient && !profilePatient">
+<!-- <form class="form-horizontal" *ngIf="!newPatient && !profilePatient">
   <input class="form-control mr-sm-2" placeholder="Buscar Paciente" type="text">
   <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
-</form>
+</form> -->
 <br *ngIf="!newPatient && !profilePatient" />
 <br *ngIf="!newPatient && !profilePatient" />
 <table class="table table-striped table-hover table-bordered" *ngIf="!newPatient && !profilePatient">
@@ -40,7 +40,7 @@
 <!-- New Pacient Button-->
 
 
-<!-- New Pacient Form -->
+<!-- New Patient Form -->
 <form [formGroup]="form" name="patientForm" (submit)="onPatientSubmit()" *ngIf="newPatient && !profilePatient">
   <div class="row">
     <div class="col-lg-6">
@@ -316,6 +316,7 @@
     </div>
     <div class="tab-pane" id="odontograma" role="tabpanel">hola</div>
     <div class="tab-pane" id="tratamientos" role="tabpanel">
+      <form [formGroup]="form" name="treatmentForm" *ngIf="editPatient">
       <div class="row">
         <div class="col-lg-6">
           <label>Fecha</label>
@@ -352,6 +353,7 @@
           </tr>
         </thead>
       </table>
+      </form>
     </div>
   </div>
 </div>
