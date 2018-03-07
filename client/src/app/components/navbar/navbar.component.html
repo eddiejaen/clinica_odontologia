@@ -17,7 +17,7 @@
         <!-- <li class="nav-item" ><a class="nav-link" *ngIf="authService.loggedIn()" routerLink="/profile">Administrador</a></li> -->
         <!-- <li class="nav-item" ><a class="nav-link" *ngIf="authService.loggedIn()" routerLink="">Reportes</a></li> -->
         <li class="nav-item" ><a class="nav-link" *ngIf="!authService.loggedIn()" routerLink="/login">Iniciar Sesión</a></li>
-        <li class="nav-item" ><a class="nav-link" *ngIf="authService.loggedIn()" href="#" (click)="onLogoutClick()">Cerrar Sesión</a></li>
+        <li class="nav-item" ><a class="nav-link" *ngIf="authService.loggedIn()" href="#" (click)="onLogoutClick()">Cerrar Sesión </a></li>
        <li *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/register">Registrar</a></li>
     </ul>
     </div>
