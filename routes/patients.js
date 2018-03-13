@@ -1,6 +1,7 @@
 const User = require('../models/user'); // Import User Model Schema
 const Patient = require('../models/patient'); // Import Patient Model Schema
 const History = require('../models/history'); // Import Patient Model Schema
+const Treatment = require('../models/treatment'); // Import Patient Model Schema
 const jwt = require('jsonwebtoken'); // Compact, URL-safe means of representing claims to be transferred between two parties.
 const config = require('../config/database'); // Import database configuration
 
@@ -90,6 +91,29 @@ module.exports = (router) => {
   });
 
 
+    /* ===============================================================
+    CREATE NEW TREATMENT
+    =============================================================== */
+    router.post('/newTreatment', (req, res) => {
+      const treatment = new Treatment({
+        cedula: req.body.cedula,
+        fecha: req.body.fecha,
+        pieza: req.body.pieza,
+        descripcion: req.body.descripcion,
+        debe: req.body.debe,
+        abono: req.body.abono,
+        saldo: req.body.saldo
+      });
+      // Save history into database
+      treatment.save((err) => {
+        // Check if error
+        if (err) {
+            res.json({ success: false, message: err}); // Return general error message
+        } else {
+          res.json({ success: true, message: 'Tratamiento Registrado' }); // Return success message
+      }
+    });
+    });
   /* ===============================================================
   Route to check if user's username is available for registration
   =============================================================== */
@@ -153,6 +177,27 @@ module.exports = (router) => {
       }
     });
   });
+
+  /* ===============================================================
+  GET ALL BLOGS
+  =============================================================== */
+  router.get('/treatment/:cedula', (req, res) => {
+    // Search database for all history posts
+    Treatment.findOne({ cedula: req.params.cedula }, (err, treatment) => {
+      // Check if error was found or not
+      if (err) {
+        res.json({ success: false, message: err }); // Return error message
+      } else {
+        // Check if history were found in database
+        if (!treatment) {
+          res.json({ success: false, message: 'No treatments found.' }); // Return error of no history found
+        } else {
+          res.json({ success: true, treatment: treatment }); // Return success and history array
+        }
+      }
+    });
+  });
+
 
   /* ===============================================================
   GET SINGLE BLOG

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { PatientService } from '../../services/patient.service';
-import { history } from "../../interfaces/patient.interface";
+import { history, treatment } from "../../interfaces/patient.interface";
 
 @Component({
   selector: 'app-patient',
@@ -24,6 +24,7 @@ export class PatientComponent implements OnInit {
   patientPosts;
   historyPosts:history;
   patientSelect;
+  treatmentX:treatment;
 
   historyBlanco: history = {
       cedula: "",
@@ -54,6 +55,15 @@ export class PatientComponent implements OnInit {
       observaciones: ""
     };
 
+treatmentBlanco: treatment = {
+  cedula: "",
+  fecha:null,
+  pieza: "",
+  descripcion: "",
+  debe: "",
+  abono: "",
+  saldo: ""
+};
 
   constructor(
     private formBuilder: FormBuilder,
@@ -342,6 +352,37 @@ export class PatientComponent implements OnInit {
     });
   }
 
+  onTreatmentSubmit(a,b,c,d,e,f){
+    this.processing = true;
+
+    const treatment = {
+      cedula: this.patientSelect.cedula,
+      fecha: a.value,
+      pieza: b.value,
+      descripcion: c.value,
+      debe: d.value,
+      abono: e.value,
+      saldo: f.value,
+    }
+
+    // Function to save history into database
+    this.patientService.newTreatment(treatment).subscribe(data => {
+      // Check if history was saved to database or not
+      if (!data.success) {
+        this.messageClass = 'alert alert-danger'; // Return error class
+        this.message = data.message; // Return error message
+        this.processing = false; // Enable submit button
+      } else {
+        this.messageClass = 'alert alert-success'; // Return success class
+        this.message = data.message; // Return success message
+        // Clear form data after two seconds
+        setTimeout(() => {
+          //window.location.reload();
+        }, 1000);
+      }
+    });
+  }
+
   onPatientUpdateSubmit() {
     this.processing = true; // Disable submit button
     this.disableFormNewPatientForm(); // Lock form
@@ -409,7 +450,18 @@ export class PatientComponent implements OnInit {
     if (!this.historyPosts)
    {
      this.historyPosts = this.historyBlanco;
-   } 
+   }
+    });
+  }
+
+  getTreatment() {
+    // Function to GET all patients from database
+    this.patientService.getTreatment(this.patientSelect.cedula).subscribe(data => {
+    this.treatmentX = data.treatment; // Assign array to use in HTML
+    if (!this.treatmentX)
+   {
+     this.treatmentX = this.treatmentBlanco;
+   }
     });
   }
 
@@ -434,6 +486,7 @@ export class PatientComponent implements OnInit {
     this.profilePatient = true;
     this.patientSelect = patient;
     this.getHistory();
+    this.getTreatment();
   }
 
   ngOnInit() {

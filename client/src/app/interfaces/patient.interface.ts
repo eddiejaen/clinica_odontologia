@@ -32,3 +32,13 @@ export interface history {
   transtornos: boolean,
   observaciones: string
 }
+
+export interface treatment {
+  cedula: string,
+  fecha: Date,
+  pieza: string,
+  descripcion: string,
+  debe: string,
+  abono: string,
+  saldo: string
+}
