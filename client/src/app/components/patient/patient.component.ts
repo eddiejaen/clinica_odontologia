@@ -19,6 +19,7 @@ export class PatientComponent implements OnInit {
   profilePatient = false;
   loadingPatients = false;
   form;
+  form2;
   processing = false;
   username;
   patientPosts;
@@ -71,11 +72,121 @@ treatmentBlanco: treatment = {
     private patientService: PatientService
   ) {
     this.createNewPatientForm(); // Create new patient form on start up
+    this.createNewTreatmentForm(); // Revisa ésta línea
   }
 
   // Function to create new patient form
   createNewPatientForm() {
     this.form = this.formBuilder.group({
+
+      inputNombre: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(50),
+        this.alphaNumericValidation
+      ])],
+      inputApellido: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(4),
+        Validators.maxLength(50),
+        this.alphaNumericValidation
+      ])],
+      inputRecomendado: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(50),
+        this.alphaNumericValidation
+      ])],
+      inputDireccion: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(50),
+        this.alphaNumericValidation
+      ])],
+      inputCanton: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(50),
+        this.alphaNumericValidation
+      ])],
+      inputProvincia: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(50),
+        this.alphaNumericValidation
+      ])],
+      inputCedula: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(9),
+        Validators.maxLength(15),
+        this.alphaNumericValidation
+      ])],
+      inputOcupacion: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(50),
+        this.alphaNumericValidation
+      ])],
+      inputCelular: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(15),
+        this.alphaNumericValidation
+      ])],
+      inputOficina: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(15),
+        this.alphaNumericValidation
+      ])],
+      inputExt: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(1),
+        Validators.maxLength(10),
+        this.alphaNumericValidation
+      ])],
+      inputHabitacion: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(50),
+        this.alphaNumericValidation
+      ])],
+      inputApdo: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(50),
+        this.alphaNumericValidation
+      ])],
+      inputMedico: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(50),
+        this.alphaNumericValidation
+      ])],
+      inputAvisar: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(50),
+        this.alphaNumericValidation
+      ])],
+      inputParentesco: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(50),
+        this.alphaNumericValidation
+      ])],
+      inputTelParentesco: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(50),
+        this.alphaNumericValidation
+      ])],
+    })
+  }
+
+  // Function to create new treatment form
+  createNewTreatmentForm() {
+    this.form2 = this.formBuilder.group({
 
       inputNombre: ['', Validators.compose([
         Validators.required,

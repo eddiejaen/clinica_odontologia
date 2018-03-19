@@ -146,7 +146,7 @@
   <!-- modificar datos del paciente -->
   <div class="tab-content">
     <div class="tab-pane" id="editar" role="tabpanel">
-      <form [formGroup]="form" name="patientForm" (submit)="onPatientUpdateSubmit()" *ngIf="editPatient">
+      <form [formGroup]="form1" name="patientForm" (submit)="onPatientUpdateSubmit()" *ngIf="editPatient">
         <!-- Go Back Button
         <button [disabled]="processing" type="button" name="button" (click)="goBack()" class="btn btn-warning">Volver</button>
         Submit Button -->
@@ -318,7 +318,7 @@
     <div class="tab-pane" id="odontograma" role="tabpanel">hola</div>
 
     <div class="tab-pane" id="tratamientos" role="tabpanel">
-      <form [formGroup]="form" name="treatmentForm" *ngIf="editPatient">
+      <form [formGroup]="form2" name="treatmentForm" *ngIf="editPatient">
         <button [disabled]="processing" type="button" name="button" (click)="onTreatmentSubmit(text1, text2,textarea, text3, text4, text5 )"
          class="btn btn-success">Ingresar Nuevo Tratamiento</button>
       <div class="row">
