@@ -139,14 +139,14 @@
       <a class="nav-link" data-toggle="tab" href="#odontograma" role="tab">Odontograma del Paciente</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#tratamientos" role="tab">Tratamientos del Paciente </a>
+      <a class="nav-link" data-toggle="tab" href="#tratamientos" role="tab" (click)="editTreatmentForm2()">Tratamientos del Paciente </a>
     </li>
   </ul>
 
   <!-- modificar datos del paciente -->
   <div class="tab-content">
     <div class="tab-pane" id="editar" role="tabpanel">
-      <form [formGroup]="form1" name="patientForm" (submit)="onPatientUpdateSubmit()" *ngIf="editPatient">
+      <form [formGroup]="form" name="patientForm" (submit)="onPatientUpdateSubmit()" *ngIf="editPatient">
         <!-- Go Back Button
         <button [disabled]="processing" type="button" name="button" (click)="goBack()" class="btn btn-warning">Volver</button>
         Submit Button -->
@@ -318,7 +318,7 @@
     <div class="tab-pane" id="odontograma" role="tabpanel">hola</div>
 
     <div class="tab-pane" id="tratamientos" role="tabpanel">
-      <form [formGroup]="form2" name="treatmentForm" *ngIf="editPatient">
+      <form [formGroup]="form2" name="treatmentForm" *ngIf="editTreatment">
         <button [disabled]="processing" type="button" name="button" (click)="onTreatmentSubmit(text1, text2,textarea, text3, text4, text5 )"
          class="btn btn-success">Ingresar Nuevo Tratamiento</button>
       <div class="row">
@@ -331,7 +331,7 @@
           <br>
           <label>Descripción</label>
           <br>
-          <textarea #textarea  name="Descripción" rows=5 cols=40 placeholder="Comentario"  [(ngModel)]="treatmentX.descripcion"></textarea><br>
+          <textarea #textarea  name="Descripción" formControlName="descripcion" rows=5 cols=40 placeholder="Comentario"  [(ngModel)]="treatmentX.descripcion"></textarea><br>
           <br>
           <label>Debe</label>
           <input #text3  class="form-control" name="inputDebe" formControlName="inputDebe" placeholder="Debe" type="text" [(ngModel)]="treatmentX.debe">
