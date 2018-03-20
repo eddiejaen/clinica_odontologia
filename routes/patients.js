@@ -197,6 +197,22 @@ module.exports = (router) => {
       }
     });
   });
+  router.get('/allTreatments/:cedula', (req, res) => {
+    // Search database for all history posts
+    Treatment.find({ cedula: req.params.cedula }, (err, treatment) => {
+      // Check if error was found or not
+      if (err) {
+        res.json({ success: false, message: err }); // Return error message
+      } else {
+        // Check if history were found in database
+        if (!treatment) {
+          res.json({ success: false, message: 'No treatments found.' }); // Return error of no history found
+        } else {
+          res.json({ success: true, treatment: treatment }); // Return success and history array
+        }
+      }
+    });
+  });
 
 
   /* ===============================================================

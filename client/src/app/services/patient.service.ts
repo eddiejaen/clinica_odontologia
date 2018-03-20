@@ -38,6 +38,7 @@ export class PatientService {
   }
   newTreatment(treatment) {
     this.createAuthenticationHeaders(); // Create headers
+    console.log (treatment);
     return this.http.post(this.domain + 'patients/newTreatment', treatment, this.options).map(res => res.json());
   }
 
@@ -59,6 +60,10 @@ export class PatientService {
   getTreatment(cedula) {
     this.createAuthenticationHeaders(); // Create headers
     return this.http.get(this.domain + 'patients/treatment/' + cedula, this.options).map(res => res.json());
+  }
+  getAllTreatments(cedula) {
+    this.createAuthenticationHeaders(); // Create headers
+    return this.http.get(this.domain + 'patients/allTreatments/' + cedula, this.options).map(res => res.json());
   }
   // Function to get the patient using the id
   getSinglePatient(id) {

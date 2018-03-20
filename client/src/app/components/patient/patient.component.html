@@ -356,7 +356,17 @@
             <th>Saldo</th>
           </tr>
         </thead>
-      </table>
+          <tbody>
+            <tr *ngFor="let treatment of treatmentX" >
+              <td>{{ treatment.fecha }}</td>
+              <td>{{ treatment.pieza }}</td>
+              <td>{{ treatment.descripcion }}</td>
+              <td>{{ treatment.debe }}</td>
+              <td>{{ treatment.abono }}</td>
+              <td>{{ treatment.saldo }}</td>
+            </tr>
+          </tbody>
+        </table>
       </form>
     </div>
   </div>

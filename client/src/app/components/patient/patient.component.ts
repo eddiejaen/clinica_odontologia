@@ -345,6 +345,7 @@ treatmentBlanco: treatment = {
         this.messageClass = 'alert alert-success'; // Return success class
         this.message = data.message; // Return success message
         // Clear form data after two seconds
+        this.processing = false; // Enable submit button
         setTimeout(() => {
           window.location.reload();
         }, 1000);
@@ -398,6 +399,7 @@ treatmentBlanco: treatment = {
         this.messageClass = 'alert alert-success'; // Return success class
         this.message = data.message; // Return success message
         // Clear form data after two seconds
+        this.processing = false; // Enable submit button
         setTimeout(() => {
           //window.location.reload();
         }, 1000);
@@ -430,6 +432,7 @@ treatmentBlanco: treatment = {
         this.message = data.message; // Return success message
         // Clear form data after two seconds
         setTimeout(() => {
+        this.processing = false; // Enable submit button
           //window.location.reload();
         }, 1000);
       }
@@ -509,14 +512,29 @@ treatmentBlanco: treatment = {
 
   getTreatment() {
     // Function to GET all patients from database
+    console.log (this.patientSelect.cedula);
     this.patientService.getTreatment(this.patientSelect.cedula).subscribe(data => {
     this.treatmentX = data.treatment; // Assign array to use in HTML
+    console.log (this.treatmentX);
     if (!this.treatmentX)
    {
      this.treatmentX = this.treatmentBlanco;
    }
     });
   }
+
+    getAllTreatments() {
+      // Function to GET all patients from database
+      console.log (this.patientSelect.cedula);
+      this.patientService.getAllTreatments(this.patientSelect.cedula).subscribe(data => {
+      this.treatmentX = data.treatment; // Assign array to use in HTML
+      console.log (this.treatmentX);
+      if (!this.treatmentX)
+     {
+       this.treatmentX = this.treatmentBlanco;
+     }
+      });
+    }
 
   // Function to check if username is available
   checkCedula() {
@@ -539,7 +557,8 @@ treatmentBlanco: treatment = {
     this.profilePatient = true;
     this.patientSelect = patient;
     this.getHistory();
-    this.getTreatment();
+  //  this.getTreatment();
+    this.getAllTreatments();
   }
 
   ngOnInit() {
