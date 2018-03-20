@@ -440,6 +440,39 @@ treatmentBlanco: treatment = {
     });
   }
 
+  updateTreatment(a,b,c,d,e,f){
+    this.processing = true;
+
+    const treatment = {
+      cedula: this.patientSelect.cedula,
+      fecha: a.value,
+      pieza: b.value,
+      descripcion: c.value,
+      debe: d.value,
+      abono: e.value,
+      saldo: f.value,
+    }
+
+    // Function to save history into database
+    this.patientService.editTreatment(this.treatmentSelect).subscribe(data => {
+      // Check if history was saved to database or not
+      if (!data.success) {
+        this.messageClass = 'alert alert-danger'; // Return error class
+        this.message = data.message; // Return error message
+        this.processing = false; // Enable submit button
+      } else {
+        this.messageClass = 'alert alert-success'; // Return success class
+        this.message = data.message; // Return success message
+        // Clear form data after two seconds
+        setTimeout(() => {
+        this.processing = false; // Enable submit button
+          //window.location.reload();
+        }, 1000);
+      }
+    });
+  }
+
+
   onPatientUpdateSubmit() {
     this.processing = true; // Disable submit button
     this.disableFormNewPatientForm(); // Lock form

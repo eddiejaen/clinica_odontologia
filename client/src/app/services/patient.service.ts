@@ -76,6 +76,10 @@ export class PatientService {
     this.createAuthenticationHeaders(); // Create headers
     return this.http.put(this.domain + 'patients/updatePatient/', patient, this.options).map(res => res.json());
   }
+  editTreatment(cedula) {
+    this.createAuthenticationHeaders(); // Create headers
+    return this.http.put(this.domain + 'patients/updateTreatment/', cedula, this.options).map(res => res.json());
+  }
 
   // Function to delete a patient
   deletePatient(id) {

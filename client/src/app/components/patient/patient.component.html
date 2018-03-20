@@ -321,6 +321,8 @@
       <form [formGroup]="form2" name="treatmentForm" *ngIf="editTreatment">
         <button [disabled]="processing" type="button" name="button" (click)="onTreatmentSubmit(text1, text2,textarea, text3, text4, text5 )"
          class="btn btn-success">Ingresar Nuevo Tratamiento</button>
+
+         <button [disabled]="processing" type="button" name="button"  (click)="updateTreatment(text1, text2,textarea, text3, text4, text5 )" class="btn btn-success">Modificar</button>
       <div class="row">
         <div class="col-lg-6">
           <label>Fecha</label>
