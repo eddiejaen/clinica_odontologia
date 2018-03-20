@@ -139,7 +139,7 @@
       <a class="nav-link" data-toggle="tab" href="#odontograma" role="tab">Odontograma del Paciente</a>
     </li>
     <li class="nav-item">
-      <a *ngIf="treatmentX" class="nav-link" data-toggle="tab" href="#tratamientos" role="tab" (click)="editTreatmentForm2()">Tratamientos del Paciente </a>
+      <a class="nav-link" data-toggle="tab" href="#tratamientos" role="tab" (click)="editTreatmentForm2()">Tratamientos del Paciente </a>
     </li>
   </ul>
 
@@ -324,23 +324,23 @@
       <div class="row">
         <div class="col-lg-6">
           <label>Fecha</label>
-          <input #text1 autocomplete=""class="form-control" name="inputFecha" formControlName="inputFecha" placeholder="Fecha" type="date" [(ngModel)]="treatmentX.fecha" >
+          <input #text1 autocomplete=""class="form-control" name="inputFecha" formControlName="inputFecha" placeholder="Fecha" type="date" [(ngModel)]="treatmentSelect.fecha" >
           <br>
           <label>Pieza</label>
-          <input #text2 class="form-control" name="inputPieza" formControlName="inputPieza" placeholder="Pieza" type="text" [(ngModel)]="treatmentX.pieza" >
+          <input #text2 class="form-control" name="inputPieza" formControlName="inputPieza" placeholder="Pieza" type="text" [(ngModel)]="treatmentSelect.pieza" >
           <br>
           <label>Descripción</label>
           <br>
-          <textarea #textarea  name="Descripción" formControlName="descripcion" rows=5 cols=40 placeholder="Comentario"  [(ngModel)]="treatmentX.descripcion"></textarea><br>
+          <textarea #textarea  name="Descripción" formControlName="descripcion" rows=5 cols=40 placeholder="Comentario"  [(ngModel)]="treatmentSelect.descripcion"></textarea><br>
           <br>
           <label>Debe</label>
-          <input #text3  class="form-control" name="inputDebe" formControlName="inputDebe" placeholder="Debe" type="text" [(ngModel)]="treatmentX.debe">
+          <input #text3  class="form-control" name="inputDebe" formControlName="inputDebe" placeholder="Debe" type="text" [(ngModel)]="treatmentSelect.debe">
           <br>
           <label>Abono</label>
-          <input #text4  class="form-control" name="inputAbono" formControlName="inputAbono" placeholder="Abono" type="text" [(ngModel)]="treatmentX.abono">
+          <input #text4  class="form-control" name="inputAbono" formControlName="inputAbono" placeholder="Abono" type="text" [(ngModel)]="treatmentSelect.abono">
           <br>
           <label>Saldo</label>
-          <input #text5 class="form-control" name="inputSaldo" formControlName="inputSaldo" placeholder="Saldo" type="text" [(ngModel)]="treatmentX.saldo">
+          <input #text5 class="form-control" name="inputSaldo" formControlName="inputSaldo" placeholder="Saldo" type="text" [(ngModel)]="treatmentSelect.saldo">
           <br>
         </div>
       </div>
@@ -357,7 +357,7 @@
           </tr>
         </thead>
           <tbody>
-            <tr *ngFor="let treatment of treatmentX" >
+            <tr *ngFor="let treatment of treatmentX" (click)="verTratamiento(treatment)" >
               <td>{{ treatment.fecha }}</td>
               <td>{{ treatment.pieza }}</td>
               <td>{{ treatment.descripcion }}</td>

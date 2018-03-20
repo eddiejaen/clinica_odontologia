@@ -27,6 +27,7 @@ export class PatientComponent implements OnInit {
   patientPosts;
   historyPosts:history;
   patientSelect;
+  treatmentSelect;
   treatmentX:treatment;
 
   historyBlanco: history = {
@@ -516,9 +517,11 @@ treatmentBlanco: treatment = {
     this.patientService.getTreatment(this.patientSelect.cedula).subscribe(data => {
     this.treatmentX = data.treatment; // Assign array to use in HTML
     console.log (this.treatmentX);
+
     if (!this.treatmentX)
    {
      this.treatmentX = this.treatmentBlanco;
+     this.treatmentSelect = this.treatmentBlanco;
    }
     });
   }
@@ -529,6 +532,7 @@ treatmentBlanco: treatment = {
       this.patientService.getAllTreatments(this.patientSelect.cedula).subscribe(data => {
       this.treatmentX = data.treatment; // Assign array to use in HTML
       console.log (this.treatmentX);
+      this.treatmentSelect = this.treatmentBlanco;
       if (!this.treatmentX)
      {
        this.treatmentX = this.treatmentBlanco;
@@ -561,6 +565,9 @@ treatmentBlanco: treatment = {
     this.getAllTreatments();
   }
 
+  verTratamiento(treatment : any){
+    this.treatmentSelect = treatment;
+  }
   ngOnInit() {
     // // Get profile username on page load
     // this.authService.getProfile().subscribe(profile => {
