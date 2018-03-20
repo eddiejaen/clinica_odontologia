@@ -139,7 +139,7 @@
       <a class="nav-link" data-toggle="tab" href="#odontograma" role="tab">Odontograma del Paciente</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#tratamientos" role="tab" (click)="editTreatmentForm2()">Tratamientos del Paciente </a>
+      <a *ngIf="treatmentX" class="nav-link" data-toggle="tab" href="#tratamientos" role="tab" (click)="editTreatmentForm2()">Tratamientos del Paciente </a>
     </li>
   </ul>
 

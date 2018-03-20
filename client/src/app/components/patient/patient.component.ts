@@ -16,6 +16,7 @@ export class PatientComponent implements OnInit {
   cedulaValid;
   newPatient = false;
   editPatient = false;
+  newTreatment = false;
   editTreatment = false;
   profilePatient = false;
   loadingPatients = false;
@@ -290,7 +291,9 @@ treatmentBlanco: treatment = {
   editPatientForm() {
     this.editPatient = true; // Show new patient form
   }
-
+  newTreatmentForm2() {
+    this.newTreatment= true; // Show new patient form
+  }
   editTreatmentForm2() {
     this.editTreatment = true; // Show new patient form
   }
