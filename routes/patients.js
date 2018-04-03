@@ -309,6 +309,48 @@ module.exports = (router) => {
       });
     }
   });
+/*===================Modific treatment====================================*/
+
+router.put('/updateTreatment', (req, res) => {
+  // Check if id was provided
+  if (!req.body._id) {
+    res.json({ success: false, message: 'No treatment id provided' }); // Return error message
+  } else {
+    // Check if id exists in database
+    Treatment.findOne({ _id: req.body._id }, (err, treatment) => {
+      // Check if id is a valid ID
+      if (err) {
+        res.json({ success: false, message: 'Not a valid treatment id' }); // Return error message
+      } else {
+        // Check if id was found in the database
+        if (!treatment) {
+          res.json({ success: false, message: 'Patient id was not found.' }); // Return error message
+        } else {
+          treatment.fecha = req.body.fecha;
+          treatment.pieza = req.body.pieza;
+          treatment.descripcion = req.body.descripcion;
+          treatment.debe = req.body.debe;
+          treatment.abono = req.body.abono;
+          treatment.saldo = req.body.saldo;
+
+          treatment.save((err) => {
+            if (err) {
+              if (err.errors) {
+                res.json({ success: false, message: 'Please ensure form is filled out properly' });
+              } else {
+                res.json({ success: false, message: err }); // Return error message
+              }
+            } else {
+              res.json({ success: true, message: 'treatment Updated!' }); // Return success message
+            }
+          });
+        }
+      }
+    });
+  }
+});
+
+/*===========================================================================================*/
 
     /* ===============================================================
     DELETE BLOG POST

@@ -462,7 +462,9 @@ treatmentBlanco: treatment = {
         this.processing = false; // Enable submit button
       } else {
         this.messageClass = 'alert alert-success'; // Return success class
+        console.log ("hola");
         this.message = data.message; // Return success message
+
         // Clear form data after two seconds
         setTimeout(() => {
         this.processing = false; // Enable submit button

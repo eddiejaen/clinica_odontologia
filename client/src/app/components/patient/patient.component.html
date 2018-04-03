@@ -360,7 +360,7 @@
         </thead>
           <tbody>
             <tr *ngFor="let treatment of treatmentX" (click)="verTratamiento(treatment)" >
-              <td>{{ treatment.fecha }}</td>
+              <td>{{ treatment.fecha| date:"dd/MM/yyyy"}}</td>
               <td>{{ treatment.pieza }}</td>
               <td>{{ treatment.descripcion }}</td>
               <td>{{ treatment.debe }}</td>
