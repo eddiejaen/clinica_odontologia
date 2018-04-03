@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthService } from './services/auth.service';
@@ -24,6 +25,7 @@ import { PublicProfileComponent } from './components/public-profile/public-profi
     AppComponent,
     NavbarComponent,
     HomeComponent,
+    CalendarComponent,
     DashboardComponent,
     RegisterComponent,
     LoginComponent,
