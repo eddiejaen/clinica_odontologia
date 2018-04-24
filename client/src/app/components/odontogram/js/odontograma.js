@@ -1,3 +1,6 @@
+
+
+
 jQuery(function(){
 
 	function drawDiente(svg, parentGroup, diente){
@@ -94,7 +97,7 @@ jQuery(function(){
 		});
 	};
 
-	function renderSvg(){
+	 function renderSvg(){
 		console.log('update render');
 
 		var svg = $('#odontograma').svg('get').clear();
@@ -292,6 +295,7 @@ jQuery(function(){
 			var tratamiento = d[i];
 			vm.tratamientosPosibles.push(tratamiento);
 		};
+
 
 
 	//Cargo los tratamientos
