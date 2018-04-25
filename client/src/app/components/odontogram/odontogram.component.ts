@@ -6,7 +6,7 @@ import './js/plugins.js';
 import './js/knockout-2.0.0.js';
 import './js/jquery.svg.min.js';
 import './js/jquery.svggraph.min.js';
-import './js/odontograma.js';
+// import './js/odontograma.js';
 
 
 @Component({

@@ -25,7 +25,7 @@ const appRoutes: Routes = [
   },
   {
   path: 'calendar',
-  component: CalendarComponent, // Dashboard Route,
+  component: CalendarComponent, // Calendar Route,
   canActivate: [AuthGuard] // User must be logged in to view this route
   },
   {
