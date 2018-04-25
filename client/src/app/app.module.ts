@@ -11,6 +11,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthService } from './services/auth.service';
 import { PatientService } from './services/patient.service';
+import { CalendarService } from './services/calendar.service';
+import {CalendarComponent } from './components/calendar/calendar.component';
 import { OdontogramComponent } from './components/odontogram/odontogram.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -30,6 +32,7 @@ import { PublicProfileComponent } from './components/public-profile/public-profi
     LoginComponent,
     ProfileComponent,
     PatientComponent,
+    CalendarComponent,
     OdontogramComponent,
     PublicProfileComponent
   ],
@@ -41,7 +44,7 @@ import { PublicProfileComponent } from './components/public-profile/public-profi
     AppRoutingModule,
     FlashMessagesModule
   ],
-  providers: [AuthService, AuthGuard, NotAuthGuard, PatientService],
+  providers: [AuthService, AuthGuard, NotAuthGuard, PatientService, CalendarService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
