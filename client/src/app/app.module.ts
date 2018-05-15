@@ -1,10 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CalendarModule } from 'angular-calendar';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -21,7 +24,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { NotAuthGuard } from './guards/notAuth.guard';
 import { PatientComponent } from './components/patient/patient.component';
 import { PublicProfileComponent } from './components/public-profile/public-profile.component';
-import { DxSchedulerModule } from 'devextreme-angular';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -39,12 +42,15 @@ import { DxSchedulerModule } from 'devextreme-angular';
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     HttpModule,
     ReactiveFormsModule,
     FormsModule,
     AppRoutingModule,
     FlashMessagesModule,
-    DxSchedulerModule
+    BrowserAnimationsModule,
+    CalendarModule.forRoot(),
+    NgbModalModule.forRoot()
   ],
   providers: [AuthService, AuthGuard, NotAuthGuard, PatientService, CalendarService],
   bootstrap: [AppComponent]
