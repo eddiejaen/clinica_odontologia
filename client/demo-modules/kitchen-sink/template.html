@@ -1,6 +1,6 @@
 <ng-template #modalContent let-close="close">
   <div class="modal-header">
-    <h5 class="modal-title">Ha ocurrido un evento</h5>
+    <h5 class="modal-title">Event action occurred</h5>
     <button type="button" class="close" (click)="close()">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -29,13 +29,13 @@
         [view]="view"
         [(viewDate)]="viewDate"
         (viewDateChange)="activeDayIsOpen = false">
-        Anterior
+        Previous
       </div>
       <div
         class="btn btn-outline-secondary"
         mwlCalendarToday
         [(viewDate)]="viewDate">
-        Hoy
+        Today
       </div>
       <div
         class="btn btn-primary"
@@ -43,7 +43,7 @@
         [view]="view"
         [(viewDate)]="viewDate"
         (viewDateChange)="activeDayIsOpen = false">
-        Siguiente
+        Next
       </div>
     </div>
   </div>
@@ -56,19 +56,19 @@
         class="btn btn-primary"
         (click)="view = 'month'"
         [class.active]="view === 'month'">
-        Mes
+        Month
       </div>
       <div
         class="btn btn-primary"
         (click)="view = 'week'"
         [class.active]="view === 'week'">
-        Semana
+        Week
       </div>
       <div
         class="btn btn-primary"
         (click)="view = 'day'"
         [class.active]="view === 'day'">
-        Día
+        Day
       </div>
     </div>
   </div>
@@ -106,11 +106,11 @@
 <br><br><br>
 
 <h3>
-  Editar Eventos
+  Edit events
   <button
     class="btn btn-primary pull-right"
     (click)="addEvent()">
-    Añadir Evento
+    Add new
   </button>
   <div class="clearfix"></div>
 </h3>
@@ -119,12 +119,12 @@
 
   <thead>
     <tr>
-      <th>Titulo</th>
-      <th>Primer Color</th>
-      <th>Segundo Color</th>
-      <th>Inicio</th>
-      <th>Finaliza</th>
-      <th>Eliminar</th>
+      <th>Title</th>
+      <th>Primary color</th>
+      <th>Secondary color</th>
+      <th>Starts at</th>
+      <th>Ends at</th>
+      <th>Remove</th>
     </tr>
   </thead>
 
@@ -149,7 +149,6 @@
           [(ngModel)]="event.color.secondary"
           (change)="refresh.next()">
       </td>
-
       <td>
         <mwl-demo-utils-date-time-picker
           [(ngModel)]="event.start"
@@ -157,19 +156,18 @@
           placeholder="Not set">
         </mwl-demo-utils-date-time-picker>
       </td>
-
       <td>
         <mwl-demo-utils-date-time-picker
-         [(ngModel)]="event.end"
-         (ngModelChange)="refresh.next()"
-         placeholder="Not set">
-       </mwl-demo-utils-date-time-picker>
+          [(ngModel)]="event.end"
+          (ngModelChange)="refresh.next()"
+          placeholder="Not set">
+        </mwl-demo-utils-date-time-picker>
       </td>
       <td>
         <button
           class="btn btn-danger"
           (click)="events.splice(index, 1); refresh.next()">
-          Eliminar
+          Delete
         </button>
       </td>
     </tr>

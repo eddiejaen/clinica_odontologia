@@ -25,6 +25,7 @@ import { NotAuthGuard } from './guards/notAuth.guard';
 import { PatientComponent } from './components/patient/patient.component';
 import { PublicProfileComponent } from './components/public-profile/public-profile.component';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import {DemoUtilsModule} from './demo-utils/module'
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
     FlashMessagesModule,
     BrowserAnimationsModule,
     CalendarModule.forRoot(),
-    NgbModalModule.forRoot()
+    NgbModalModule.forRoot(),
+    DemoUtilsModule
   ],
   providers: [AuthService, AuthGuard, NotAuthGuard, PatientService, CalendarService],
   bootstrap: [AppComponent]
