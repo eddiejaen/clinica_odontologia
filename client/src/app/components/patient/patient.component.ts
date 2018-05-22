@@ -27,7 +27,9 @@ export class PatientComponent implements OnInit {
   patientPosts;
   patientSelect;
   // HISTORY
+  newHistory = false;
   editHistory = false;
+  historySelect;
   historyPosts:history;
   // TREATMENT
   newTreatment = false;
@@ -364,6 +366,162 @@ export class PatientComponent implements OnInit {
 
 
 //HISTORY
+createNewHistoryForm() {
+  this.form3 = this.formBuilder.group({
+
+    tratamiento: ['', Validators.compose([
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(50),
+      this.alphaNumericValidation
+    ])],
+    medicamento: ['', Validators.compose([
+      Validators.required,
+      Validators.minLength(4),
+      Validators.maxLength(50),
+      this.alphaNumericValidation
+    ])],
+    diabetes: ['', Validators.compose([
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(50),
+      this.alphaNumericValidation
+    ])],
+    artritis: ['', Validators.compose([
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(50),
+      this.alphaNumericValidation
+    ])],
+    cardiacas: ['', Validators.compose([
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(50),
+      this.alphaNumericValidation
+    ])],
+    fiebre: ['', Validators.compose([
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(50),
+      this.alphaNumericValidation
+    ])],
+    hepatitis: ['', Validators.compose([
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(50),
+      this.alphaNumericValidation
+    ])],
+    ulceras: ['', Validators.compose([
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(50),
+      this.alphaNumericValidation
+    ])],
+    trastornos: ['', Validators.compose([
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(50),
+      this.alphaNumericValidation
+    ])],
+    nerviosas: ['', Validators.compose([
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(50),
+      this.alphaNumericValidation
+    ])],
+    otras_enfermedades: ['', Validators.compose([
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(50),
+      this.alphaNumericValidation
+    ])],
+    internado: ['', Validators.compose([
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(50),
+      this.alphaNumericValidation
+    ])],
+    alteraciones: ['', Validators.compose([
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(50),
+      this.alphaNumericValidation
+    ])],
+    padecimiento: ['', Validators.compose([
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(50),
+      this.alphaNumericValidation
+    ])],
+    aspirina: ['', Validators.compose([
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(50),
+      this.alphaNumericValidation
+    ])],
+    penicilina: ['', Validators.compose([
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(50),
+      this.alphaNumericValidation
+    ])],
+    sulfas: ['', Validators.compose([
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(50),
+      this.alphaNumericValidation
+    ])],
+    otros_medicamentos: ['', Validators.compose([
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(50),
+      this.alphaNumericValidation
+    ])],
+    anestesia: ['', Validators.compose([
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(50),
+      this.alphaNumericValidation
+    ])],
+    sangrado: ['', Validators.compose([
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(50),
+      this.alphaNumericValidation
+    ])],
+    desmayos: ['', Validators.compose([
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(50),
+      this.alphaNumericValidation
+    ])],
+    embarazada: ['', Validators.compose([
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(50),
+      this.alphaNumericValidation
+    ])],
+    lactancia: ['', Validators.compose([
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(50),
+      this.alphaNumericValidation
+    ])],
+    transtornos: ['', Validators.compose([
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(50),
+      this.alphaNumericValidation
+    ])],
+    observaciones: ['', Validators.compose([
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(50),
+      this.alphaNumericValidation
+    ])],
+  })
+}
+
   historyBlanco: history = {
       cedula: " ",
       tratamiento: false,
@@ -392,6 +550,10 @@ export class PatientComponent implements OnInit {
       transtornos: false,
       observaciones: " "
     };
+
+    newHistoryForm3() {
+        this.newHistory= true; // Show new treatment form2
+      }
 
     editHistoryForm3() {
       this.editHistory = true; // Show new patient form
@@ -483,7 +645,7 @@ export class PatientComponent implements OnInit {
       }
 
       // Function to save history into database
-      this.patientService.editHistory(this.historyPosts).subscribe(data => {
+      this.patientService.editHistory(this.historySelect).subscribe(data => {
         // Check if history was saved to database or not
         if (!data.success) {
           this.messageClass = 'alert alert-danger'; // Return error class
@@ -504,11 +666,14 @@ export class PatientComponent implements OnInit {
 // Function to get history
   getHistory() {
       // Function to GET all patients from database
+      console.log (this.patientSelect.cedula);
       this.patientService.getHistory(this.patientSelect.cedula).subscribe(data => {
       this.historyPosts = data.history; // Assign array to use in HTML
+      console.log (this.historyPosts);
       if (!this.historyPosts)
      {
        this.historyPosts = this.historyBlanco;
+       this.historySelect = this.historyBlanco;
      }
       });
     }
