@@ -150,7 +150,7 @@
         <!-- Go Back Button
         <button [disabled]="processing" type="button" name="button" (click)="goBack()" class="btn btn-warning">Volver</button>
         Submit Button -->
-        <button [disabled]="processing || !form.valid" type="submit" name="button" class="btn btn-success">Modificar</button>
+        <button [disabled]="processing" type="submit" name="button" class="btn btn-success">Modificar</button>
         <div class="row">
           <div class="col-lg-6">
             <label>Nombre</label>
@@ -256,7 +256,7 @@
             <label><input #text9 type="checkbox" name="trastornos" value="true" [checked]="historyPosts.transtornos"> Trastornos Renales</label><br>
             <label><input #text10 type="checkbox" name="nerviosas" value="true" [checked]="historyPosts.nerviosas"> Enfermedades Nerviosas</label><br>
             <label>Otras enfermedades:</label><br>
-            <textarea #textarea1 name="otras_enfermedades" rows=5 cols=40 placeholder="Comentario">{{historyPosts.otras_enfermedades}}</textarea><br>
+            <textarea #textarea1 name="otras_enfermedades" rows=5 value=" " cols=40 placeholder="Comentario">{{historyPosts.otras_enfermedades}}</textarea><br>
             <br>
             <label>Le han operado alguna vez o ha estado internado(a).</label>
             <br>
@@ -277,7 +277,7 @@
             <label><input #text15 type="checkbox" name="penicilina" value="true" [checked]="historyPosts.penicilina"> Penicilina</label><br>
             <label><input #text16 type="checkbox" name="sulfas" value="true" [checked]="historyPosts.sulfas"> Sulfas</label><br>
             <label>Otros medicamentos:</label><br>
-            <textarea #textarea2  name="otros_medicamentos" rows=5 cols=40 placeholder="Comentario">{{historyPosts.otros_medicamentos}}</textarea><br>
+            <textarea #textarea2  name="otros_medicamentos" value=" " rows=5 cols=40 placeholder="Comentario">{{historyPosts.otros_medicamentos}}</textarea><br>
             <br>
             <label>Ha tenido alguna vez reacciones anormales a la anestesia dental.</label>
             <br>
@@ -306,7 +306,7 @@
             <label><input #text22 type="checkbox" name="transtornos" value="true" [checked]="historyPosts.transtornos"> Si</label>
             <br>
             <label>Observaciones:</label><br>
-            <textarea #textarea3  name="observaciones" rows=5 cols=40 placeholder="Comentario">{{historyPosts.observaciones}}</textarea><br>
+            <textarea #textarea3  name="observaciones" value=" "  rows=5 cols=40 placeholder="Comentario">{{historyPosts.observaciones}}</textarea><br>
             <!-- <br>
             <label>Fecha:</label>
             <input class="form-control" name="inputFecha"  placeholder="Fecha" type="date"> -->

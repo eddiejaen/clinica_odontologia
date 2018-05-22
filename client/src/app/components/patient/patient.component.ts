@@ -365,7 +365,7 @@ export class PatientComponent implements OnInit {
 
 //HISTORY
   historyBlanco: history = {
-      cedula: "",
+      cedula: " ",
       tratamiento: false,
       medicamento: false,
       diabetes: false,
@@ -376,21 +376,21 @@ export class PatientComponent implements OnInit {
       ulceras: false,
       trastornos: false,
       nerviosas: false,
-      otras_enfermedades: "",
+      otras_enfermedades: " ",
       internado: false,
       alteraciones: false,
       padecimiento: false,
       aspirina: false,
       penicilina: false,
       sulfas: false,
-      otros_medicamentos: "",
+      otros_medicamentos: " ",
       anestesia: false,
       sangrado: false,
       desmayos: false,
       embarazada: false,
       lactancia: false,
       transtornos: false,
-      observaciones: ""
+      observaciones: " "
     };
 
     editHistoryForm3() {
