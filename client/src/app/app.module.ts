@@ -17,6 +17,7 @@ import { PatientService } from './services/patient.service';
 import { CalendarService } from './services/calendar.service';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { OdontogramComponent } from './components/odontogram/odontogram.component';
+import { BoardComponent } from './components/board/board.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { FlashMessagesModule } from 'angular2-flash-messages';
@@ -36,6 +37,7 @@ import {DemoUtilsModule} from './demo-utils/module'
     RegisterComponent,
     LoginComponent,
     ProfileComponent,
+    BoardComponent,
     PatientComponent,
     CalendarComponent,
     OdontogramComponent,

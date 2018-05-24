@@ -8,6 +8,7 @@ import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { PublicProfileComponent } from './components/public-profile/public-profile.component';
 import { PatientComponent } from './components/patient/patient.component';
+import { BoardComponent } from './components/board/board.component';
 import { OdontogramComponent } from './components/odontogram/odontogram.component';
 import { AuthGuard } from './guards/auth.guard';
 import { NotAuthGuard } from './guards/notAuth.guard';
@@ -31,6 +32,11 @@ const appRoutes: Routes = [
   {
     path: 'register',
     component: RegisterComponent, // Register Route
+    canActivate: [AuthGuard] // User must NOT be logged in to view this route
+  },
+  {
+    path: 'board',
+    component: BoardComponent, // Register Route
     canActivate: [AuthGuard] // User must NOT be logged in to view this route
   },
   {
