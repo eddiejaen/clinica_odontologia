@@ -8,7 +8,7 @@ const NUM_PLAYERS: number = 1;
 const BOARD_SIZE: number = 20;
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-root2',
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.css'],
   providers: [BoardService]
