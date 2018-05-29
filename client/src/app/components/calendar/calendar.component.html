@@ -106,11 +106,11 @@
 <br><br><br>
 
 <h3>
-  Editar Eventos
+  Editar citas
   <button
     class="btn btn-primary pull-right"
     (click)="addEvent()">
-    Añadir Evento
+    Añadir cita
   </button>
   <div class="clearfix"></div>
 </h3>
@@ -119,12 +119,12 @@
 
   <thead>
     <tr>
-      <th>Titulo</th>
-      <th>Primer Color</th>
-      <th>Segundo Color</th>
-      <th>Inicio</th>
-      <th>Finaliza</th>
+      <th>Paciente</th>
+      <th>Color</th>
+      <th>Hora Inicio</th>
+      <th>Hora Final</th>
       <th>Eliminar</th>
+      <th>Agregar</th>
     </tr>
   </thead>
 
@@ -132,6 +132,7 @@
     <tr *ngFor="let event of events; let index = index">
       <td>
         <input
+          name = "paciente"
           type="text"
           class="form-control"
           [(ngModel)]="event.title"
@@ -139,19 +140,16 @@
       </td>
       <td>
         <input
-          type="color"
+          name = "color"
+          type="text"
           [(ngModel)]="event.color.primary"
-          (change)="refresh.next()">
-      </td>
-      <td>
-        <input
-          type="color"
-          [(ngModel)]="event.color.secondary"
           (change)="refresh.next()">
       </td>
 
       <td>
         <mwl-demo-utils-date-time-picker
+          name= "inicio"
+          type= "Date"
           [(ngModel)]="event.start"
           (ngModelChange)="refresh.next()"
           placeholder="Not set">
@@ -160,6 +158,8 @@
 
       <td>
         <mwl-demo-utils-date-time-picker
+          name= "final"
+          type= "Date"
          [(ngModel)]="event.end"
          (ngModelChange)="refresh.next()"
          placeholder="Not set">
@@ -167,9 +167,20 @@
       </td>
       <td>
         <button
+          name="eliminar"
           class="btn btn-danger"
           (click)="events.splice(index, 1); refresh.next()">
           Eliminar
+        </button>
+      </td>
+      <td>
+        <button
+          name="agregar"
+          [disabled]="processing"
+          type="button"
+          (click)="onTreatmentSubmit(text1, text2, Date1, Date2)"
+          class="btn btn-danger">
+          Agregar
         </button>
       </td>
     </tr>
