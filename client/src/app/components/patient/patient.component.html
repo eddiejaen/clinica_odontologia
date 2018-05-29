@@ -13,10 +13,11 @@
 <br *ngIf="!newPatient && !profilePatient" />
 <br *ngIf="!newPatient && !profilePatient" />
 
-<!-- <form class="form-horizontal" *ngIf="!newPatient && !profilePatient">
+<form class="form-horizontal" *ngIf="!newPatient && !profilePatient">
   <input class="form-control mr-sm-2" placeholder="Buscar Paciente" type="text">
   <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
-</form> -->
+</form>
+
 <br *ngIf="!newPatient && !profilePatient" />
 <br *ngIf="!newPatient && !profilePatient" />
 <table class="table table-striped table-hover table-bordered" *ngIf="!newPatient && !profilePatient">
@@ -228,14 +229,16 @@
     </div>
 
     <div class="tab-pane" id="historial" role="tabpanel">
-      <form [formGroup]="form" name="blogForm" *ngIf="editPatient">
+      <form [formGroup]="form" name="historyForm" *ngIf="editPatient">
         <!-- Go Back Button
       <button [disabled]="processing" type="button" name="button"  (click)="goBack()" class="btn btn-warning">Volver</button>
          Submit Button -->
         <button [disabled]="processing" type="button" name="button" (click)="onHistorialSubmit(text1, text2, text3, text4, text5, text6, text7, text8,
          text9, text10, text11, text12, text13, text14, text15, text16, text17, text18, text19, text20, text21, text22, textarea1, textarea2, textarea3)"
          class="btn btn-success">Ingresar Historial Clínico</button>
-         <button [disabled]="processing" type="submit" name="button" class="btn btn-success">Modificar</button>
+         <button [disabled]="processing" type="button" name="button" (click)="updateHistory(text1, text2, text3, text4, text5, text6, text7, text8,
+          text9, text10, text11, text12, text13, text14, text15, text16, text17, text18, text19, text20, text21, text22, textarea1, textarea2, textarea3)"
+          class="btn btn-success">Modificar</button>
         <div class="row">
           <div class="col-lg-4">
             <label>¿Está usted bajo tratamiento médico?</label>
@@ -317,12 +320,12 @@
       </form>
     </div>
     <div class="tab-pane" id="odontograma" role="tabpanel">
-            <app-root2></app-root2>
+           <app-odontogram></app-odontogram>
     </div>
 
     <div class="tab-pane" id="tratamientos" role="tabpanel">
       <form [formGroup]="form2" name="treatmentForm" *ngIf="editTreatment">
-        <button [disabled]="processing" type="button" name="button" (click)="onTreatmentSubmit(text1, text2,textarea, text3, text4, text5 )"
+        <button [disabled]="processing" type="button" name="button" (click)="onTreatmentSubmit(text1, text2, textarea, text3, text4, text5 )"
          class="btn btn-success">Ingresar Nuevo Tratamiento</button>
 
          <button [disabled]="processing" type="button" name="button"  (click)="updateTreatment(text1, text2,textarea, text3, text4, text5 )" class="btn btn-success">Modificar</button>

@@ -16,7 +16,6 @@ export class PatientComponent implements OnInit {
   cedulaValid;
   form;
   form2;
-  form3;
   processing = false;
   username;
   // PATIENT
@@ -367,7 +366,7 @@ export class PatientComponent implements OnInit {
 
 //HISTORY
 createNewHistoryForm() {
-  this.form3 = this.formBuilder.group({
+  this.form = this.formBuilder.group({
 
     tratamiento: ['', Validators.compose([
       Validators.required,
@@ -551,11 +550,11 @@ createNewHistoryForm() {
       observaciones: " "
     };
 
-    newHistoryForm3() {
+    newHistoryForm() {
         this.newHistory= true; // Show new treatment form2
       }
 
-    editHistoryForm3() {
+    editHistoryForm() {
       this.editHistory = true; // Show new patient form
     }
   // Function to submit a new history post
