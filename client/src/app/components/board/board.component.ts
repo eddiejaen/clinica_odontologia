@@ -5,7 +5,8 @@ import { Board } from '../../class/board'
 
 // set game constants
 const NUM_PLAYERS: number = 1;
-const BOARD_SIZE: number = 48;
+const BOARD_SIZE: number = 7;
+const BOARD_SIZE2: number = 47;
 
 
 
@@ -32,10 +33,11 @@ export class BoardComponent {
 
   // event handler for click event on
   // each tile - fires torpedo at selected tile
-  fireTorpedo(e:any) : BoardComponent {
+  clickTile(e:any) : BoardComponent {
+  console.log(e.target);
     let id = e.target.id,
       boardId = id.substring(1,2),
-      row = id.substring(2,3), col = id.substring(3,4),
+      row = parseInt(id.substring(2,4)), col = parseInt(id.substring(4,6)),
       tile = this.boards[boardId].tiles[row][col];
     if (!this.checkValidHit(boardId, tile)) {
       return;
@@ -59,7 +61,7 @@ export class BoardComponent {
   }
 
   createBoards() : BoardComponent {
-      this.boardService.createBoard(BOARD_SIZE);
+      this.boardService.createBoard(BOARD_SIZE, BOARD_SIZE2);
     return this;
   }
 
@@ -71,5 +73,16 @@ export class BoardComponent {
   // get all boards and assign to boards property
   get boards () : Board[] {
     return this.boardService.getBoards()
+  }
+
+  transformNumber(numero:number) : string {
+    let texto = '';
+    if (numero.toString().length == 1){
+      texto = '0' + numero.toString()
+    }else{
+      texto = numero.toString()
+    }
+
+    return texto;
   }
 }
