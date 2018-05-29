@@ -1,28 +1,10 @@
 
-import { Component,
-         ChangeDetectionStrategy,
-         ViewChild,
-         TemplateRef} from '@angular/core';
-  import {
-           startOfDay,
-           endOfDay,
-           subDays,
-           addDays,
-           endOfMonth,
-           isSameDay,
-           isSameMonth,
-           addHours
-         } from 'date-fns';
-
+import { Component,ChangeDetectionStrategy,ViewChild,TemplateRef} from '@angular/core';
+import {startOfDay,endOfDay,subDays,addDays,endOfMonth,isSameDay,isSameMonth,addHours} from 'date-fns';
 import { Subject } from 'rxjs';
-
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
-import {
-  CalendarEvent,
-  CalendarEventAction,
-  CalendarEventTimesChangedEvent
-} from 'angular-calendar';
+import {CalendarEvent,CalendarEventAction,CalendarEventTimesChangedEvent} from 'angular-calendar';
+import { CalendarService } from '../../services/calendar.service';
 
 const colors: any = {
   red: {
@@ -44,13 +26,10 @@ const colors: any = {
     selector: 'calendars',
     templateUrl: './calendar.component.html'
 })
-export class CalendarComponent {
-    @ViewChild('modalContent') modalContent: TemplateRef<any>;
+export class CalendarComponent {@ViewChild('modalContent') modalContent: TemplateRef<any>;
 
       view: string = 'month';
-
       viewDate: Date = new Date();
-
       modalData: {
         action: string;
         event: CalendarEvent;
@@ -73,9 +52,7 @@ export class CalendarComponent {
       ];
 
       refresh: Subject<any> = new Subject();
-
       events: CalendarEvent[] = [];
-
       eventsX: CalendarEvent[] = [
         {
           start: subDays(startOfDay(new Date()), 1),
@@ -112,7 +89,8 @@ export class CalendarComponent {
 
       activeDayIsOpen: boolean = true;
 
-      constructor(private modal: NgbModal) {}
+      constructor(private modal: NgbModal,
+          private calendarService: CalendarService) {}
 
       dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
         if (isSameMonth(date, this.viewDate)) {
@@ -157,5 +135,44 @@ export class CalendarComponent {
           }
         });
         this.refresh.next();
+      }
+
+      add = false;
+      messageClass;
+      message;
+      processing = false;
+
+      addForm() {
+        this.add = true; // Show new patient form
+      }
+
+      onAddSubmit(a,b,c,d,e){
+        this.processing = true;
+
+        const calendar = {
+          paciente: a.value,
+          color: b.value,
+          color1: c.value,
+          inicia: d.value,
+          final: e.value,
+        }
+
+        // Function to save history into database
+        this.calendarService.add(calendar).subscribe(data => {
+          // Check if history was saved to database or not
+          if (!data.success) {
+            this.messageClass = 'alert alert-danger'; // Return error class
+            this.message = data.message; // Return error message
+            this.processing = false; // Enable submit button
+          } else {
+            this.messageClass = 'alert alert-success'; // Return success class
+            this.message = data.message; // Return success message
+            // Clear form data after two seconds
+            setTimeout(() => {
+            this.processing = false; // Enable submit button
+              //window.location.reload();
+            }, 1000);
+          }
+        });
       }
 }
