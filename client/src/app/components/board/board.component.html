@@ -6,8 +6,8 @@
 
           <!-- shows when a player has won the game -->
           <section *ngIf="winner" class="notification is-success has-text-centered" style="color:white">
-            <h1>Player {{ winner.player.id }} has won the game!</h1>
-            <h5>Click <a href="{{ gameUrl }}">here</a> to start a new game.</h5>
+              <!--  <h1>Player {{ winner.player.id }} has won the game!</h1>
+            <h5>Click <a href="{{ gameUrl }}">here</a> to start a new game.</h5>-->
           </section>
 
           <!-- <div class="columns" *ngIf="validPlayer"> -->
@@ -20,7 +20,7 @@
                   [style.background-color] = "col.used ? '' : 'transparent'"
                   [class.win] = "col.status == 'win'" [class.fail] = "col.status !== 'win'"
                   class="battleship-tile" id="t{{i}}{{j}}{{k}}">
-                  {{ col.value == "X" ? "X" : "  " }}
+                  {{ col.value == "X" ? "" : "  " }}
                 </td>
               </tr>
             </table>

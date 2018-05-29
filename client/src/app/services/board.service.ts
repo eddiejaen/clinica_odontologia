@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
    import { Board } from '../class/board'
-   import { Player } from '../class/player'
+
 
    @Injectable()
    export class BoardService {
 
-     playerId: number = 1;
+
      boards: Board[] = [];
 
      constructor() { }
@@ -22,13 +22,12 @@ import { Injectable } from '@angular/core';
          }
        }
        // generate random ships for the board
-       for (let i = 0; i < size * 2; i++) {
+       for (let i = 0; i < size * 3; i++) {
          tiles = this.randomShips(tiles, size);
        }
        // create board
        let board = new Board({
-         player: new Player({ id: this.playerId++ }),
-         tiles: tiles
+           tiles: tiles
        });
        // append created board to `boards` property
        this.boards.push(board);
