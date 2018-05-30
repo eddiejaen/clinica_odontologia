@@ -7,13 +7,21 @@ import { Injectable } from '@angular/core';
 
 
      boards: Board[] = [];
+     clickable = [];
+
 
      constructor() { }
 
      // method for creating a board which takes
      // an optional size parameter that defaults to 5
      createBoard(size:number = 19, size2:number = 19) : BoardService {
-       // create tiles for board
+      this.clickable = [["0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0"],
+                        ["0","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","0"],
+                        ["0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0"],
+                        ["0","0","0","0","0","0","0","0","","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"],
+                        ["0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0"],
+                        ["0","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","x","0"],
+                        ["0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0","x","0","0"]];
        let tiles = [];
        for(let i=0; i < size; i++) {
          tiles[i] = [];
@@ -21,6 +29,9 @@ import { Injectable } from '@angular/core';
            tiles[i][j] = { used: false, value: 0, status: ''};
          }
        }
+       console.log(tiles);
+       console.log(this.clickable);
+       console.log(this.clickable[0][1]);
        // generate random ships for the board
        // for (let i = 0; i < size * 3; i++) {
        //   tiles = this.randomShips(tiles, size);
@@ -59,5 +70,5 @@ import { Injectable } from '@angular/core';
      getBoards() : Board[] {
        return this.boards;
      }
-     
+
    }

@@ -85,4 +85,5 @@ export class BoardComponent {
 
     return texto;
   }
+  
 }

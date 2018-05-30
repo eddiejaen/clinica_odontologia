@@ -17,10 +17,10 @@
                 <tr *ngFor="let row of board.tiles; let j = index">
                   <td *ngFor="let col of row; let k = index"
                   (click) = "clickTile($event)"
-                  [style.background-color] = "col.used ? '' : 'transparent'"
+                  [style.background-color] = "this.boardService.clickable[j][k] == 'x' ? '' : 'transparent'"
                   [class.win] = "col.status == 'win'" [class.fail] = "col.status !== 'win'"
                   class="battleship-tile" id="t{{i}}{{transformNumber(j)}}{{transformNumber(k)}}">
-                  {{ col.value == "X" ? "" : "  " }}
+                  
                 </td>
               </tr>
             </table>
