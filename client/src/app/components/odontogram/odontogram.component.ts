@@ -20,6 +20,7 @@ export class OdontogramComponent {
 
    selected_row: number = 0;
    selected_col: number = 0;
+   pieza:string = "";
   constructor(
 
     private _vcr: ViewContainerRef,
@@ -39,6 +40,7 @@ export class OdontogramComponent {
       tile = this.odontograms[odontogramId].tiles[row][col];
       this.selected_row = row;
       this.selected_col = col;
+      this.pieza = this.odontogramService.pieces[row][col];
       return;
 
     // this.odontograms[odontogramId].tiles[row][col].used = true;
@@ -67,8 +69,8 @@ export class OdontogramComponent {
     return texto;
   }
   imprimeValor(i, j){
-    let valor = this.odontogramService.clickable[i][j];
-    if (valor !== "x" && valor !== "0"){
+    let valor = this.odontogramService.pieces[i][j];
+    if (valor !== "000"){
       return valor;
     }else{
       return "";

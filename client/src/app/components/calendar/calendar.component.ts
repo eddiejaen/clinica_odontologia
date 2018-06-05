@@ -28,6 +28,7 @@ const colors: any = {
 })
 export class CalendarComponent {@ViewChild('modalContent') modalContent: TemplateRef<any>;
 
+
       view: string = 'month';
       viewDate: Date = new Date();
       modalData: {
@@ -52,8 +53,8 @@ export class CalendarComponent {@ViewChild('modalContent') modalContent: Templat
       ];
 
       refresh: Subject<any> = new Subject();
-      events: CalendarEvent[] = [];
-      eventsX: CalendarEvent[] = [
+      // events: CalendarEvent[] = [];
+      events: CalendarEvent[] = [
         {
           start: subDays(startOfDay(new Date()), 1),
           end: addDays(new Date(), 1),
@@ -122,7 +123,10 @@ export class CalendarComponent {@ViewChild('modalContent') modalContent: Templat
         this.modal.open(this.modalContent, { size: 'lg' });
       }
 
+
+
       addEvent(): void {
+        console.log(this.events);
         this.events.push({
           title: 'New event',
           start: startOfDay(new Date()),

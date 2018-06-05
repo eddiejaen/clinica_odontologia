@@ -22,7 +22,7 @@
                   [class.fail] = "col.status !== 'win'"
                   [class.used] = "col.used == true"
                   class="battleship-tile" id="t{{i}}{{transformNumber(j)}}{{transformNumber(k)}}">
-                  {{ imprimeValor(j,k)}}
+                  <!-- {{ imprimeValor(j,k)}} -->
                 </td>
               </tr>
             </table>
@@ -30,7 +30,7 @@
         </div>
         <div class="columns">
           <div class="column has-text-centered" *ngFor="let odontogram of odontograms; let i = index">
-            Fila seleccionada {{selected_row}}, columna seleccionada{{selected_col}}
+            {{ pieza }}
         </div>
       </div>
       </div>
