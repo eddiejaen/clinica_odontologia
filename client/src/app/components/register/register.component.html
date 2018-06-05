@@ -17,9 +17,9 @@
       <input type="text" name="username" class="form-control" autocomplete="off" placeholder="*Nombre de Usuario" formControlName="username" (blur)="checkUsername()"  />
       <!-- Validation -->
       <ul class="help-block">
-        <li *ngIf="form.controls.username.errors?.required && form.controls.username.dirty">This field is required</li>
-        <li *ngIf="form.controls.username.errors?.minlength && form.controls.username.dirty || form.controls.username.errors?.maxlength && form.controls.username.dirty ">Minimum characters: 3, Maximum characters: 15</li>
-        <li *ngIf="form.controls.username.errors?.validateUsername && form.controls.username.dirty">Username must not have any special characters</li>
+        <li *ngIf="form.controls.username.errors?.required && form.controls.username.dirty">Requerido</li>
+        <li *ngIf="form.controls.username.errors?.minlength && form.controls.username.dirty || form.controls.username.errors?.maxlength && form.controls.username.dirty ">Mínimo de caracteres: 3, Máximo de caracteres: 15</li>
+        <li *ngIf="form.controls.username.errors?.validateUsername && form.controls.username.dirty">El nombre de usuario no puede tener caracteres especiales</li>
         <li *ngIf="usernameMessage">{{ usernameMessage }}</li>
       </ul>
     </div>
@@ -32,9 +32,9 @@
       <input type="text" name="email" class="form-control" autocomplete="off" placeholder="*Correo Electrónico" formControlName="email" (blur)="checkEmail()" />
       <!-- Validation -->
       <ul class="help-block">
-        <li *ngIf="form.controls.email.errors?.required && form.controls.email.dirty">This field is required</li>
-        <li *ngIf="(form.controls.email.errors?.minlength && form.controls.email.dirty || form.controls.email.errors?.maxlength && form.controls.email.dirty ) && form.controls.email.dirty">Minimum characters: 5, Maximum characters: 30</li>
-        <li *ngIf="form.controls.email.errors?.validateEmail && form.controls.email.dirty">This must be a valid e-mail</li>
+        <li *ngIf="form.controls.email.errors?.required && form.controls.email.dirty">Requerido</li>
+        <li *ngIf="(form.controls.email.errors?.minlength && form.controls.email.dirty || form.controls.email.errors?.maxlength && form.controls.email.dirty ) && form.controls.email.dirty">Mínimo de caracteres: 5, Máximo de caracteres: 30</li>
+        <li *ngIf="form.controls.email.errors?.validateEmail && form.controls.email.dirty">Debe ser un correo electrónico válido</li>
         <li *ngIf="emailMessage">{{ emailMessage}}</li>
       </ul>
     </div>
@@ -47,9 +47,9 @@
       <input type="password" name="password" class="form-control" autocomplete="off" placeholder="*Contraseña" formControlName="password" />
       <!-- Validation -->
       <ul class="help-block">
-        <li *ngIf="form.controls.password.errors?.required && form.controls.password.dirty">This field is required</li>
-        <li *ngIf="form.controls.password.errors?.minlength && form.controls.password.dirty || form.controls.password.errors?.maxlength && form.controls.password.dirty ">Minimum characters: 8, Maximum characters: 35</li>
-        <li *ngIf="form.controls.password.errors?.validatePassword && form.controls.password.dirty">Password must be at least 8 characters but no more than 35</li>
+        <li *ngIf="form.controls.password.errors?.required && form.controls.password.dirty">Requerido</li>
+        <li *ngIf="form.controls.password.errors?.minlength && form.controls.password.dirty || form.controls.password.errors?.maxlength && form.controls.password.dirty ">Mínimo de caracteres: 8, Máximo de caracteres: 35</li>
+        <li *ngIf="form.controls.password.errors?.validatePassword && form.controls.password.dirty">La contraseña debe de ser con 8 caracteres mínimo y 35 de máximo</li>
       </ul>
     </div>
   </div>
@@ -61,8 +61,8 @@
       <input type="password" name="confirm" class="form-control" autocomplete="off" placeholder="*Confirmar Contraseña" formControlName="confirm" />
       <!-- Validation -->
       <ul class="help-block">
-        <li *ngIf="form.controls.confirm.errors?.required && form.controls.confirm.dirty">This field is required</li>
-        <li *ngIf="form.errors?.matchingPasswords && form.controls.confirm.dirty">Password do not match</li>
+        <li *ngIf="form.controls.confirm.errors?.required && form.controls.confirm.dirty">Requerido</li>
+        <li *ngIf="form.errors?.matchingPasswords && form.controls.confirm.dirty">La contraseña no coincide</li>
       </ul>
     </div>
   </div>

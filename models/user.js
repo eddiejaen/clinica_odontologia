@@ -38,12 +38,12 @@ const emailValidators = [
   // First Email Validator
   {
     validator: emailLengthChecker,
-    message: 'E-mail must be at least 5 characters but no more than 30'
+    message: 'El correo electrónico debe de ser con 5 caracteres mínimo y 30 de máximo'
   },
   // Second Email Validator
   {
     validator: validEmailChecker,
-    message: 'Must be a valid e-mail'
+    message: 'Debe ser un correo electrónico válido'
   }
 ];
 
@@ -79,12 +79,12 @@ const usernameValidators = [
   // First Username validator
   {
     validator: usernameLengthChecker,
-    message: 'Username must be at least 3 characters but no more than 15'
+    message: 'Mínimo de caracteres: 3, Máximo de caracteres: 15'
   },
   // Second username validator
   {
     validator: validUsername,
-    message: 'Username must not have any special characters'
+    message: 'El nombre de usuario no puede tener caracteres especiales'
   }
 ];
 
@@ -120,12 +120,12 @@ const passwordValidators = [
   // First password validator
   {
     validator: passwordLengthChecker,
-    message: 'Password must be at least 8 characters but no more than 35'
+    message: 'La contraseña debe de ser con 8 caracteres mínimo y 35 de máximo'
   },
   // Second password validator
   {
     validator: validPassword,
-    message: 'Must have at least one uppercase, lowercase, special character, and number'
+    message: 'La contraseña debe tener al menos una letra mayúscula, minúscula, carácter especial y número'
   }
 ];
 
