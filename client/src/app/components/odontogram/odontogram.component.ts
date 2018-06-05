@@ -43,7 +43,7 @@ export class OdontogramComponent {
 
     // this.odontograms[odontogramId].tiles[row][col].used = true;
     // this.odontograms[odontogramId].tiles[row][col].value = "X";
-    return this;
+    // return this;
   }
 
   createOdontograms() : OdontogramComponent {
