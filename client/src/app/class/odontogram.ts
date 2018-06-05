@@ -1,6 +1,5 @@
-import { Player } from './player'
-    export class Board {
-  
+    export class Odontogram {
+
       tiles: Object[];
 
       constructor(values: Object = {}) {
