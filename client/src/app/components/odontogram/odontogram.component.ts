@@ -5,7 +5,7 @@ import { Odontogram } from '../../class/odontogram'
 
 // set game constants
 const BOARD_SIZE: number = 10;
-const BOARD_SIZE2: number = 61;
+const BOARD_SIZE2: number = 65;
 
 
 
