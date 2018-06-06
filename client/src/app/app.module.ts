@@ -16,6 +16,7 @@ import { AuthService } from './services/auth.service';
 import { PatientService } from './services/patient.service';
 import { CalendarService } from './services/calendar.service';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import { OdontogramService  } from './services/odontogram.service';
 import { OdontogramComponent } from './components/odontogram/odontogram.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -54,7 +55,7 @@ import {DemoUtilsModule} from './demo-utils/module'
     NgbModalModule.forRoot(),
     DemoUtilsModule
   ],
-  providers: [AuthService, AuthGuard, NotAuthGuard, PatientService, CalendarService],
+  providers: [AuthService, AuthGuard, NotAuthGuard, PatientService, CalendarService, OdontogramService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

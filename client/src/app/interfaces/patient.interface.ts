@@ -42,3 +42,10 @@ export interface treatment {
   abono: string,
   saldo: string
 }
+
+export interface odontogram {
+  cedula: string,
+  calza:boolean,
+  extraccion:boolean,
+  pieza: string
+}
