@@ -1,9 +1,9 @@
 <div class="section">
       <div class="container">
-        <label><input #text1 type="checkbox" name="caries" value="true" [checked]="odontogramX.caries"> Caries</label>
-        <label><input #text2 type="checkbox" name="mal_estado" value="true" [checked]="odontogramX.mal_estado"> Mal estado</label>
-        <label><input #text3 type="checkbox" name="buen_estado" value="true" [checked]="odontogramX.buen_estado"> Buen estado</label>
-        <input #text4 name="inputPieza"  placeholder="Pieza" type="text" [(ngModel)]="pieza" >
+        <label><input #text1 type="checkbox" name="caries" [(ngModel)]="odontogramBlanco.caries"> Caries</label>
+        <label><input #text2 type="checkbox" name="mal_estado" [(ngModel)]="odontogramBlanco.mal_estado"> Mal estado</label>
+        <label><input #text3 type="checkbox" name="buen_estado" [(ngModel)]="odontogramBlanco.buen_estado"> Buen estado</label>
+        <input #text4 name="inputPieza"  placeholder="Pieza" type="text" [(ngModel)]="odontogramBlanco.pieza" >
         <div class="content">
           <hr>
 

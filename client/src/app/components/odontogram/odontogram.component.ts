@@ -3,7 +3,7 @@ import { Component, ViewContainerRef } from '@angular/core';
 import { OdontogramService } from '../../services/odontogram.service'
 import { Odontogram } from '../../class/odontogram'
 import { odontogram } from "../../interfaces/patient.interface";
-import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+// import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 // set game constants
 const BOARD_SIZE: number = 10;
 const BOARD_SIZE2: number = 65;
@@ -30,13 +30,14 @@ export class OdontogramComponent {
   odontogramX:odontogram;
    selected_row: number = 0;
    selected_col: number = 0;
-   pieza:string = "";
   constructor(
-  private formBuilder: FormBuilder,
+
     private _vcr: ViewContainerRef,
     private odontogramService: OdontogramService
   ) {
-    this.createNewOdontogramForm();
+    console.log("Inicia");
+    //this.createNewOdontogramForm();
+    console.log("Finaliza");
     this.createOdontograms();
   }
 
@@ -55,65 +56,56 @@ export class OdontogramComponent {
     this.getAllOdontogram();
   }
   createNewOdontogramForm() {
-    this.form = this.formBuilder.group({
-
-      caries: ['', Validators.compose([
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(50),
-        this.alphaNumericValidation
-      ])],
-      mal_estado: ['', Validators.compose([
-        Validators.required,
-        Validators.minLength(4),
-        Validators.maxLength(50),
-        this.alphaNumericValidation
-      ])],
-      buen_estado: ['', Validators.compose([
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(50),
-        this.alphaNumericValidation
-      ])],
-      pieza: ['', Validators.compose([
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(50),
-        this.alphaNumericValidation
-      ])],
-    })
+    // this.form = this.formBuilder.group({
+    //
+    //   caries: ['', Validators.compose([
+    //     Validators.required,
+    //     Validators.minLength(3),
+    //     Validators.maxLength(50),
+    //     this.alphaNumericValidation
+    //   ])],
+    //   mal_estado: ['', Validators.compose([
+    //     Validators.required,
+    //     Validators.minLength(4),
+    //     Validators.maxLength(50),
+    //     this.alphaNumericValidation
+    //   ])],
+    //   buen_estado: ['', Validators.compose([
+    //     Validators.required,
+    //     Validators.minLength(3),
+    //     Validators.maxLength(50),
+    //     this.alphaNumericValidation
+    //   ])],
+    //   pieza: ['', Validators.compose([
+    //     Validators.required,
+    //     Validators.minLength(3),
+    //     Validators.maxLength(50),
+    //     this.alphaNumericValidation
+    //   ])],
+    // })
   }
 
-  odontogramBlanco: odontogram = {
-      cedula: " ",
+  odontogramBlanco = {
+      cedula: "110990099",
       caries: false,
       mal_estado: false,
       buen_estado: false,
       pieza: " "
     };
 
-    newOdontogramForm() {
-        this.newOdontogram= true; // Show new treatment form2
-      }
+    // newOdontogramForm() {
+    //     this.newOdontogram= true; // Show new treatment form2
+    //   }
+    //
+    // editOdontogramForm() {
+    //   this.editOdontogram = true; // Show new patient form
+    // }
 
-    editOdontogramForm() {
-      this.editOdontogram = true; // Show new patient form
-    }
-
-    onOdontogramSubmit(a,b,c,d) {
+    onOdontogramSubmit() {
         this.processing = true; // Disable submit button
 
-        // Create history object from form fields
-        const odontogram = {
-          cedula: this.patientSelect.cedula,
-          caries: a.checked,
-          mal_estado: b.checked,
-          buen_estado: c.checked,
-          pieza: d.value,
-        }
-
         // Function to save history into database
-        this.odontogramService.newOdontogram(odontogram).subscribe(data => {
+        this.odontogramService.newOdontogram(this.odontogramBlanco).subscribe(data => {
           // Check if history was saved to database or not
           if (!data.success) {
             this.messageClass = 'alert alert-danger'; // Return error class
