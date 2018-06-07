@@ -13,7 +13,48 @@
      options;
      domain = this.authService.domain;
 
-     constructor(private authService: AuthService,private http: Http) { }
+     constructor(
+       private authService: AuthService,
+       private http: Http)
+     { }
+
+     createAuthenticationHeaders() {
+         this.authService.loadToken(); // Get token so it can be attached to headers
+         // Headers configuration options
+         this.options = new RequestOptions({
+           headers: new Headers({
+             'Content-Type': 'application/json', // Format set to JSON
+             'authorization': this.authService.authToken // Attach token
+           })
+         });
+       }
+
+     checkCedula(cedula) {
+       this.createAuthenticationHeaders(); // Create headers
+       return this.http.get(this.domain + 'patients/checkCedula/' + cedula, this.options).map(res => res.json());
+     }
+
+     newOdontogram(odontogram) {
+       this.createAuthenticationHeaders(); // Create headers
+       console.log (odontogram);
+       return this.http.post(this.domain + 'odontograms/newOdontogram/', odontogram, this.options).map(res => res.json());
+     }
+
+     editOdontogram(cedula) {
+       this.createAuthenticationHeaders(); // Create headers
+       return this.http.put(this.domain + 'odontograms/updateOdontogram/', cedula, this.options).map(res => res.json());
+     }
+
+     getOdontogram(cedula) {
+       this.createAuthenticationHeaders(); // Create headers
+       return this.http.get(this.domain + 'odontograms/odontogram/' + cedula, this.options).map(res => res.json());
+     }
+
+     getAllOdontogram(cedula) {
+       this.createAuthenticationHeaders(); // Create headers
+       return this.http.get(this.domain + 'odontograms/allOdontogram/' + cedula, this.options).map(res => res.json());
+     }
+
 
      // method for creating a odontogram which takes
      // an optional size parameter that defaults to 5
@@ -63,38 +104,6 @@
      // returns all created odontograms
      getOdontograms() : Odontogram[] {
        return this.odontograms;
-     }
-
-     createAuthenticationHeaders() {
-         this.authService.loadToken(); // Get token so it can be attached to headers
-         // Headers configuration options
-         this.options = new RequestOptions({
-           headers: new Headers({
-             'Content-Type': 'application/json', // Format set to JSON
-             'authorization': this.authService.authToken // Attach token
-           })
-         });
-       }
-     checkCedula(cedula) {
-       this.createAuthenticationHeaders(); // Create headers
-       return this.http.get(this.domain + 'patients/checkCedula/' + cedula, this.options).map(res => res.json());
-     }
-     newOdontogram(odontogram) {
-       this.createAuthenticationHeaders(); // Create headers
-       console.log (odontogram);
-       return this.http.post(this.domain + 'odontogram/newOdontogram/', odontogram, this.options).map(res => res.json());
-     }
-     editOdontogram(cedula) {
-       this.createAuthenticationHeaders(); // Create headers
-       return this.http.put(this.domain + 'odontogram/updateOdontogram/', cedula, this.options).map(res => res.json());
-     }
-     getOdontogram(cedula) {
-       this.createAuthenticationHeaders(); // Create headers
-       return this.http.get(this.domain + 'odontogram/odontogram/' + cedula, this.options).map(res => res.json());
-     }
-     getAllOdontogram(cedula) {
-       this.createAuthenticationHeaders(); // Create headers
-       return this.http.get(this.domain + 'odontogram/allOdontogram/' + cedula, this.options).map(res => res.json());
      }
 
    }

@@ -32,8 +32,9 @@ module.exports = (router) => {
   router.post('/newOdontogram', (req, res) => {
     const odontogram = new odontogram({
       cedula: req.body.cedula,
-      calza: req.body.calza,
-      extraccion: req.body.extraccion,
+      caries: req.body.caries,
+      mal_estado: req.body.mal_estado,
+      buen_estado: req.body.buen_estado,
       pieza: req.body.pieza,
     });
     // Save history into database
@@ -96,8 +97,9 @@ if (!req.body._id) {
       if (!odontogram) {
         res.json({ success: false, message: 'Patient id was not found.' }); // Return error message
       } else {
-        odontogram.calza = req.body.calza;
-        odontogram.extraccion = req.body.extraccion;
+        odontogram.caries = req.body.caries;
+        odontogram.mal_estado = req.body.mal_estado;
+        odontogram.buen_estado = req.body.buen_estado;
         odontogram.pieza = req.body.pieza;
 
         odontogram.save((err) => {

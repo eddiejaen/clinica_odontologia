@@ -45,7 +45,8 @@ export interface treatment {
 
 export interface odontogram {
   cedula: string,
-  calza:boolean,
-  extraccion:boolean,
+  caries:boolean,
+  mal_estado:boolean,
+  buen_estado:boolean,
   pieza: string
 }

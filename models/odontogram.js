@@ -97,11 +97,12 @@ const Schema = mongoose.Schema; // Import Schema from Mongoose
 // Patient Model Definition
 const odontogramSchema = new Schema({
   cedula: { type: String, required: true },
-  calza: { type: Boolean, required: true },
-  extraccion: {  type: Boolean, required: true},
-  pieza: { type: String, required: true },
+  caries: { type: Boolean, required: true },
+  mal_estado: {  type: Boolean, required: true},
+  buen_estado: {  type: Boolean, required: true},
+  pieza: { type: String, required: true }
 
 });
 
 // Export Module/Schema
-module.exports = mongoose.model('Odontogram', odontogramSchema);
+module.exports = mongoose.model('Odontograms', odontogramSchema);
