@@ -8,7 +8,7 @@ export class PatientService {
 
   options;
   domain = this.authService.domain;
-
+  cedula:string;
   constructor(
     private authService: AuthService,
     private http: Http
