@@ -100,7 +100,7 @@ const odontogramSchema = new Schema({
   caries: { type: Boolean, required: true },
   mal_estado: {  type: Boolean, required: true},
   buen_estado: {  type: Boolean, required: true},
-  pieza: { type: String, required: true }
+  diente: { type: String, required: true }
 
 });
 

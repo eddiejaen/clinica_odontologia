@@ -3,7 +3,9 @@
         <label><input #text1 type="checkbox" name="caries" [(ngModel)]="odontogramBlanco.caries"> Caries</label>
         <label><input #text2 type="checkbox" name="mal_estado" [(ngModel)]="odontogramBlanco.mal_estado"> Mal estado</label>
         <label><input #text3 type="checkbox" name="buen_estado" [(ngModel)]="odontogramBlanco.buen_estado"> Buen estado</label>
-        <input #text4 name="inputPieza"  placeholder="Pieza" type="text" [(ngModel)]="odontogramBlanco.pieza" >
+        <input #text4 name="diente"  placeholder="Pieza" type="text" [(ngModel)]="pieza" >
+          <button  type="button" name="button" (click)="onOdontogramSubmit(text1, text2, text3, text4)"
+          class="btn btn-success">Guardar</button>
         <div class="content">
           <hr>
 
@@ -32,8 +34,8 @@
           </div>
         </div>
         <div class="columns">
-          <button  type="button" name="button" (click)="onOdontogramSubmit(text1, text2, text3, text4)" class="btn btn-success">Guardar</button>
-        <table class="table table-striped table-hover table-bordered" >
+
+        <!-- <table class="table table-striped table-hover table-bordered" >
           <thead class="thead-dark">
             <tr>
               <th>Condición del diente</th>
@@ -51,7 +53,7 @@
                 <td>{{ odontogram.pieza }}</td>
               </tr>
             </tbody>
-          </table>
+          </table> -->
 
       </div>
       </div>

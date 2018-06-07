@@ -35,7 +35,7 @@ module.exports = (router) => {
       caries: req.body.caries,
       mal_estado: req.body.mal_estado,
       buen_estado: req.body.buen_estado,
-      pieza: req.body.pieza,
+      diente: req.body.diente,
     });
     // Save history into database
     odontogram.save((err) => {
@@ -100,7 +100,7 @@ if (!req.body._id) {
         odontogram.caries = req.body.caries;
         odontogram.mal_estado = req.body.mal_estado;
         odontogram.buen_estado = req.body.buen_estado;
-        odontogram.pieza = req.body.pieza;
+        odontogram.diente = req.body.diente;
 
         odontogram.save((err) => {
           if (err) {

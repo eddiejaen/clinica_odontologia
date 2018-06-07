@@ -30,6 +30,7 @@ export class OdontogramComponent {
   odontogramX:odontogram;
    selected_row: number = 0;
    selected_col: number = 0;
+  pieza:string = "";
   constructor(
 
     private _vcr: ViewContainerRef,
@@ -90,7 +91,7 @@ export class OdontogramComponent {
       caries: false,
       mal_estado: false,
       buen_estado: false,
-      pieza: " "
+      diente: " "
     };
 
     // newOdontogramForm() {
@@ -101,8 +102,17 @@ export class OdontogramComponent {
     //   this.editOdontogram = true; // Show new patient form
     // }
 
-    onOdontogramSubmit() {
+    onOdontogramSubmit(a,b,c,d) {
         this.processing = true; // Disable submit button
+
+        // Create history object from form fields
+        const odontogram = {
+          //cedula: this.patientSelect.cedula,
+          caries: a.checked,
+          mal_estado: b.checked,
+          buen_estado: c.checked,
+          diente: d.value,
+        }
 
         // Function to save history into database
         this.odontogramService.newOdontogram(this.odontogramBlanco).subscribe(data => {
@@ -131,7 +141,7 @@ export class OdontogramComponent {
           caries: a.checked,
           mal_estado: b.checked,
           buen_estado: c.checked,
-          pieza: d.value,
+          diente: d.value,
         }
 
         // Function to save history into database

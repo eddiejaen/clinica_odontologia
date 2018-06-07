@@ -48,5 +48,5 @@ export interface odontogram {
   caries:boolean,
   mal_estado:boolean,
   buen_estado:boolean,
-  pieza: string
+  diente: string
 }
