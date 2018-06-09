@@ -84,9 +84,11 @@
          tiles[i] = [];
          for(let j=0; j< size2; j++) {
            if (this.clickable[i][j]=="0"){
-             tiles[i][j] = { used: false, value: 0, status: ''};
+             tiles[i][j] = { used: false, treatment: '', value: 0, status: ''};
            }else{
-           tiles[i][j] = { used: true, value: 0, status: ''};
+            if (1==1){ 
+              tiles[i][j] = { used: true, treatment: '', value: 0, status: ''};
+         }
          }
          }
          //tiles[0][3].status="calza";

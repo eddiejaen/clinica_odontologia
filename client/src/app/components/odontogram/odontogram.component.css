@@ -9,6 +9,21 @@
      background-color: #686c70;
      /* color: #fff; */
    }
+   .caries {
+     cursor: pointer;
+     background-color: #625c70;
+     /* color: #fff; */
+   }
+   .mal_estado {
+     cursor: pointer;
+     background-color: #825c70;
+     /* color: #fff; */
+   }
+   .buen_estado {
+     cursor: pointer;
+     background-color: #725c70;
+     /* color: #fff; */
+   }
    /* .tcalza {
      background-color: black;
       color: #fff;

@@ -30,7 +30,7 @@ module.exports = (router) => {
     }
   });
   router.post('/newOdontogram', (req, res) => {
-    const odontogram = new odontogram({
+    const odontogram = new Odontogram({
       cedula: req.body.cedula,
       caries: req.body.caries,
       mal_estado: req.body.mal_estado,

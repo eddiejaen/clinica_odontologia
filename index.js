@@ -12,6 +12,7 @@ const path = require('path'); // NodeJS Package for file paths
 const authentication = require('./routes/authentication')(router); // Import Authentication Routes
 const blogs = require('./routes/blogs')(router); // Import Blog Routes
 const patients = require('./routes/patients')(router); // Import Blog Routes
+const odontograms = require('./routes/odontograms')(router); // Import Blog Routes
 const bodyParser = require('body-parser'); // Parse incoming request bodies in a middleware before your handlers, available under the req.body property.
 const cors = require('cors'); // CORS is a node.js package for providing a Connect/Express middleware that can be used to enable CORS with various options.
 const port = process.env.PORT || 8080; // Allows heroku to set port
@@ -33,6 +34,7 @@ app.use(express.static(__dirname + '/public')); // Provide static directory for 
 app.use('/authentication', authentication); // Use Authentication routes in application
 app.use('/blogs', blogs); // Use Blog routes in application
 app.use('/patients', patients); // Use Blog routes in application
+app.use('/odontograms', odontograms); // Use Blog routes in application
 
 // Connect server to Angular 2 Index.html
 app.get('*', (req, res) => {
