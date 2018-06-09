@@ -28,13 +28,11 @@ export class OdontogramComponent {
   newOdontogram = false;
   editOdontogram = false;
   odontogramSelect;
-  odontogramX:odontogram;
-   selected_row: number = 0;
-   selected_col: number = 0;
-  pieza:string = "";
-
+  selected_row: number = 0;
+  selected_col: number = 0;
+  
     odontogramBlanco = {
-        cedula:this.patientService.cedula,
+        cedula: '',
         caries: false,
         mal_estado: false,
         buen_estado: false,
@@ -47,10 +45,8 @@ export class OdontogramComponent {
     private odontogramService: OdontogramService,
     private patientService: PatientService
   ) {
-    console.log("Inicia");
-    //this.createNewOdontogramForm();
-    console.log("finaliza");
     this.odontogramBlanco.cedula = this.patientService.cedula;
+    console.log("cedula "+ this.odontogramBlanco.cedula);
     this.createOdontograms();
 
   }

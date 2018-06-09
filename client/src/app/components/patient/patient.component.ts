@@ -54,6 +54,7 @@ export class PatientComponent implements OnInit {
     verPaciente(patient : any){
       this.profilePatient = true;
       this.patientSelect = patient;
+      this.patientService.cedula = this.patientSelect.cedula;
       this.getHistory();
 
       this.getAllTreatments();
@@ -558,8 +559,6 @@ createNewHistoryForm() {
       this.editHistory = true; // Show new patient form
     }
     editOdontogram(){
-      this.patientService.cedula = this.patientSelect.cedula;
-      console.log(this.patientService.cedula)
     }
   // Function to submit a new history post
   onHistorialSubmit(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y) {
