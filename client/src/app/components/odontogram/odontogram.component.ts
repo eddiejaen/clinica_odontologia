@@ -30,7 +30,7 @@ export class OdontogramComponent {
   odontogramSelect;
   selected_row: number = 0;
   selected_col: number = 0;
-  
+
     odontogramBlanco = {
         cedula: '',
         caries: false,
@@ -170,14 +170,8 @@ export class OdontogramComponent {
 
         console.log (this.patientSelect.cedula);
         this.odontogramService.getOdontogram(this.patientSelect.cedula).subscribe(data => {
-        this.odontogramX = data.odontogram; // Assign array to use in HTML
-        console.log (this.odontogramX);
-
-        if (!this.odontogramX)
-       {
-         this.odontogramX = this.odontogramBlanco;
          this.odontogramSelect = this.odontogramBlanco;
-       }
+
         });
       }
     // Function to get all treatment
@@ -186,13 +180,7 @@ export class OdontogramComponent {
 
           console.log (this.patientSelect.cedula);
           this.odontogramService.getAllOdontogram(this.patientSelect.cedula).subscribe(data => {
-          this.odontogramX = data.odontogram; // Assign array to use in HTML
-          console.log (this.odontogramX);
           this.odontogramSelect = this.odontogramBlanco;
-          if (!this.odontogramX)
-         {
-           this.odontogramX = this.odontogramBlanco;
-         }
           });
         }
   clickTile(e:any) : OdontogramComponent {
