@@ -40,11 +40,6 @@
        return this.http.post(this.domain + 'odontograms/newOdontogram/', odontogram, this.options).map(res => res.json());
      }
 
-     editOdontogram(cedula) {
-       this.createAuthenticationHeaders(); // Create headers
-       return this.http.put(this.domain + 'odontograms/updateOdontogram/', cedula, this.options).map(res => res.json());
-     }
-
      getOdontogram(cedula) {
        this.createAuthenticationHeaders(); // Create headers
        return this.http.get(this.domain + 'odontograms/odontogram/' + cedula, this.options).map(res => res.json());
@@ -86,7 +81,7 @@
            if (this.clickable[i][j]=="0"){
              tiles[i][j] = { used: false, treatment: '', value: 0, status: ''};
            }else{
-            if (1==1){ 
+            if (1==1){
               tiles[i][j] = { used: true, treatment: '', value: 0, status: ''};
          }
          }

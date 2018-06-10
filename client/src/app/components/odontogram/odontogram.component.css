@@ -11,17 +11,17 @@
    }
    .caries {
      cursor: pointer;
-     background-color: #625c70;
+     background-color: #FF0000;
      /* color: #fff; */
    }
    .mal_estado {
      cursor: pointer;
-     background-color: #825c70;
+     background-color: #000000;
      /* color: #fff; */
    }
    .buen_estado {
      cursor: pointer;
-     background-color: #725c70;
+     background-color: #0404B4;
      /* color: #fff; */
    }
    /* .tcalza {

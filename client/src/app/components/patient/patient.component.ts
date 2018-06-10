@@ -613,58 +613,7 @@ createNewHistoryForm() {
         }
       });
     }
-  // Function to update history
-  updateHistory(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y){
-      this.processing = true;
 
-      const history = {
-        cedula: this.patientSelect.cedula,
-        tratamiento: a.checked,
-        medicamento: b.checked,
-        diabetes: c.checked,
-        artritis: d.checked,
-        cardiacas: e.checked,
-        fiebre: f.checked,
-        hepatitis: g.checked,
-        ulceras: h.checked,
-        trastornos: i.checked,
-        nerviosas: j.checked,
-        otras_enfermedades: w.value,
-        internado: k.checked,
-        alteraciones: l.checked,
-        padecimiento: m.checked,
-        aspirina: n.checked,
-        penicilina: o.checked,
-        sulfas: p.checked,
-        otros_medicamentos: x.value,
-        anestesia: q.checked,
-        sangrado: r.checked,
-        desmayos: s.checked,
-        embarazada: t.checked,
-        lactancia: u.checked,
-        transtornos: v.checked,
-        observaciones: y.value,
-      }
-
-      // Function to save history into database
-      this.patientService.editHistory(this.historySelect).subscribe(data => {
-        // Check if history was saved to database or not
-        if (!data.success) {
-          this.messageClass = 'alert alert-danger'; // Return error class
-          this.message = data.message; // Return error message
-          this.processing = false; // Enable submit button
-        } else {
-          this.messageClass = 'alert alert-success'; // Return success class
-          this.message = data.message; // Return success message
-
-          // Clear form data after two seconds
-          setTimeout(() => {
-          this.processing = false; // Enable submit button
-            //window.location.reload();
-          }, 1000);
-        }
-      });
-    }
 // Function to get history
   getHistory() {
       // Function to GET all patients from database

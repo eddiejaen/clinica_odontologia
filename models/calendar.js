@@ -104,4 +104,4 @@ const calendarSchema = new Schema({
 });
 
 // Export Module/Schema
-module.exports = mongoose.model('calendar', calendarSchema);
+module.exports = mongoose.model('calendars', calendarSchema);

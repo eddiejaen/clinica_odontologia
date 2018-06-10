@@ -105,22 +105,22 @@
     <tr *ngFor="let event of events; let index = index">
       <td>
         <input
-      name="paciente" formControlName="paciente" type="text" class="form-control"  [(ngModel)]="event.title"  (keyup)="refresh.next()">  </td>
+      #text1 name="paciente"  type="text"  [(ngModel)]="calendarBlanco.paciente"  (change)="refresh.next()">  </td>
       <td>
         <input
-          name="color" formControlName="color" type="color" [(ngModel)]="event.color.primary"  (change)="refresh.next()"> </td>
+        #text2    name="color"  type="color" [(ngModel)]="calendarBlanco.color"  (change)="refresh.next()"> </td>
       <td>
         <input
-        name="color1" formControlName="color1" type="color" [(ngModel)]="event.color.secondary" (change)="refresh.next()">
+        #text3  name="color1" type="color" [(ngModel)]="calendarBlanco.color1" (change)="refresh.next()">
       </td>
       <td>
         <mwl-demo-utils-date-time-picker
-        name="inicio" formControlName="inicio" type="date" [(ngModel)]="event.start" (ngModelChange)="refresh.next()"  placeholder="Not set">
+        #text4  name="inicio" type="date" [(ngModel)]="calendarBlanco.inicio" (ngModelChange)="refresh.next()"  placeholder="Not set">
         </mwl-demo-utils-date-time-picker>
       </td>
       <td>
         <mwl-demo-utils-date-time-picker
-    name="final"  formControlName="final" type="date" [(ngModel)]="event.end" (ngModelChange)="refresh.next()" placeholder="Not set">
+    #text5  name="final"   type="date" [(ngModel)]="calendarBlanco.final" (ngModelChange)="refresh.next()" placeholder="Not set">
        </mwl-demo-utils-date-time-picker>
       </td>
       <td>
@@ -131,7 +131,7 @@
       </td>
         <td>
         <button
-      (click)="onAddSubmit(text1, color1, color2, date1, date2 )" [disabled]="processing" type="button" name="button"
+      (click)="onCalendarSubmit(text1, text2, text3, text4, text5 )" type="button" name="button"
            class="btn btn-success">
           Agregar
         </button>

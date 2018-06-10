@@ -4,7 +4,7 @@ const config = require('../config/database'); // Import database configuration
 
 module.exports = (router) => {
 
-  router.post('/add', (req, res) => {
+  router.post('/newCalendar', (req, res) => {
     const calendar = new Calendar({
       paciente: req.body.paciente,
       color: req.body.color,
@@ -12,17 +12,15 @@ module.exports = (router) => {
       inicio: req.body.inicio,
       final: req.body.final
     });
-    // Save patient into database
+    // Save history into database
     calendar.save((err) => {
       // Check if error
-    }if (err.code === 11000) {
+      if (err) {
           res.json({ success: false, message: err}); // Return general error message
-        }
-   else {
-        res.json({ success: true, message: 'Cita Registrada!' }); // Return success message
-      }
-    });
+      } else {
+        res.json({ success: true, message: 'Cita Registrada' }); // Return success message
+    }
   });
-
+  });
   return router;
 };

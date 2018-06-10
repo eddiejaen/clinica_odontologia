@@ -141,16 +141,19 @@ export class CalendarComponent {@ViewChild('modalContent') modalContent: Templat
         this.refresh.next();
       }
 
-      add = false;
+
       messageClass;
       message;
       processing = false;
 
-      addForm() {
-        this.add = true; // Show new patient form
-      }
-
-      onAddSubmit(a,b,c,d,e){
+      calendarBlanco = {
+        paciente: " ",
+        color: " ",
+        color1: " ",
+        inicia: " ",
+        final: " ",
+        };
+      onCalendarSubmit(a,b,c,d,e){
         this.processing = true;
 
         const calendar = {
@@ -162,7 +165,7 @@ export class CalendarComponent {@ViewChild('modalContent') modalContent: Templat
         }
 
         // Function to save history into database
-        this.calendarService.add(calendar).subscribe(data => {
+        this.calendarService.newCalendar(calendar).subscribe(data => {
           // Check if history was saved to database or not
           if (!data.success) {
             this.messageClass = 'alert alert-danger'; // Return error class

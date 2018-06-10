@@ -63,45 +63,9 @@ export class OdontogramComponent {
 
   verOdontogram(odontogram : any){
     this.odontogramSelect = odontogram;
-    this.getAllOdontogram();
+    this.getOdontogram();
+    //this.getAllOdontogram();
   }
-  createNewOdontogramForm() {
-    // this.form = this.formBuilder.group({
-    //
-    //   caries: ['', Validators.compose([
-    //     Validators.required,
-    //     Validators.minLength(3),
-    //     Validators.maxLength(50),
-    //     this.alphaNumericValidation
-    //   ])],
-    //   mal_estado: ['', Validators.compose([
-    //     Validators.required,
-    //     Validators.minLength(4),
-    //     Validators.maxLength(50),
-    //     this.alphaNumericValidation
-    //   ])],
-    //   buen_estado: ['', Validators.compose([
-    //     Validators.required,
-    //     Validators.minLength(3),
-    //     Validators.maxLength(50),
-    //     this.alphaNumericValidation
-    //   ])],
-    //   pieza: ['', Validators.compose([
-    //     Validators.required,
-    //     Validators.minLength(3),
-    //     Validators.maxLength(50),
-    //     this.alphaNumericValidation
-    //   ])],
-    // })
-  }
-
-    // newOdontogramForm() {
-    //     this.newOdontogram= true; // Show new treatment form2
-    //   }
-    //
-    // editOdontogramForm() {
-    //   this.editOdontogram = true; // Show new patient form
-    // }
 
     onOdontogramSubmit(a,b,c,d) {
         this.processing = true; // Disable submit button
@@ -134,55 +98,24 @@ export class OdontogramComponent {
         });
       }
 
-      updateOdontogram(a,b,c,d){
-        this.processing = true;
-
-        const odontogram = {
-          cedula: this.patientSelect.cedula,
-          caries: a.checked,
-          mal_estado: b.checked,
-          buen_estado: c.checked,
-          diente: d.value,
-        }
-
-        // Function to save history into database
-        this.odontogramService.editOdontogram(this.odontogramSelect).subscribe(data => {
-          // Check if history was saved to database or not
-          if (!data.success) {
-            this.messageClass = 'alert alert-danger'; // Return error class
-            this.message = data.message; // Return error message
-            this.processing = false; // Enable submit button
-          } else {
-            this.messageClass = 'alert alert-success'; // Return success class
-            this.message = data.message; // Return success message
-
-            // Clear form data after two seconds
-            setTimeout(() => {
-            this.processing = false; // Enable submit button
-              //window.location.reload();
-            }, 1000);
-          }
-        });
-      }
-
       getOdontogram() {
-        // Function to GET all patients from database
-
-        console.log (this.patientSelect.cedula);
-        this.odontogramService.getOdontogram(this.patientSelect.cedula).subscribe(data => {
-         this.odontogramSelect = this.odontogramBlanco;
+  
+        console.log (this.patientService.cedula);
+        this.odontogramService.getOdontogram(this.patientService.cedula).subscribe(data => {
+        this.odontogramSelect = this.odontogramBlanco;
 
         });
       }
     // Function to get all treatment
-      getAllOdontogram() {
-          // Function to GET all patients from database
+      // getAllOdontogram() {
+      //     // Function to GET all patients from database
+      //
+      //     console.log (this.patientService.cedula);
+      //     this.odontogramService.getAllOdontogram(this.patientService.cedula).subscribe(data => {
+      //     this.odontogramSelect = this.odontogramBlanco;
+      //     });
+      //   }
 
-          console.log (this.patientSelect.cedula);
-          this.odontogramService.getAllOdontogram(this.patientSelect.cedula).subscribe(data => {
-          this.odontogramSelect = this.odontogramBlanco;
-          });
-        }
   clickTile(e:any) : OdontogramComponent {
   console.log(e.target);
     let id = e.target.id,
@@ -193,10 +126,6 @@ export class OdontogramComponent {
       this.selected_col = col;
       this.odontogramBlanco.diente = this.odontogramService.pieces[row][col];
       return;
-
-    // this.odontograms[odontogramId].tiles[row][col].used = true;
-    // this.odontograms[odontogramId].tiles[row][col].value = "X";
-    // return this;
   }
 
   createOdontograms() : OdontogramComponent {

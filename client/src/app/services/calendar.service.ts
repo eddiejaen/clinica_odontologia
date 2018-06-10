@@ -106,8 +106,8 @@ export class CalendarService {
     }
 
     //  PATIENT
-    add(calendar) {
+    newCalendar(calendar) {
       this.createAuthenticationHeaders(); // Create headers
-      return this.http.post(this.domain + 'calendar/add', calendar, this.options).map(res => res.json());
+      return this.http.post(this.domain + 'calendars/newCalendar', calendar, this.options).map(res => res.json());
     }
 }

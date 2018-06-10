@@ -60,10 +60,6 @@ createAuthenticationHeaders() {
     this.createAuthenticationHeaders(); // Create headers
     return this.http.get(this.domain + 'patients/history/' + cedula, this.options).map(res => res.json());
   }
-  editHistory(cedula) {
-    this.createAuthenticationHeaders(); // Create headers
-    return this.http.put(this.domain + 'patients/updateHistory/', cedula, this.options).map(res => res.json());
-  }
 
 
   ///TREATMENT
