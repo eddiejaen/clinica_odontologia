@@ -126,7 +126,7 @@ export class CalendarComponent {@ViewChild('modalContent') modalContent: Templat
 
 
       addEvent(): void {
-        console.log(this.events);
+        // console.log(this.events);
         this.events.push({
           title: 'New event',
           start: startOfDay(new Date()),
@@ -145,23 +145,16 @@ export class CalendarComponent {@ViewChild('modalContent') modalContent: Templat
       messageClass;
       message;
       processing = false;
+      
 
-      calendarBlanco = {
-        paciente: " ",
-        color: " ",
-        color1: " ",
-        inicia: " ",
-        final: " ",
-        };
-      onCalendarSubmit(a,b,c,d,e){
+      onCalendarSubmit(a,b,c,d){
         this.processing = true;
 
         const calendar = {
-          paciente: a.value,
+          title: a.value,
           color: b.value,
-          color1: c.value,
-          inicia: d.value,
-          final: e.value,
+          start: c.value,
+          end: d.value,
         }
 
         // Function to save history into database

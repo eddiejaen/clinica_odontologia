@@ -6,11 +6,10 @@ module.exports = (router) => {
 
   router.post('/newCalendar', (req, res) => {
     const calendar = new Calendar({
-      paciente: req.body.paciente,
+      title: req.body.title,
       color: req.body.color,
-      color1: req.body.color1,
-      inicio: req.body.inicio,
-      final: req.body.final
+      start: req.body.start,
+      end: req.body.end
     });
     // Save history into database
     calendar.save((err) => {

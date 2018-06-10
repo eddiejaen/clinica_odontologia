@@ -96,11 +96,10 @@ const Schema = mongoose.Schema; // Import Schema from Mongoose
 
 // Patient Model Definition
 const calendarSchema = new Schema({
-  paciente: { type: String, required: true },
+  title: { type: String, required: true },
   color: { type: String, required: true },
-  color1: { type: String, required: true },
-  inicio: { type: Date, required: true },
-  final: { type: Date, required: true }
+  start: { type: Date, required: true },
+  end: { type: Date, required: true }
 });
 
 // Export Module/Schema

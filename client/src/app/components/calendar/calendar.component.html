@@ -87,56 +87,46 @@
   <div class="clearfix"></div>
 </h3>
 
-<table class="table table-bordered">
-
+  <table class="table table-bordered">
   <thead>
     <tr>
       <th>Nombre</th>
-      <th>Primer Color</th>
-      <th>Segundo Color</th>
+      <th>Color</th>
       <th>Inicio</th>
       <th>Finaliza</th>
-      <th>Eliminar</th>
-      <th>Agregar</th>
     </tr>
   </thead>
 
   <tbody>
     <tr *ngFor="let event of events; let index = index">
+
       <td>
         <input
-      #text1 name="paciente"  type="text"  [(ngModel)]="calendarBlanco.paciente"  (change)="refresh.next()">  </td>
+        #text1 class="form-control"  name="title" placeholder="Nombre" type="text"  [(ngModel)]="event.title"(keyup)="refresh.next()">
+      </td>
       <td>
         <input
-        #text2    name="color"  type="color" [(ngModel)]="calendarBlanco.color"  (change)="refresh.next()"> </td>
-      <td>
-        <input
-        #text3  name="color1" type="color" [(ngModel)]="calendarBlanco.color1" (change)="refresh.next()">
+        #text2 class="form-control"  name="color" placeholder="color" type="color" [(ngModel)]="event.color.primary"(change)="refresh.next()">
       </td>
       <td>
         <mwl-demo-utils-date-time-picker
-        #text4  name="inicio" type="date" [(ngModel)]="calendarBlanco.inicio" (ngModelChange)="refresh.next()"  placeholder="Not set">
-        </mwl-demo-utils-date-time-picker>
-      </td>
-      <td>
-        <mwl-demo-utils-date-time-picker
-    #text5  name="final"   type="date" [(ngModel)]="calendarBlanco.final" (ngModelChange)="refresh.next()" placeholder="Not set">
-       </mwl-demo-utils-date-time-picker>
-      </td>
-      <td>
-        <button
-          class="btn btn-danger" (click)="events.splice(index, 1); refresh.next()">
-          Eliminar
-        </button>
-      </td>
-        <td>
-        <button
-      (click)="onCalendarSubmit(text1, text2, text3, text4, text5 )" type="button" name="button"
-           class="btn btn-success">
-          Agregar
-        </button>
-      </td>
-    </tr>
-  </tbody>
+        #text3 class="form-control"  name="start"  type="date" [(ngModel)]="event.start" (ngModelChange)="refresh.next()"  placeholder="Not set">
+      </mwl-demo-utils-date-time-picker>
+    </td>
+    <td>
+      <mwl-demo-utils-date-time-picker
+      #text4 class="form-control"  name="end"  type="date" [(ngModel)]="event.end"(ngModelChange)="refresh.next()" placeholder="Not set">
+    </mwl-demo-utils-date-time-picker>
+  </td>
+
+  <td>
+    <button class="btn btn-danger" (click)="events.splice(index, 1); refresh.next()">Eliminar</button>
+  </td>
+  <td>
+    <button [disabled]="processing" type="button" name="button" (click)="onCalendarSubmit(text1, text2, text3, text4 )"
+    class="btn btn-success">Agregar</button>
+  </td>
+</tr>
+</tbody>
 
 </table>
