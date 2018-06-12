@@ -112,6 +112,6 @@ export class CalendarService {
     }
     getAllCalendar() {
       this.createAuthenticationHeaders(); // Create headers
-      return this.http.post(this.domain + 'calendars/allCalendar', this.options).map(res => res.json());
+      return this.http.get(this.domain + 'calendars/allCalendar', this.options).map(res => res.json());
     }
 }

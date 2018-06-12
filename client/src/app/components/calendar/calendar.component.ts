@@ -60,13 +60,6 @@ export class CalendarComponent {@ViewChild('modalContent') modalContent: Templat
       refresh: Subject<any> = new Subject();
       // events: CalendarEvent[] = [];
       events: CalendarEvent[] = [
-        {
-          start: subDays(startOfDay(new Date()), 1),
-          end: subDays(startOfDay(new Date()), 1),
-          title: 'Una cita ficticia',
-          color: colors.red,
-          actions: this.actions
-        }
       ];
 
       activeDayIsOpen: boolean = true;
@@ -142,7 +135,9 @@ export class CalendarComponent {@ViewChild('modalContent') modalContent: Templat
             this.processing = false; // Enable submit button
           } else {
             this.messageClass = 'alert alert-success'; // Return success class
-            this.message = data.message; // Return success message
+            this.message = data.message;
+            this.getAllCalendar();
+            // Return success message
             // Clear form data after two seconds
             setTimeout(() => {
             this.processing = false; // Enable submit button
@@ -155,8 +150,20 @@ export class CalendarComponent {@ViewChild('modalContent') modalContent: Templat
       getAllCalendar() {
 
           this.calendarService.getAllCalendar().subscribe(data => {
-           console.log(data);
-
+            for (let calendar of data.calendars) {
+            this.events.push({
+              title: calendar.title,
+              start: calendar.start,
+              end: calendar.start,
+              color: colors.red,
+              draggable: true,
+              resizable: {
+                beforeStart: true,
+                afterEnd: true
+              }
+            });
+            this.refresh.next();
+          };
         });
       }
 }
