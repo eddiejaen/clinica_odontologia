@@ -1,5 +1,5 @@
 
-import { Component,ChangeDetectionStrategy,ViewChild,TemplateRef} from '@angular/core';
+import { Component,ChangeDetectionStrategy,ViewChild,TemplateRef, OnInit} from '@angular/core';
 import {startOfDay,endOfDay,subDays,addDays,endOfMonth,isSameDay,isSameMonth,addHours} from 'date-fns';
 import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -59,14 +59,16 @@ export class CalendarComponent {@ViewChild('modalContent') modalContent: Templat
 
       refresh: Subject<any> = new Subject();
       // events: CalendarEvent[] = [];
-      events: CalendarEvent[] = [
-      ];
+      events: CalendarEvent[] = [];
 
       activeDayIsOpen: boolean = true;
 
       constructor(private modal: NgbModal,
           private calendarService: CalendarService) {
                   this.getAllCalendar();
+          }
+          ngOnInit(): void {
+                    this.getAllCalendar();
           }
 
       dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
@@ -114,6 +116,7 @@ export class CalendarComponent {@ViewChild('modalContent') modalContent: Templat
             afterEnd: true
           }
         });
+        console.log(this.events);
         this.refresh.next();
       }
 
@@ -150,20 +153,24 @@ export class CalendarComponent {@ViewChild('modalContent') modalContent: Templat
       getAllCalendar() {
 
           this.calendarService.getAllCalendar().subscribe(data => {
+            console.log(data);
             for (let calendar of data.calendars) {
-            this.events.push({
+            let event = {
+              id : calendar._id,
               title: calendar.title,
-              start: calendar.start,
-              end: calendar.start,
+              start: new Date(calendar.start),
+              end: new Date(calendar.start),
               color: colors.red,
               draggable: true,
               resizable: {
                 beforeStart: true,
                 afterEnd: true
               }
-            });
+            };
+            this.events.push(event);
             this.refresh.next();
           };
+          console.log(this.events);
         });
       }
 }

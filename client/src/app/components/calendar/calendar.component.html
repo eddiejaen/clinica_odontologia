@@ -128,7 +128,7 @@
     </td>
 
   <td>
-    <button class="btn btn-danger" (click)="events.splice(index, 1); refresh.next()">Eliminar</button>
+    <button class="btn btn-danger" (click)="calendarService.deleteCalendar(event.id); events.splice(index, 1); refresh.next()">Eliminar</button>
   </td>
   <!-- <td>
     <button [disabled]="processing" type="button" name="button" (click)="onCalendarSubmit(text1, text2, event.start, event.end )"
