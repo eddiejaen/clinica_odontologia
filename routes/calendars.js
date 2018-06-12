@@ -7,16 +7,16 @@ module.exports = (router) => {
   router.post('/newCalendar', (req, res) => {
     const calendar = new Calendar({
       title: req.body.title,
-      color: req.body.color,
-      start: req.body.start,
-      end: req.body.end
+      start: req.body.start
     });
     // Save history into database
     calendar.save((err) => {
       // Check if error
       if (err) {
+          // console.log(err);
           res.json({ success: false, message: err}); // Return general error message
       } else {
+        // console.log('exito');
         res.json({ success: true, message: 'Cita Registrada' }); // Return success message
     }
   });

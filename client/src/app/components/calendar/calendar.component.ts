@@ -28,7 +28,12 @@ const colors: any = {
 })
 export class CalendarComponent {@ViewChild('modalContent') modalContent: TemplateRef<any>;
 
-
+      newEvent=
+        {
+          start: subDays(startOfDay(new Date()), 1),
+          title: ''
+        }
+      ;
       view: string = 'month';
       viewDate: Date = new Date();
       modalData: {
@@ -57,34 +62,10 @@ export class CalendarComponent {@ViewChild('modalContent') modalContent: Templat
       events: CalendarEvent[] = [
         {
           start: subDays(startOfDay(new Date()), 1),
-          end: addDays(new Date(), 1),
-          title: 'Un evento de 3 días',
+          end: subDays(startOfDay(new Date()), 1),
+          title: 'Una cita ficticia',
           color: colors.red,
           actions: this.actions
-        },
-        {
-          start: startOfDay(new Date()),
-          title: 'Un evento sin fecha de fin',
-          color: colors.yellow,
-          actions: this.actions
-        },
-        {
-          start: subDays(endOfMonth(new Date()), 3),
-          end: addDays(endOfMonth(new Date()), 3),
-          title: 'Un evento que se extiende 2 meses',
-          color: colors.blue
-        },
-        {
-          start: addHours(startOfDay(new Date()), 2),
-          end: new Date(),
-          title: 'Un evento que se puede arrastrar y ampliar',
-          color: colors.yellow,
-          actions: this.actions,
-          resizable: {
-            beforeStart: true,
-            afterEnd: true
-          },
-          draggable: true
         }
       ];
 
@@ -145,20 +126,13 @@ export class CalendarComponent {@ViewChild('modalContent') modalContent: Templat
       messageClass;
       message;
       processing = false;
-      
 
-      onCalendarSubmit(a,b,c,d){
+
+      onCalendarSubmit(){
         this.processing = true;
-
-        const calendar = {
-          title: a.value,
-          color: b.value,
-          start: c.value,
-          end: d.value,
-        }
-
+        console.log(this.newEvent);
         // Function to save history into database
-        this.calendarService.newCalendar(calendar).subscribe(data => {
+        this.calendarService.newCalendar(this.newEvent).subscribe(data => {
           // Check if history was saved to database or not
           if (!data.success) {
             this.messageClass = 'alert alert-danger'; // Return error class
