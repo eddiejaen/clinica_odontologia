@@ -21,5 +21,22 @@ module.exports = (router) => {
     }
   });
   });
+
+  router.get('/allCalendar/', (req, res) => {
+    // Search database for all treatment posts
+    Calendar.find({ }, (err, calendar) => {
+      // Check if error was found or not
+      if (err) {
+        res.json({ success: false, message: err }); // Return error message
+      } else {
+        // Check if treatment were found in database
+        if (!calendar) {
+          res.json({ success: false, message: 'No calendar found.' }); // Return error of no treatment found
+        } else {
+          res.json({ success: true, calendar: calendar }); // Return success and treatment array
+        }
+      }
+    });
+  });
   return router;
 };

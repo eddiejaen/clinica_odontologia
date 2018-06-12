@@ -72,7 +72,9 @@ export class CalendarComponent {@ViewChild('modalContent') modalContent: Templat
       activeDayIsOpen: boolean = true;
 
       constructor(private modal: NgbModal,
-          private calendarService: CalendarService) {}
+          private calendarService: CalendarService) {
+                  this.getAllCalendar();
+          }
 
       dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
         if (isSameMonth(date, this.viewDate)) {
@@ -147,6 +149,14 @@ export class CalendarComponent {@ViewChild('modalContent') modalContent: Templat
               //window.location.reload();
             }, 1000);
           }
+        });
+      }
+
+      getAllCalendar() {
+
+          this.calendarService.getAllCalendar().subscribe(data => {
+           console.log(data);
+
         });
       }
 }
