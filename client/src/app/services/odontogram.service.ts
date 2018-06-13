@@ -1,7 +1,10 @@
    import { Injectable } from '@angular/core';
+
    import { Odontogram } from '../class/odontogram'
    import { AuthService } from './auth.service';
    import { Http, Headers, RequestOptions } from '@angular/http';
+   //import { OdontogramService } from '../../services/odontogram.service'
+
 
    @Injectable()
    export class OdontogramService {
@@ -14,6 +17,7 @@
      domain = this.authService.domain;
 
      constructor(
+      // private odontogramService: OdontogramService,
        private authService: AuthService,
        private http: Http)
      { }
@@ -78,9 +82,16 @@
            }else{
             if (1==1){
               tiles[i][j] = { used: true, treatment: '', value: 0, status: ''};
+
          }
          }
+      
+       // if(this.pieces[i][j]==odontogram.diente && odontogram.caries == true){
+       //     tiles[i][j] = { used: true, treatment: 'caries', value: 0, status: ''};
+       //   }
+
          }
+
          //tiles[0][3].status="calza";
        }
 

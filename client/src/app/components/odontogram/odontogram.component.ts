@@ -26,7 +26,6 @@ export class OdontogramComponent {
   processing = false;
   patientSelect;
   newOdontogram = false;
-  editOdontogram = false;
   odontogramSelect;
   odontogramX:odontogram;
   selected_row: number = 0;
@@ -115,12 +114,14 @@ export class OdontogramComponent {
              this.odontogramX = this.odontogramBlanco;
            }
 
+
           });
 
         }
 
-  clickTile(e:any) : OdontogramComponent {
+  clickTile(e:any ) : OdontogramComponent {
   console.log(e.target);
+
     let id = e.target.id,
       odontogramId = id.substring(1,2),
       row = parseInt(id.substring(2,4)), col = parseInt(id.substring(4,6)),
@@ -128,6 +129,7 @@ export class OdontogramComponent {
       this.selected_row = row;
       this.selected_col = col;
       this.odontogramBlanco.diente = this.odontogramService.pieces[row][col];
+
       return;
   }
 
@@ -151,6 +153,7 @@ export class OdontogramComponent {
 
     return texto;
   }
+  
   imprimeValor(i, j){
     let valor = this.odontogramService.pieces[i][j];
     if (valor !== "000"){
