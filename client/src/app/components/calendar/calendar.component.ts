@@ -1,6 +1,6 @@
 
 import { Component,ChangeDetectionStrategy,ViewChild,TemplateRef, OnInit} from '@angular/core';
-import {startOfDay,endOfDay,subDays,addDays,endOfMonth,isSameDay,isSameMonth,addHours} from 'date-fns';
+import {startOfDay,endOfDay,subDays,addDays,endOfMonth,isSameDay,isSameMonth,addMinutes} from 'date-fns';
 import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {CalendarEvent,CalendarEventAction,CalendarEventTimesChangedEvent} from 'angular-calendar';
@@ -31,6 +31,7 @@ export class CalendarComponent {@ViewChild('modalContent') modalContent: Templat
       newEvent=
         {
           start: subDays(startOfDay(new Date()), 1),
+          end: subDays(startOfDay(new Date()), 1),
           title: ''
         }
       ;
@@ -130,6 +131,12 @@ export class CalendarComponent {@ViewChild('modalContent') modalContent: Templat
         this.processing = true;
         console.log(this.newEvent);
         // Function to save history into database
+        //this.newEvent.end = new Date(this.newEvent.start.setMinutes(30));
+        // this.newEvent.end = addHours(this.newEvent.start, 1);
+        let result = addMinutes(this.newEvent.start, 30)
+        console.log(result);
+        this.newEvent.end = result;
+        console.log(this.newEvent);
         this.calendarService.newCalendar(this.newEvent).subscribe(data => {
           // Check if history was saved to database or not
           if (!data.success) {
@@ -159,7 +166,7 @@ export class CalendarComponent {@ViewChild('modalContent') modalContent: Templat
               id : calendar._id,
               title: calendar.title,
               start: new Date(calendar.start),
-              end: new Date(calendar.start),
+              end: new Date(calendar.end),
               color: colors.red,
               draggable: true,
               resizable: {

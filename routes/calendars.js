@@ -7,7 +7,8 @@ module.exports = (router) => {
   router.post('/newCalendar', (req, res) => {
     const calendar = new Calendar({
       title: req.body.title,
-      start: req.body.start
+      start: req.body.start,
+      end: req.body.end
     });
     // Save history into database
     calendar.save((err) => {
