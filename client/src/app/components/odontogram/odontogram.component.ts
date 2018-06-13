@@ -1,4 +1,4 @@
-import { Component, ViewContainerRef } from '@angular/core';
+import { Component, ViewContainerRef, OnInit } from '@angular/core';
 // import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { OdontogramService } from '../../services/odontogram.service'
 import { PatientService } from '../../services/patient.service'
@@ -28,6 +28,7 @@ export class OdontogramComponent {
   newOdontogram = false;
   editOdontogram = false;
   odontogramSelect;
+  odontogramX:odontogram;
   selected_row: number = 0;
   selected_col: number = 0;
 
@@ -48,7 +49,14 @@ export class OdontogramComponent {
     this.odontogramBlanco.cedula = this.patientService.cedula;
     console.log("cedula "+ this.odontogramBlanco.cedula);
     this.createOdontograms();
+    this.getAllOdontogram();
+  }
+  ngOnInit(): void {
+    this.getAllOdontogram();
+  }
 
+  verOdontogram(odontogram : any){
+    this.odontogramSelect = odontogram;
   }
 
   alphaNumericValidation(controls) {
@@ -61,11 +69,6 @@ export class OdontogramComponent {
     }
   }
 
-  verOdontogram(odontogram : any){
-    this.odontogramSelect = odontogram;
-    this.getOdontogram();
-    //this.getAllOdontogram();
-  }
 
     onOdontogramSubmit(a,b,c,d) {
         this.processing = true; // Disable submit button
@@ -98,23 +101,31 @@ export class OdontogramComponent {
         });
       }
 
-      getOdontogram() {
-  
-        console.log (this.patientService.cedula);
-        this.odontogramService.getOdontogram(this.patientService.cedula).subscribe(data => {
-        this.odontogramSelect = this.odontogramBlanco;
-
-        });
-      }
     // Function to get all treatment
-      // getAllOdontogram() {
-      //     // Function to GET all patients from database
-      //
-      //     console.log (this.patientService.cedula);
-      //     this.odontogramService.getAllOdontogram(this.patientService.cedula).subscribe(data => {
-      //     this.odontogramSelect = this.odontogramBlanco;
-      //     });
-      //   }
+      getAllOdontogram() {
+          // Function to GET all patients from database
+
+          console.log (this.patientService.cedula);
+          this.odontogramService.getAllOdontogram(this.patientService.cedula).subscribe(data => {
+            this.odontogramX = data.odontogram; // Assign array to use in HTML
+            console.log (this.odontogramX);
+            this.odontogramSelect = this.odontogramBlanco;
+            if (!this.odontogramX)
+           {
+             this.odontogramX = this.odontogramBlanco;
+           }
+
+                      //   for (let odontogram of data.odontograms) {
+            //   let odontogramBlanco = {
+            //     caries : odontogram.caries,
+            //     mal_estado: odontogram.mal_estado,
+            //     buen_estado: odontogram.buen_estado,
+            //     diente: odontogram.diente,
+            //   };
+            // };
+          });
+
+        }
 
   clickTile(e:any) : OdontogramComponent {
   console.log(e.target);

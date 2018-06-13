@@ -37,7 +37,29 @@
           </div>
         </div>
         <div class="columns">
+          <table class="table table-striped table-hover table-bordered" >
+                 <thead class="thead-dark">
+                   <tr>
+                    <th>Caries</th>
+                    <th>Mal estado</th>
+                    <th>Buen estado</th>
+                    <th>Pieza</th>
+                   </tr>
+                 </thead>
+                   <tbody>
+                     <tr *ngFor="let odontogram of odontogramX" (click)="verOdontogram(odontogram)">
+                       <td><input #text1 class="form-control"  name="caries" placeholder="caries"
+                       type="text"  [(ngModel)]="odontogramBlanco.caries"> </td>
+                       <td><input #text1 class="form-control"  name="mal_estado" placeholder="mal_estado"
+                       type="text"  [(ngModel)]="odontogramBlanco.mal_estado"> </td>
+                       <td><input #text1 class="form-control"  name="buen_estado" placeholder="buen_estado"
+                       type="text" [(ngModel)]="odontogramBlanco.buen_estado"> </td>
+                       <td><input #text1 class="form-control"  name="diente" placeholder="diente"
+                       type="text" [(ngModel)]="odontogramBlanco.diente"> </td>
 
+                     </tr>
+                   </tbody>
+                 </table>
       </div>
       </div>
     </div>

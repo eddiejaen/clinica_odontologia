@@ -40,11 +40,6 @@
        return this.http.post(this.domain + 'odontograms/newOdontogram/', odontogram, this.options).map(res => res.json());
      }
 
-     getOdontogram(cedula) {
-       this.createAuthenticationHeaders(); // Create headers
-       return this.http.get(this.domain + 'odontograms/odontogram/' + cedula, this.options).map(res => res.json());
-     }
-
      getAllOdontogram(cedula) {
        this.createAuthenticationHeaders(); // Create headers
        return this.http.get(this.domain + 'odontograms/allOdontogram/' + cedula, this.options).map(res => res.json());
