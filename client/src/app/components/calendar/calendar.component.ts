@@ -193,7 +193,7 @@ export class CalendarComponent {@ViewChild('modalContent') modalContent: Templat
                 afterEnd: true
               }
             };
-            this.events.push(event);
+          //  this.events.push(event);
             this.refresh.next();
           };
           console.log(this.events);
