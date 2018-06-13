@@ -101,7 +101,7 @@
         <input
            name="title" placeholder="Nombre" type="text"  [(ngModel)]="newEvent.title">
       </td>
-    <td>
+    <td>      
        <mwl-demo-utils-date-time-picker
            name="start"  type="date" [(ngModel)]="newEvent.start"  placeholder="Not set">
        </mwl-demo-utils-date-time-picker>
@@ -119,12 +119,13 @@
 
       <td>
         <input
-        #text1 class="form-control"  name="title" placeholder="Nombre" type="text"  [(ngModel)]="event.title"(keyup)="refresh.next()">
+        readonly name="title" placeholder="Nombre" type="text"  value="{{event.title}}">
       </td>
     <td>
-       <mwl-demo-utils-date-time-picker
-         class="form-control"  name="start"  type="date" [(ngModel)]="event.start" (ngModelChange)="refresh.next()"  placeholder="Not set">
-       </mwl-demo-utils-date-time-picker>
+      <input
+      readonly name="date" type="text"  value="{{transformNumber(event.start.getDate())}}-{{transformNumber(event.start.getMonth())}}-{{event.start.getYear() + 1900}}">
+      <input
+      readonly name="time" placeholder="Hora" type="time"  value="{{transformNumber(event.start.getHours())}}:{{transformNumber(event.start.getMinutes())}}">
     </td>
 
   <td>

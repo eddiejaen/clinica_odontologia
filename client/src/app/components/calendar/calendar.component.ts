@@ -1,6 +1,6 @@
 
 import { Component,ChangeDetectionStrategy,ViewChild,TemplateRef, OnInit} from '@angular/core';
-import {startOfDay,endOfDay,subDays,addDays,endOfMonth,isSameDay,isSameMonth,addMinutes} from 'date-fns';
+import { getDate, getMonth, getYear, getMinutes, getHours, startOfDay,endOfDay,subDays,addDays,endOfMonth,isSameDay,isSameMonth,addMinutes} from 'date-fns';
 import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {CalendarEvent,CalendarEventAction,CalendarEventTimesChangedEvent} from 'angular-calendar';
@@ -64,6 +64,8 @@ export class CalendarComponent {@ViewChild('modalContent') modalContent: Templat
 
       activeDayIsOpen: boolean = true;
 
+      selectedDate : Date;
+
       constructor(private modal: NgbModal,
           private calendarService: CalendarService) {
                   this.getAllCalendar();
@@ -74,6 +76,9 @@ export class CalendarComponent {@ViewChild('modalContent') modalContent: Templat
           }
 
       dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+        this.selectedDate = date;
+        console.log(this.selectedDate);
+        this.newEvent.start = this.selectedDate;
         if (isSameMonth(date, this.viewDate)) {
           if (
             (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
@@ -199,8 +204,19 @@ export class CalendarComponent {@ViewChild('modalContent') modalContent: Templat
             // };
 
             // this.refresh.next();
-          };
+          // };
           // console.log(this.events);
         });
       }
+
+      transformNumber(numero:number) : string {
+        let texto = '';
+        if (numero.toString().length == 1){
+          texto = '0' + numero.toString()
+        }else{
+          texto = numero.toString()
+        }
+        return texto
+      }
+
 }
