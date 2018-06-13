@@ -129,14 +129,8 @@ export class CalendarComponent {@ViewChild('modalContent') modalContent: Templat
 
       onCalendarSubmit(){
         this.processing = true;
-        console.log(this.newEvent);
-        // Function to save history into database
-        //this.newEvent.end = new Date(this.newEvent.start.setMinutes(30));
-        // this.newEvent.end = addHours(this.newEvent.start, 1);
         let result = addMinutes(this.newEvent.start, 30)
-        console.log(result);
         this.newEvent.end = result;
-        console.log(this.newEvent);
         this.calendarService.newCalendar(this.newEvent).subscribe(data => {
           // Check if history was saved to database or not
           if (!data.success) {
