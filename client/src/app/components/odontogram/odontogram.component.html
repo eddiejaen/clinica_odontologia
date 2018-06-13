@@ -48,14 +48,14 @@
                  </thead>
                    <tbody>
                      <tr *ngFor="let odontogram of odontogramX" (click)="verOdontogram(odontogram)">
-                       <td><input #text1 class="form-control"  name="caries" placeholder="caries"
-                       type="text"  [(ngModel)]="odontogramBlanco.caries"> </td>
-                       <td><input #text1 class="form-control"  name="mal_estado" placeholder="mal_estado"
-                       type="text"  [(ngModel)]="odontogramBlanco.mal_estado"> </td>
-                       <td><input #text1 class="form-control"  name="buen_estado" placeholder="buen_estado"
-                       type="text" [(ngModel)]="odontogramBlanco.buen_estado"> </td>
-                       <td><input #text1 class="form-control"  name="diente" placeholder="diente"
-                       type="text" [(ngModel)]="odontogramBlanco.diente"> </td>
+                       <td><input name="caries" placeholder="caries"
+                       type="text"  [(ngModel)]="odontogram.caries"> </td>
+                       <td><input name="mal_estado" placeholder="mal_estado"
+                       type="text"  [(ngModel)]="odontogram.mal_estado"> </td>
+                       <td><input name="buen_estado" placeholder="buen_estado"
+                       type="text" [(ngModel)]="odontogram.buen_estado"> </td>
+                       <td><input name="diente" placeholder="diente"
+                       type="text" [(ngModel)]="odontogram.diente"> </td>
 
                      </tr>
                    </tbody>
