@@ -156,6 +156,7 @@ export class CalendarComponent {@ViewChild('modalContent') modalContent: Templat
 
           this.calendarService.getAllCalendar().subscribe(data => {
             console.log(data);
+            this.events = [];
             for (let calendar of data.calendars) {
             let event = {
               id : calendar._id,
@@ -170,33 +171,36 @@ export class CalendarComponent {@ViewChild('modalContent') modalContent: Templat
               }
             };
             this.events.push(event);
-            this.refresh.next();
           };
+          this.refresh.next();
           console.log(this.events);
         });
       }
 
-      deleteCalendar(id) {
+      deleteCalendar(id, index) {
 
           this.calendarService.deleteCalendar(id).subscribe(data => {
-            console.log(data);
-            for (let calendar of data.calendars) {
-            let event = {
-              id : calendar._id,
-              title: calendar.title,
-              start: new Date(calendar.start),
-              end: new Date(calendar.end),
-              color: colors.red,
-              draggable: true,
-              resizable: {
-                beforeStart: true,
-                afterEnd: true
-              }
-            };
-          //  this.events.push(event);
+            // console.log(data);
+            // this.getAllCalendar();
+            this.events.splice(index, 1);
             this.refresh.next();
+            // for (let calendar of data.calendars) {
+            // let event = {
+            //   id : calendar._id,
+            //   title: calendar.title,
+            //   start: new Date(calendar.start),
+            //   end: new Date(calendar.end),
+            //   color: colors.red,
+            //   draggable: true,
+            //   resizable: {
+            //     beforeStart: true,
+            //     afterEnd: true
+            //   }
+            // };
+
+            // this.refresh.next();
           };
-          console.log(this.events);
+          // console.log(this.events);
         });
       }
 }
