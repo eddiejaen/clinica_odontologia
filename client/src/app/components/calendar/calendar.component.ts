@@ -67,6 +67,7 @@ export class CalendarComponent {@ViewChild('modalContent') modalContent: Templat
       constructor(private modal: NgbModal,
           private calendarService: CalendarService) {
                   this.getAllCalendar();
+
           }
           ngOnInit(): void {
                     this.getAllCalendar();
@@ -154,6 +155,30 @@ export class CalendarComponent {@ViewChild('modalContent') modalContent: Templat
       getAllCalendar() {
 
           this.calendarService.getAllCalendar().subscribe(data => {
+            console.log(data);
+            for (let calendar of data.calendars) {
+            let event = {
+              id : calendar._id,
+              title: calendar.title,
+              start: new Date(calendar.start),
+              end: new Date(calendar.end),
+              color: colors.red,
+              draggable: true,
+              resizable: {
+                beforeStart: true,
+                afterEnd: true
+              }
+            };
+            this.events.push(event);
+            this.refresh.next();
+          };
+          console.log(this.events);
+        });
+      }
+
+      deleteCalendar(id) {
+
+          this.calendarService.deleteCalendar(id).subscribe(data => {
             console.log(data);
             for (let calendar of data.calendars) {
             let event = {

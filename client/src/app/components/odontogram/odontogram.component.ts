@@ -115,14 +115,6 @@ export class OdontogramComponent {
              this.odontogramX = this.odontogramBlanco;
            }
 
-                      //   for (let odontogram of data.odontograms) {
-            //   let odontogramBlanco = {
-            //     caries : odontogram.caries,
-            //     mal_estado: odontogram.mal_estado,
-            //     buen_estado: odontogram.buen_estado,
-            //     diente: odontogram.diente,
-            //   };
-            // };
           });
 
         }
